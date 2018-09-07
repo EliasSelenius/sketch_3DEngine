@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Component Type="sketch_3DEngine$Physics">
+  <Mass>10.0</Mass>
+</Component>

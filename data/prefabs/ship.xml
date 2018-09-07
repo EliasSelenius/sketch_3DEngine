@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<ship Type="sketch_3DEngine$GameObject">
+	<Component sAttrib1="box">sketch_3DEngine$MeshRenderer</Component>
+	<Component fAttrib1="100">sketch_3DEngine$Physics</Component>	
+</ship>
