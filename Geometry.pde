@@ -19,6 +19,7 @@ class Sphere implements IShape {
 }
 
 class Cube implements IShape {
+  // Size: the cubes width, height or depth.
   float Size;
   Cube(float s){
     Size = s;
