@@ -1,4 +1,25 @@
 
+
+class Tree<T> {
+  
+  Node Root;
+  
+  abstract class Node {
+    void Insert() {
+      
+    }
+  }
+  
+  class LeafNode {
+  
+  }
+  
+  
+}
+
+
+
+
 interface IOcTreeIndex {
   Vector3 GetPosition();
 }
@@ -31,7 +52,7 @@ class OcTreeNode {
   // cube: deffines the borders of this node:
   Cube cube;
   
-  // Indices: only leaf nodes has elements, this is null for non-leaf nodes: 
+  // Elements: only leaf nodes has elements, this is null for non-leaf nodes: 
   ArrayList<IOcTreeIndex> Elements = null;
   
   // Children: only non-leaf nodes has children, this is null for leaf nodes:
