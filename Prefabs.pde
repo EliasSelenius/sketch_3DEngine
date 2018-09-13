@@ -1,10 +1,4 @@
 
-import java.util.Map;
-import java.lang.annotation.*;
-
-
-
-
 class XMLConverter {
   
   XML NewXML(String Name){

@@ -9,7 +9,7 @@ class GameObject {
   
   
   void init(){
-    transform = new Transform();       
+    transform = new Transform();    
   }
   
   GameObject(){

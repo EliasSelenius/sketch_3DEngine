@@ -1,5 +1,4 @@
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
+
 
 
 interface Interpolatable<T>{
@@ -10,8 +9,47 @@ interface IEquatable<T>{
   boolean Equal(T value);
 }
 
+// GetMethod(): returns a Method with the given parametertypes(params) from the given object(obj):  
+Method GetMethod(Object obj, String methodName, Class... params) {
+  Class<?> c = obj.getClass();
+  try{
+    return c.getDeclaredMethod(methodName, params);
+  } catch(NoSuchMethodException x){
+    x.printStackTrace();
+  }
+  return null;
+}
 
 
+// InvokeMethod(): invokes a Method with the given parameters(params) in the given object(obj):  
+void InvokeMethod(Object obj, String methodName, Object... params){
+  Class[] paramTypes = new Class[params.length];
+  
+  for(int i = 0; i < params.length; i++){
+    paramTypes[i] = params[i].getClass();
+  }
+  
+  try{
+    GetMethod(obj, methodName, paramTypes).invoke(obj, params);
+  } catch(Exception x){
+    x.printStackTrace();
+  }
+  
+  
+}
+
+// GetClass(): gets a Class from given string;
+Class GetClass(String n){
+  try{
+    return (Class.forName("sketch_3DEngine$" + n));
+  } catch(Exception w){
+    w.printStackTrace();
+  }
+  return null;
+}
+
+
+// InstantiateObject(): returns a new object from the given type and constructor parameters(params):
 Object InstantiateObject(Class type, Object... params){
   
   Class[] paramsType = new Class[params.length + 1];
@@ -44,7 +82,7 @@ Object InstantiateObject(Class type, Object... params){
   return object;
 }
 
-
+// WIP
 Field[] FindFields(Class<?> classs, Class<? extends Annotation> ann) {
     ArrayList<Field> list = new ArrayList<Field>();
     Class<?> c = classs;

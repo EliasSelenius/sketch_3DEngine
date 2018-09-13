@@ -1,5 +1,14 @@
 
 
+import java.util.Map;
+import java.lang.annotation.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Methods;
+import java.awt.*;
+
+
+
 //----Global-Variables------
 // deltaTime: seconds since last update.
 float deltaTime;
@@ -46,14 +55,22 @@ void setup(){
   Prefabs = new PrefabManager();
   //--------------------
 
+
+  defScene = new Scene();
+  
+  defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
+  
+  SceneCommander c = new SceneCommander(defScene);
+  
+  c.Execute("initobj");
   
   //XMLConverter xconv = new XMLConverter();
   //saveXML(xconv.GetXML(new Physics(10f)), "data\\prefabs\\NewTestXML");
   
-  FindFields(sketch_3DEngine.Physics.class, SerializeField.class);
+  //FindFields(sketch_3DEngine.Physics.class, SerializeField.class);
 
 
-  CreateGalaxy();
+  //CreateGalaxy();
 } 
 
 
@@ -75,5 +92,5 @@ void draw(){
   
   input.Update();
   
-  println(frameRate);
+  //println(frameRate);
 }

@@ -94,9 +94,11 @@ Sketch_3DEngine TODO list
 				- transform
 			- select <name> // finds an object from the scene
 				- addComp // add a component to the gameobject
+				- delete // delets the gameObject
 		- general syntax:
 			- get main cameras position
 		- commands can be loaded from .txt file
+		- UI Terminal // interface for a commandExecutor
 				
 		
 Gameplay Features ? A.K.A less permanent features 
