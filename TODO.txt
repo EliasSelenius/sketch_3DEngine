@@ -84,6 +84,20 @@ Sketch_3DEngine TODO list
 		- GameObjects should be ordered in a octree
 	* Networking ?
 		- let the engine run on a server where multiple clients can connect
+	* Command executor class
+		- deffine commands
+		- commands execute java functions
+		- commands:
+			- initObj // creates a new gameObject in the scene. arguments:
+				- components
+				- name
+				- transform
+			- select <name> // finds an object from the scene
+				- addComp // add a component to the gameobject
+		- general syntax:
+			- get main cameras position
+		- commands can be loaded from .txt file
+				
 		
 Gameplay Features ? A.K.A less permanent features 
 	* Galaxy
