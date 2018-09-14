@@ -20,6 +20,25 @@ Method GetMethod(Object obj, String methodName, Class... params) {
   return null;
 }
 
+Field GetField(Class c, String name){
+  try {
+    return c.getDeclaredField(name);
+  } catch (Exception x){
+    x.printStackTrace();
+  }
+  return null;
+}
+
+
+Object GetObject(Object obj, String objName) {
+  try{
+    return GetField(obj.getClass(), objName).get(obj);
+  } catch (IllegalAccessException x) {
+    x.printStackTrace();
+  }
+  return null;
+}
+
 
 // InvokeMethod(): invokes a Method with the given parameters(params) in the given object(obj):  
 void InvokeMethod(Object obj, String methodName, Object... params){
@@ -47,6 +66,8 @@ Class GetClass(String n){
   }
   return null;
 }
+
+
 
 
 // InstantiateObject(): returns a new object from the given type and constructor parameters(params):

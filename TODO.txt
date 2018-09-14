@@ -10,24 +10,30 @@ Sketch_3DEngine TODO list
 			- Scene ?		
 			- UIElements
 		- serialize/deserialize using XML or JSON?
+		
 	* PrefabEditor
 		- create Prefabs and save to disk
 		- load Prefabs and modify
 		- needs UI system
+		
 	* Canvas class, (for UI)
 		- implement as Component for a GameObject
 		- modular such that UIElements can be created from different UIComponents
 		- save/load with PrefabManager
+		
 	* Improvments to Transform
 		- void LookAt()
 		- void transformPoint()
 		- void RotateAround()
 		- Matrix ?
+		
 	* Matrix3 and 4?
+	
 	* Audio...
 		- GeneralAudioListner
 		- AudioListner : Component
 		- AudioSource : Component
+		
 	* Geometry library // several systems use the idea of a Geometric shape, therefore it should be generalized
 		- the IShape interface with usefull functions like:
 			- Volume of shape
@@ -39,86 +45,98 @@ Sketch_3DEngine TODO list
 			- cuboid, width height and depth
 			- cylinder, radius and height
 			- cone, radius1, radius2, height
+			
 	* Octree list for optimalization
 		- interface IOctreeIndex
 			- Vector3 GetPos()
 			- float FurthestPointfrompivot()
 		- should somehow use IShape
 		- maybe QuadTree aswell // 2D version of octree
+		
 	* physics
 		- void AddForceAtPos() // adds force and torque
 		- calculate center of mass
+		
 	* Collider and collision
 		- should use IShape
 		- collision cheking should use Octree
 		- BoxCollider
 		- MeshCollider
 		- RayCast
+		
 	* Animation
 		- AnimationCurve
 		- Animator : Component // animate RenderObject
 		- get animation data from blender and use that to animate
+		
 	* Shaders
 		- write more SHADERS!
 		- image effect shaders such as:
 			- Bloom
 			- SunRay
+			
 	* Renderer
 		- Line : RenderObject
-		- 
+		
 	* Lights
 		- lights should be Components
+		
 	* Camera class
 		- abbility to change field of view
 		- Camera writes to buffer, so you can have more than one Camera
 		- control of clipping planes
 		- perspective or orthographic
 		- background color, if there is no skybox 
+		
 	* Voxels
 		- VoxelMesh : RenderObject
 		- uses octree for optimizing
 		- uses the Geometry library to insert shapes in voxelMesh
+		
 	* Assets class
 		- automatic loading of assets
+		
 	* Scene class
 		- GameObjects should be ordered in a octree
+		
 	* Networking ?
 		- let the engine run on a server where multiple clients can connect
+		
 	* Command executor class
-		- deffine commands
-		- commands execute java functions
-		- commands:
-			- initObj // creates a new gameObject in the scene. arguments:
-				- components
-				- name
-				- transform
-			- select <name> // finds an object from the scene
-				- addComp // add a component to the gameobject
-				- delete // delets the gameObject
-		- general syntax:
-			- get main cameras position
-		- commands can be loaded from .txt file
+		- modify memory of the running application
+		- invoke methods in the application
+		- Global // is a reference to any object in the applications memory
+		- vars // is a list of references
+		- Commands:
+			- find <varnames> // looks for a variable an places it in Global
+			- set <varname> // place the Global in a variable called <varname>
+			- exec <scriptname> // executes a predeffined script
 		- UI Terminal // interface for a commandExecutor
 				
 		
 Gameplay Features ? A.K.A less permanent features 
+
 	* Galaxy
 		- make it look nicer, SHADERS!
 		- will mostly work as a map to get to solar systems
 		- spore-like
+		
 	* solarSystem
 		- the Sun should have the bloom and sunray shader.
 		- planets.
 		- astreoid belts.
 		- rodina-like
+		
 	* ships
 		- dogfighting sucks..... try to make it fun. <-- this is the real challenge in this entire project
 		- ...modular ships... :D perhaps make it with voxels or a spaz-like solution
 		- Capital Ships should be made of voxels, that way we can see the damage and debree from an explosion
+		
 	* MainMenu 
 		- needs UI system
 		- access main game, join game or host game
 		- access PrefabEditor // palyers should have the abbility to use this, just like in CortexCommand
+		
 	* explosions
 		- should be magnificent and satesfying
 		- visible shock wave, probably using a shader

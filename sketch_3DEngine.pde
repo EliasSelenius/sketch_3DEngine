@@ -4,7 +4,7 @@ import java.util.Map;
 import java.lang.annotation.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.Methods;
+import java.lang.reflect.Method;
 import java.awt.*;
 
 
@@ -22,6 +22,8 @@ MathLib Math = new MathLib();
 Scene defScene;
 // DisplayBuffer: the PGraphics object that gets drawn to the display.
 PGraphics DisplayBuffer;
+// This: this app:
+sketch_3DEngine This = this;
 // G: the Gravitational constant.
 final float G = 6.67 * (10^-11);
 // variables for a planet.
@@ -60,9 +62,13 @@ void setup(){
   
   defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
   
-  SceneCommander c = new SceneCommander(defScene);
   
-  c.Execute("initobj");
+  CommandExecutor exc = new CommandExecutor();
+  
+  
+  //exc.ExecuteScript("hey");
+  
+  exc.ExecuteLine("exec hey");
   
   //XMLConverter xconv = new XMLConverter();
   //saveXML(xconv.GetXML(new Physics(10f)), "data\\prefabs\\NewTestXML");

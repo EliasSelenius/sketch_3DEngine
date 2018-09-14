@@ -1,0 +1,10 @@
+
+global is an internal reference to any object in the code
+vars is a list of references to any objects in the code
+
+global // prints the instance of global
+find <varname> // finds a variable <varname> and places it in global
+set <varname> // places the global in vars with the name <varname>
+vars // prints the content of the vars array
+invoke <methodname> // invokes method <methodname> on global
+exec <scriptname> // executes a script named <scriptname> 
