@@ -24,6 +24,8 @@ Scene defScene;
 PGraphics DisplayBuffer;
 // This: this app:
 sketch_3DEngine This = this;
+// Reflect: collection of functions for java.lang.reflect
+Reflect Reflect = new Reflect();
 // G: the Gravitational constant.
 final float G = 6.67 * (10^-11);
 // variables for a planet.
@@ -63,19 +65,13 @@ void setup(){
   defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
   
   
-  CommandExecutor exc = new CommandExecutor();
+  //CommandExecutor exc = new CommandExecutor();
+  //exc.ExecuteLine("exec hey");
   
-  
-  //exc.ExecuteScript("hey");
-  
-  exc.ExecuteLine("exec hey");
   
   //XMLConverter xconv = new XMLConverter();
   //saveXML(xconv.GetXML(new Physics(10f)), "data\\prefabs\\NewTestXML");
   
-  //FindFields(sketch_3DEngine.Physics.class, SerializeField.class);
-
-
   //CreateGalaxy();
 } 
 

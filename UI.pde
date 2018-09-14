@@ -8,16 +8,14 @@ class Canvas extends RenderObject {
   
   @Override
   void Draw(){
-
     DisplayBuffer.text(frameRate, width / 2,height / 2);
     DisplayBuffer.image(assets.getTexture("front"), 0, 0, width, height);
     for(int i = 0; i < Elements.size(); i++){
-      Elements.get(i).Update();
+      Elements.get(i).Draw();
     }
   }
-}
-
-abstract class UIElement{
   
-  abstract void Update();
+  abstract class UIElement{
+    void Draw(){}
+  }
 }

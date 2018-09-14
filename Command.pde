@@ -35,7 +35,7 @@ class CommandExecutor {
     String[] args = line.split(" ");
     switch(args[0]){
       case "find":
-        Global = GetObject(This, args[1]);
+        Global = Reflect.GetObject(This, args[1]);
         break;
       case "set":
         vars.put(args[1], Global);

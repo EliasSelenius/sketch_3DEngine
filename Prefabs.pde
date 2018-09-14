@@ -27,13 +27,6 @@ class XMLConverter {
   }
 }
 
-@Target(ElementType.FIELD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface SerializeField {
-  String value() default "ok";
-}
-
-
 class PrefabManager {
 
   HashMap<String, Object> Elements = new HashMap<String, Object>();

@@ -51,7 +51,7 @@ class Camera extends Component {
   
   @Override
   void Render(){
-    c.Render(new Vector3(), new Vector3(1), new Quaternion());
+    //c.Render(transform.position.plus(transform.Forward().multiply(100)), new Vector3(1), transform.rotation);
   }
 }
 
