@@ -27,7 +27,7 @@ sketch_3DEngine This = this;
 // Reflect: collection of functions for java.lang.reflect
 Reflect Reflect = new Reflect();
 // G: the Gravitational constant.
-final float G = 6.67 * (10^-11);
+final float G = 6.67 * (pow(10, -11));
 // variables for a planet.
 Vector3 planetpoint = new Vector3(4000,2000,0);
 float planetMass = 1500;
@@ -65,8 +65,11 @@ void setup(){
   defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
   
   
-  //CommandExecutor exc = new CommandExecutor();
-  //exc.ExecuteLine("exec hey");
+  CommandExecutor exc = new CommandExecutor();
+  
+  exc.LoadScript();
+  
+  exc.ExecuteLine("hey.txt");
   
   
   //XMLConverter xconv = new XMLConverter();

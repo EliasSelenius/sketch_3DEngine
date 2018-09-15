@@ -94,6 +94,7 @@ class Scene {
   GameObject Instantiate(){
     GameObject o = new GameObject();
     AddObject(o);
+    println("init");
     return o;
   }
   

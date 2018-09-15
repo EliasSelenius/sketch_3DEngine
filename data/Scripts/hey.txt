@@ -1,0 +1,2 @@
+find defScene.MainCamera.FieldOfView
+print
