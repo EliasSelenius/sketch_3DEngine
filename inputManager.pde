@@ -14,7 +14,7 @@ class Key{
 }
 
 
-class InpAxis{
+class InpAxis {
   Key key1, key2;
   float Value;
   String Name;

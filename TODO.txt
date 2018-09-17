@@ -7,7 +7,7 @@ Sketch_3DEngine TODO list
 			- GameObject and Component
 			- EmissionShapes
 			- ParticleSystem Data
-			- Scene ?		
+			- Scene ?
 			- UIElements
 		- serialize/deserialize using XML or JSON?
 		

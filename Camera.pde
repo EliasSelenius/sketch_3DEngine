@@ -81,7 +81,9 @@ class CamFlyMovment extends Component{
     // look rotation:    
     transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).devide(100));
     
-    
+    if(input.getKey('g').Released){
+      exc.ExecuteLine("hey.txt");
+    }
     
     //spotLight(0,255,0, transform.position.x, transform.position.y, transform.position.z, 0, -1, 0, 60, 600);
     

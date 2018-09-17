@@ -23,11 +23,44 @@ class Reflect {
     return null;
   }
   
-  // GetAllFields(): returns all the fields in the given Class
-  Field[] GetAllFields(Class c) {
+  // GetField(): returns a Field object in a Class and its super Classes from given string
+  Field GetFieldSuper(Class cls, String name){
+    Class c = cls;
+    while(c != null){
+      Field f = null;
+      try {
+        f = c.getDeclaredField(name);
+      } catch (NoSuchFieldException x) {
+        c = c.getSuperclass();
+        continue;
+      }
+      return f;
+    }
+    return null;
+  }
+  
+  // GetFields(): returns all the fields in the given Class
+  Field[] GetFields(Class c) {
     return c.getDeclaredFields();
   }
   
+  // GetFieldsSuper(): returns all the fields in the given Class and its super Classes
+  Field[] GetFieldsSuper(Class<?> cls) {
+    ArrayList<Field> fields = new ArrayList<Field>();
+    Class<?> c = cls;
+    while(c != null){
+      for(Field field : c.getDeclaredFields()){
+        fields.add(field);
+      }
+      c = c.getSuperclass();
+    }
+    Field[] f = new Field[fields.size()];
+    for(int i = 0; i < f.length; i++){
+      f[i] = fields.get(i);
+    }
+    return f;
+  }
+       
   // GetObject(): returns an object in a object with given name
   Object GetObject(Object obj, String objName) {
     try{
@@ -38,9 +71,18 @@ class Reflect {
     return null;
   }
   
-  // GetAllObjects(): returns all the objects in the given object
-  Object[] GetAllObjects(Object obj) {
-    Field[] fields = GetAllFields(obj.getClass());
+  Object GetObjectSuper(Object obj, String name){
+    try{
+      return GetFieldSuper(obj.getClass(), name).get(obj);  
+    } catch (IllegalAccessException x) {
+      x.printStackTrace();
+    }
+    return null;
+  }
+  
+  // GetObjects(): returns all the objects in the given object
+  Object[] GetObjects(Object obj) {
+    Field[] fields = GetFields(obj.getClass());
     Object[] objs = new Object[fields.length];
     for(int i = 0; i < objs.length; i++) {
       objs[i] = GetObject(obj, fields[i].getName());
@@ -48,18 +90,33 @@ class Reflect {
     return objs;
   }
   
+  // GetObjectSuper(): returns all objects in the given object and all its super objects
+  Object[] GetObjectsSuper(Object obj){
+    Field[] fields = GetFieldsSuper(obj.getClass());
+    Object[] objs = new Object[fields.length];
+    for(int i = 0; i < objs.length; i++) {
+      try{
+        objs[i] = fields[i].get(obj);
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    return objs;
+  }
+  
   
   // InvokeMethod(): invokes a Method with the given parameters(params) in the given object(obj):  
-  void InvokeMethod(Object obj, String methodName, Object... params){
+  Object InvokeMethod(Object obj, String methodName, Object... params){
     Class[] paramTypes = new Class[params.length];    
     for(int i = 0; i < params.length; i++){
       paramTypes[i] = params[i].getClass();
     }    
     try{
-      GetMethod(obj, methodName, paramTypes).invoke(obj, params);
+      return GetMethod(obj, methodName, paramTypes).invoke(obj, params);
     } catch(Exception x){
       x.printStackTrace();
     }
+    return null;
   }
   
   // GetClass(): gets a Class from given string;
@@ -73,7 +130,7 @@ class Reflect {
   }
   
   // InstantiateObject(): returns a new object from the given type and constructor parameters(params):
-  Object InstantiateObject(Class type, Object... params){
+  Object InstantiateObject(Class type, Object... params) {
     
     Class[] paramsType = new Class[params.length + 1];
     paramsType[0] = this.getClass();

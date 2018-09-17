@@ -18,19 +18,18 @@ class CommandExecutor {
     return new String[] {script + " is not a script"};
   }
   
-  String[] ExecuteLine(String line){
+  String[] ExecuteLine(String line) {
     String[] args = line.split(" ");
     switch(args[0]){
       case "find":
         String[] path = args[1].split("\\.");
-        Global = Reflect.GetObject(This, path[0]);
+        Global = Reflect.GetObjectSuper(This, path[0]);
         for(int i = 1; i < path.length; i++){
-          Global = Reflect.GetObject(Global, path[i]);
+          Global = Reflect.GetObjectSuper(Global, path[i]);
         }
         break;
       case "set":
         vars.put(args[1], Global);
-        Global = null;
         break;
       case "get":
         Global = vars.get(args[1]);
@@ -39,13 +38,17 @@ class CommandExecutor {
         println("print: " + Global.toString());
         break;
       case "invoke":
-        Reflect.InvokeMethod(Global, args[1]);
+        Global = InvokeCommand(Global, args[1]);
         break;
       default:
         return ExecuteScript(args[0]);
     }
     // This will never happen:
     return null;
+  }
+  
+  Object InvokeCommand(Object o, String name, Object... args) {
+    return Reflect.InvokeMethod(o, name, args);
   }
     
   void LoadScript(){

@@ -6,6 +6,10 @@ class Assets{
   ArrayList<TextureAsset> Textures = new ArrayList<TextureAsset>(); 
   ArrayList<ShaderAsset> Shaders = new ArrayList<ShaderAsset>(); 
   
+  void Hello() {
+    println("Hello from assets");
+  }
+  
   void loadModdelAssets(String... nameList){
     for(int i = 0; i < nameList.length; i++){
       Modells.add(new ModellAsset(nameList[i]));

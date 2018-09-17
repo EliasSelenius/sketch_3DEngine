@@ -34,6 +34,8 @@ float planetMass = 1500;
 //--------------------------
 
 
+CommandExecutor exc;
+
 void setup(){
   
   fullScreen(P3D);
@@ -65,11 +67,10 @@ void setup(){
   defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
   
   
-  CommandExecutor exc = new CommandExecutor();
+  exc = new CommandExecutor();
   
   exc.LoadScript();
   
-  exc.ExecuteLine("hey.txt");
   
   
   //XMLConverter xconv = new XMLConverter();

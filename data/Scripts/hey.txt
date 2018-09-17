@@ -1,2 +1,1 @@
-find defScene.MainCamera.FieldOfView
-print
+find defScene
