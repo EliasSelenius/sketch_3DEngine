@@ -121,9 +121,9 @@ class Scene {
   GameObject Instantiate(String name, Vector3 pos, Vector3 scale, Quaternion rot, Component... comps){
     GameObject o = new GameObject(comps);
     o.Name = name;
-    o.transform.position = pos;
-    o.transform.scale = scale;
-    o.transform.rotation = rot;    
+    o.transform.position.setValue(pos);
+    o.transform.scale.setValue(scale);
+    o.transform.rotation.setValue(rot);    
     AddObject(o);
     return o;
   }

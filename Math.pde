@@ -29,4 +29,8 @@ class MathLib {
     return new Vector3(pv.x, pv.y, pv.z);
   }
   
+  float Normelized(float v){
+    return v / abs(v);
+  }
+  
 }

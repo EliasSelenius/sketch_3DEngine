@@ -22,9 +22,9 @@ class SpaceShip extends Component {
   Transform cam;
   
   void Start(){
-    h = input.getAxis("Horizontal");
-    v = input.getAxis("Vertical");
-    r = input.getAxis("Roll");
+    h = input.GetAxis("Horizontal");
+    v = input.GetAxis("Vertical");
+    r = input.GetAxis("Roll");
     p = (Physics)GetComponent(Physics.class);
     
     cam = gameObject.scene.FindObject("Camera").transform;
@@ -45,7 +45,7 @@ class SpaceShip extends Component {
     
     cam.rotation.setValue(transform.rotation.multiply(q));
     
-    if(input.getKey('f').Pressed){
+    if(input.GetKey('f').Pressed){
       p.Velocity.setValue(0);
       p.AngularVelocity.setValue(0);
     }

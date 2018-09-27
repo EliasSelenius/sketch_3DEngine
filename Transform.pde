@@ -7,7 +7,7 @@ class Transform{
   Quaternion rotation;
 
 
-  Transform(){
+  Transform() {
     position = new Vector3();
     scale = new Vector3(1);
     rotation = new Quaternion();

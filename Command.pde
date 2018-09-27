@@ -15,7 +15,7 @@ class CommandExecutor {
         return s.Execute();
       }
     }
-    return new String[] {script + " is not a script"};
+    return new String[] {script + " was not found in memory."};
   }
   
   String[] ExecuteLine(String line) {

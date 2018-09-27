@@ -60,10 +60,15 @@ class CamFlyMovment extends Component{
   
   InpAxis h, v, r;
   
+  OcTreeRenderer tree;
+  
   void Start(){
-    h = input.getAxis("Horizontal");
-    v = input.getAxis("Vertical");
-    r = input.getAxis("Roll");
+    h = input.GetAxis("Horizontal");
+    v = input.GetAxis("Vertical");
+    r = input.GetAxis("Roll");
+    
+    
+    tree = (OcTreeRenderer)gameObject.scene.FindObject("tree").GetComponent(OcTreeRenderer.class);
   }
   
   void Update(){    
@@ -75,15 +80,22 @@ class CamFlyMovment extends Component{
       
     // fly movement:
     transform.Translate(transform.Forward().multiply(-v.getValue() * speed));
-    transform.Translate(new Vector3(0,(input.getKey(' ').Pressed)? 1 : 0,0));
+    transform.Translate(new Vector3(0,(input.GetKey(' ').Pressed)? 1 : 0,0));
     transform.Translate(transform.Right().multiply(-h.getValue() * speed));
     
-    // look rotation:    
+        // look rotation:    
     transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).devide(100));
     
-    if(input.getKey('g').Released){
-      exc.ExecuteLine("hey.txt");
+    if(input.GetKey('g').Released){
+      //exc.ExecuteLine("hey.txt");
+      
+      tree.ocTree.Insert(new Physics(10f), transform.position);
+      
     }
+    
+    
+    
+    
     
     //spotLight(0,255,0, transform.position.x, transform.position.y, transform.position.z, 0, -1, 0, 60, 600);
     

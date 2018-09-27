@@ -64,12 +64,14 @@ void setup(){
 
   defScene = new Scene();
   
+  defScene.Instantiate("tree", new OcTreeRenderer());
+  
   defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
+
   
+  //exc = new CommandExecutor();
   
-  exc = new CommandExecutor();
-  
-  exc.LoadScript();
+  //exc.LoadScript();
   
   
   

@@ -1,6 +1,5 @@
 
 
-
 interface Interpolatable<T>{
   T Lerp(T value, float t);
 }

@@ -20,8 +20,8 @@ class InpAxis {
   String Name;
   InpAxis(String n, char a, char b){
     Name = n;
-    key1 = input.getKey(a);
-    key2 = input.getKey(b);
+    key1 = input.GetKey(a);
+    key2 = input.GetKey(b);
   }
   
   void Update(){
@@ -71,7 +71,7 @@ class Input {
   }
   
   void Init(){
-    char[] ch = {' ', 'w', 'a', 's', 'd', 'g', 'e', 'q', 'f'};
+    char[] ch = {' ', 'w', 'a', 's', 'd', 'g', 'e', 'q', 'f', 'r'};
     keys = new Key[ch.length];
     for(int i = 0; i < ch.length; i++){
       keys[i] = new Key(ch[i]);
@@ -122,7 +122,7 @@ class Input {
     }
   }
 
-  Key getKey(char n){
+  Key GetKey(char n){
     for(int i = 0; i < keys.length; i++){
       if(keys[i].Name == n){
         return keys[i];
@@ -131,7 +131,7 @@ class Input {
     return null;
   }
   
-  InpAxis getAxis(String n){
+  InpAxis GetAxis(String n){
     for(int i = 0; i < Axis.length; i++){
       if(Axis[i].Name == n){
         return Axis[i];

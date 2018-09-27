@@ -49,9 +49,10 @@ class Cylinder implements IShape {
   float MaxLengthFromPivot() { return sqrt(sq(Height / 2) + sq(Radius)); }
 }
 
-class Cone implements IShape {
+// TODO: the formulas in ConicalFrustum may be wrong 
+class ConicalFrustum implements IShape {
   float LowerRadius, UpperRadius, Height;
-  Cone(float l, float u, float h){
+  ConicalFrustum(float l, float u, float h){
     LowerRadius = l; UpperRadius = u; Height = h;
   }
   float Volume() { return ((PI * Height) / 3) * (sq(LowerRadius) + (LowerRadius * UpperRadius) + sq(UpperRadius)); }
