@@ -43,7 +43,7 @@ class CommandExecutor {
       case "exec":
         ExecuteScript(args[1]);
         break;
-      case "new":
+      case "use":
         Global = InitObject(args[1], ExcludeIndices(args, 0, 1).toArray(new String[args.length - 2]));
     }
     return new String[] { line + " Not recognized, There is probably a syntax error..." };
@@ -54,9 +54,9 @@ class CommandExecutor {
     Float f = float(obj);
     if(!f.isNaN()) {
       return f;
-    } else if(obj == "true") {
+    } else if(obj.equals("true")) {
       return true;
-    } else if(obj == "false") {
+    } else if(obj.equals("false")) {
       return false;
     } else if(obj.charAt(0) == '\"') {
       return obj.substring(1, obj.length() - 1);
