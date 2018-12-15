@@ -66,9 +66,9 @@ void setup(){
   
   //defScene.Instantiate("tree", new OcTreeRenderer());
   
-  defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
+  //defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
 
-  defScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
+  //defScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
 
 
   exc = new CommandExecutor();
@@ -78,7 +78,7 @@ void setup(){
   //XMLConverter xconv = new XMLConverter();
   //saveXML(xconv.GetXML(new Physics(10f)), "data\\prefabs\\NewTestXML");
   
-  //CreateGalaxy();
+  CreateGalaxy();
 } 
 
 

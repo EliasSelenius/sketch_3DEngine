@@ -2,11 +2,48 @@
 
 Command Executor:
 
-todo: use Command {
+todo: use Command string value bug {
+    
     use "Hello World"
     print
 
     only prints Hell
     we need to replace string.split(' ') with something that
     doesnt fuck up the string
+}
+
+todo: use Command {
+
+    use Transform Vector3 100 39 0 Vector3 1 Quaternion
+
+    all of the values here is interperated as 
+    Transform constructor arguments
+    
+    fix:
+    use Transform (Vector3 (100, 3, 4), Vector3 (1), Quaternion (329, 21, 1, 1))
+    
+    comma sepperated arguments
+
+}
+
+todo: semicolon syntax {
+    commands can get really long. we should be able to have on command on several lines
+    how do we sepperate commands from each other?
+    fix:
+    use semicolon after every command
+}
+
+
+Animation libray:
+
+todo: class Curve2D {
+    represents a curve on a graph
+
+    api:
+    list<value, time>
+    float Evaluate(time) {
+        return value at time
+    }
+
+    would be cool with intuitive chainable api for creating a curve in code
 }

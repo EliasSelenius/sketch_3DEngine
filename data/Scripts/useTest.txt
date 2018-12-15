@@ -4,7 +4,13 @@ print
 use false
 print
 
+use null
+print
+
 use "Hello world"
+print
+
+use 689
 print
 
 use Transform
@@ -12,5 +18,8 @@ print
 invoke Forward
 print
 
-use 689
+use Vector3 100 54 9
+print
+
+use Transform Vector3 Vector3 Quaternion
 print

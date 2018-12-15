@@ -87,7 +87,7 @@ class CamFlyMovment extends Component{
     transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).devide(100F));
     
     if(input.GetKey('g').Released){
-      exc.ExecuteLine("exec hey.txt");
+      exc.ExecuteLine("exec useTest.txt");
       
       //tree.ocTree.Insert(new Physics(10f), transform.position);
       

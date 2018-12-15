@@ -35,7 +35,7 @@ class CommandExecutor {
         Global = vars.get(args[1]);
         break;
       case "print":
-        println("print: " + Global.toString());
+        println("print: " + ((Global == null)? "null" : Global.toString()));
         break;
       case "invoke":
         Global = InvokeCommand(Global, args[1], (ArrayList)ExcludeIndices(args, 0, 1));
@@ -58,7 +58,9 @@ class CommandExecutor {
       return true;
     } else if(obj.equals("false")) {
       return false;
-    } else if(obj.charAt(0) == '\"') {
+    } else if(obj.equals("null")) {
+      return null;
+    }else if(obj.charAt(0) == '\"') {
       return obj.substring(1, obj.length() - 1);
     } else if(obj.equals("get")) {
       return vars.get(args[0]);
