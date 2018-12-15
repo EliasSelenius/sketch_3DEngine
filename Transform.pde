@@ -9,7 +9,7 @@ class Transform{
 
   Transform() {
     position = new Vector3();
-    scale = new Vector3(1);
+    scale = new Vector3(1f);
     rotation = new Quaternion();
   }
   Transform(Vector3 p, Vector3 s, Quaternion r){

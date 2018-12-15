@@ -20,7 +20,7 @@ class Galaxy extends Component {
   Vector3 GetCoord(int arm, float Length){
     float dist = ArmLength * Length;
     float angle = ((TAU / Arms) * arm) + (dist / 3.2f);
-    return new Vector3(sin(angle) * dist, 0, cos(angle) * dist);
+    return new Vector3(sin(angle) * dist, 0f, cos(angle) * dist);
   }
   
   
@@ -55,7 +55,7 @@ void CreateGalaxy(){
   
   scene.AddObject(CreateShip());
 
-  scene.Instantiate("Galaxy", new Vector3(0), new Vector3(1000), new Quaternion(), new Galaxy(5, 10));
+  scene.Instantiate("Galaxy", new Vector3(0f), new Vector3(1000f), new Quaternion(), new Galaxy(5, 10));
   
   defScene = scene;
 }

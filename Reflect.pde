@@ -133,7 +133,7 @@ class Reflect {
   Object InstantiateObject(Class type, Object... params) {
     
     Class[] paramsType = new Class[params.length + 1];
-    paramsType[0] = this.getClass();
+    paramsType[0] = This.getClass();
     for(int i = 0; i < params.length; i++){
       paramsType[i + 1] = params[i].getClass();
     }
@@ -149,7 +149,7 @@ class Reflect {
     Object object = null;
     try{
       Object[] paro = new Object[params.length + 1];
-      paro[0] = this;
+      paro[0] = This;
       for(int i = 0; i < params.length; i++){
         paro[i + 1] = params[i];
       }

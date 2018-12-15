@@ -102,17 +102,17 @@ class Input {
     
     switch(mouseMode){
       case Free:
-        mouseMove.setValue(mouseX - pmouseX, mouseY - pmouseY);
+        mouseMove.setValue((float)(mouseX - pmouseX), (float)(mouseY - pmouseY));
         break;
       case Locked:
         robot.mouseMove((int)centerX + frame.getX(),(int)centerY + frame.getY());
-        mouseMove.setValue(0,0);
+        mouseMove.setValue(0f,0f);
         mouseMove.setValue(mouseX - centerX, mouseY - centerY);        
         break;
     }
     
 
-    mousePos.setValue(mouseX, mouseY);
+    mousePos.setValue((float)mouseX, (float)mouseY);
     
     for(int i = 0; i < Axis.length; i++){
       Axis[i].Update();

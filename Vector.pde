@@ -4,7 +4,10 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
 
   float x, y, z;
  
-
+  @Override
+  String toString() {
+    return "x: " + x + " y: " + y + " z: " + z;
+  }
   
   Vector3(){
     x = 0;
@@ -16,23 +19,23 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     setValue(p);
   }
   
-  Vector3(float xPos, float yPos, float zPos){  
+  Vector3(Float xPos, Float yPos, Float zPos){  
     x = xPos;
     y = yPos; 
     z = zPos;
   }  
   
-  Vector3(float pos){
+  Vector3(Float pos){
     x = pos;
     y = pos; 
     z = pos;
   }
   
-  void setValue(float xyz){
+  void setValue(Float xyz){
     x = y = z = xyz;
   }
   
-  void setValue(float xp, float yp, float zp){
+  void setValue(Float xp, Float yp, Float zp){
     x = xp;
     y = yp;
     z = zp;
@@ -50,7 +53,7 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     this.z += v.z;
   }
   
-  Vector3 multiply(float v){
+  Vector3 multiply(Float v){
     return new Vector3(x * v, y * v, z * v);
   }
   
@@ -58,7 +61,7 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     return new Vector3(x * v.x, y * v.y, z * v.z);
   }
   
-  Vector3 devide(float v){
+  Vector3 devide(Float v){
     return new Vector3(x / v, y / v, z / v);
   }
   
@@ -66,7 +69,7 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     return new Vector3(x + v.x, y + v.y, z + v.z);
   }
   
-  Vector3 plus(float v){
+  Vector3 plus(Float v){
     return new Vector3(x + v, y + v, z + v);
   }
   
@@ -74,10 +77,10 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     return new Vector3(x - v.x, y - v.y, z - v.z); 
   }
   
-  float Dot(Vector3 v){
+  Float Dot(Vector3 v){
     return x * v.x + y * v.y + z * v.z;
   }
-  float Dot(float X, float Y, float Z){
+  Float Dot(Float X, Float Y, Float Z){
     return x * X + y * Y + z * Z;
   }
   Vector3 Cross(Vector3 v){
@@ -90,18 +93,18 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     
   }
   
-  float distanceTo(Vector3 v){
+  Float distanceTo(Vector3 v){
     return sqrt(sq(x - v.x) + sq(y - v.y) + sq(z - v.z));
   }
   
-  float Magnitude(){
+  Float Magnitude(){
     return sqrt(sq(x) + sq(y) + sq(z));
   }
   
-  float angleTo(Vector3 v){
+  Float angleTo(Vector3 v){
     return acos(Dot(v) / (Magnitude() * v.Magnitude()));
   }
-  float angleTo(float X, float Y, float Z){
+  Float angleTo(Float X, Float Y, Float Z){
     return acos(Dot(X,Y,Z) / (Magnitude() * sqrt(sq(X) + sq(Y) + sq(Z))));
   }
   
@@ -122,7 +125,7 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
   }
   
   // Lerp: interpolates between two vectors
-  Vector3 Lerp(Vector3 value, float t){
+  Vector3 Lerp(Vector3 value, Float t){
     return new Vector3((value.x - x) * t, (value.y - y) * t, (value.z - z) * t);
   }
   
@@ -141,39 +144,39 @@ class Vector2 {
     y = 0;
   }
   
-  Vector2(float xPos, float yPos){  
+  Vector2(Float xPos, Float yPos){  
     x = xPos;
     y = yPos;     
   }  
   
-  Vector2(float pos){
+  Vector2(Float pos){
     x = pos;
     y = pos;     
   }
   
-  void setValue(float xp, float yp){
+  void setValue(Float xp, Float yp){
     x = xp;
     y = yp;    
   }
   
-  float Magnitude(){
+  Float Magnitude(){
     return sqrt(sq(x) + sq(y));
   }
   
-  float Dot(Vector2 v){
+  Float Dot(Vector2 v){
     return x * v.x + y * v.y;
   }
-  float Dot(float X, float Y){
+  Float Dot(float X, float Y){
     return x * X + y * Y;
   }
   Vector2 Cross(){
     return new Vector2(y, -x);
   }
   
-  float angleTo(Vector2 v){
+  Float angleTo(Vector2 v){
     return acos(Dot(v) / (Magnitude() * v.Magnitude()));
   }
-  float angleTo(float X, float Y){
+  Float angleTo(Float X, Float Y){
     return acos(Dot(X, Y) / (Magnitude() * (sqrt(sq(X) + sq(Y))))); 
   }
   
@@ -195,7 +198,7 @@ class Vector4{
   
   }
   
-  Vector4(float X, float Y, float Z, float W){
+  Vector4(Float X, Float Y, Float Z, Float W){
     x = X;
     y = Y;
     z = Z;

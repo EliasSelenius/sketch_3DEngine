@@ -68,7 +68,7 @@ class CamFlyMovment extends Component{
     r = input.GetAxis("Roll");
     
     
-    tree = (OcTreeRenderer)gameObject.scene.FindObject("tree").GetComponent(OcTreeRenderer.class);
+    //tree = (OcTreeRenderer)gameObject.scene.FindObject("tree").GetComponent(OcTreeRenderer.class);
   }
   
   void Update(){    
@@ -80,16 +80,21 @@ class CamFlyMovment extends Component{
       
     // fly movement:
     transform.Translate(transform.Forward().multiply(-v.getValue() * speed));
-    transform.Translate(new Vector3(0,(input.GetKey(' ').Pressed)? 1 : 0,0));
+    transform.Translate(new Vector3(0F,(input.GetKey(' ').Pressed)? 1F : 0F,0F));
     transform.Translate(transform.Right().multiply(-h.getValue() * speed));
     
         // look rotation:    
-    transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).devide(100));
+    transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).devide(100F));
     
     if(input.GetKey('g').Released){
-      //exc.ExecuteLine("hey.txt");
+      exc.ExecuteLine("exec hey.txt");
       
-      tree.ocTree.Insert(new Physics(10f), transform.position);
+      //tree.ocTree.Insert(new Physics(10f), transform.position);
+      
+      //for(int i = 0; i < 50; i++) {
+      //  float s = tree.ocTree.Root.cube.Size / 2f;
+      //  tree.ocTree.Insert(new Physics(10f), new Vector3(random(-s, s), random(-s, s), random(-s, s)));
+      //}
       
     }
     
@@ -117,7 +122,7 @@ class CameraOrbit extends Component {
     transform.position.z = cos(hor) * zoom;
     transform.position.y = sin(vert) * zoom;
     
-    transform.LookAt(new Vector3(1), new Vector3(0,-1,0));
+    transform.LookAt(new Vector3(1F), new Vector3(0F,-1F,0F));
        
   }
 }

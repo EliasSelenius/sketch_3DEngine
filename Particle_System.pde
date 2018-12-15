@@ -171,7 +171,7 @@ class ConeEmission extends EmissionShape{
   
   }
   void processParticle(Particle p){
-    p.Velocity.setValue(1,1,1);
+    p.Velocity.setValue(1f,1f,1f);
     Vector2 t = new Vector2(p.Velocity.x, p.Velocity.y);
     t.Normelize();
     float theta = (t.Magnitude() / p.Velocity.z) * 45;

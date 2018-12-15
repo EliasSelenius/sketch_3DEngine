@@ -37,7 +37,7 @@ class Physics extends Component {
   }
   
   void OnColliderHit(Collider other){
-    Velocity.setValue(0);
+    Velocity.setValue(0f);
   }
   
   

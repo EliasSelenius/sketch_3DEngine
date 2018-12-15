@@ -38,17 +38,54 @@ class CommandExecutor {
         println("print: " + Global.toString());
         break;
       case "invoke":
-        Global = InvokeCommand(Global, args[1]);
+        Global = InvokeCommand(Global, args[1], (ArrayList)ExcludeIndices(args, 0, 1));
         break;
-      default:
-        return ExecuteScript(args[0]);
+      case "exec":
+        ExecuteScript(args[1]);
+        break;
+      case "new":
+        Global = InitObject(args[1], ExcludeIndices(args, 0, 1).toArray(new String[args.length - 2]));
     }
-    // This will never happen:
-    return null;
+    return new String[] { line + " Not recognized, There is probably a syntax error..." };
   }
   
-  Object InvokeCommand(Object o, String name, Object... args) {
-    return Reflect.InvokeMethod(o, name, args);
+  Object InitObject(String obj, String... args) {
+    // check for primitive value-type (String, float, bool)
+    Float f = float(obj);
+    if(!f.isNaN()) {
+      return f;
+    } else if(obj == "true") {
+      return true;
+    } else if(obj == "false") {
+      return false;
+    } else if(obj.charAt(0) == '\"') {
+      return obj.substring(1, obj.length() - 1);
+    } else if(obj.equals("get")) {
+      return vars.get(args[0]);
+    }
+    // if its not a primitive:
+    if(args.length > 0) {
+      Object[] arry = new Object[args.length];
+      for(int i = 0; i < args.length; i++) {
+        arry[i] = InitObject(args[i]);
+      }
+      return Reflect.InstantiateObject(Reflect.GetClass(obj), arry);
+    } else {
+      return Reflect.InstantiateObject(Reflect.GetClass(obj));
+    }
+  }
+  
+  Object InvokeCommand(Object o, String name, ArrayList<String> args) {
+    if(args.size() > 0) {
+      Object[] a = new Object[args.size()];
+      boolean skipnext = false;
+      for(int i = 0; i < a.length; i++) {
+        a[i] = InitObject(args.get(i), args.get(i + 1));
+      }
+      return Reflect.InvokeMethod(o, name, a);
+    } else {
+      return Reflect.InvokeMethod(o, name);
+    }
   }
     
   void LoadScript(){

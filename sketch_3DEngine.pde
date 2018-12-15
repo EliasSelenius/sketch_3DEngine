@@ -29,7 +29,7 @@ Reflect Reflect = new Reflect();
 // G: the Gravitational constant.
 final float G = 6.67 * (pow(10, -11));
 // variables for a planet.
-Vector3 planetpoint = new Vector3(4000,2000,0);
+Vector3 planetpoint = new Vector3(4000F,2000F,0F);
 float planetMass = 1500;
 //--------------------------
 
@@ -64,17 +64,17 @@ void setup(){
 
   defScene = new Scene();
   
-  defScene.Instantiate("tree", new OcTreeRenderer());
+  //defScene.Instantiate("tree", new OcTreeRenderer());
   
   defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
 
+  defScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
+
+
+  exc = new CommandExecutor();
+  exc.LoadScript();
   
-  //exc = new CommandExecutor();
-  
-  //exc.LoadScript();
-  
-  
-  
+
   //XMLConverter xconv = new XMLConverter();
   //saveXML(xconv.GetXML(new Physics(10f)), "data\\prefabs\\NewTestXML");
   

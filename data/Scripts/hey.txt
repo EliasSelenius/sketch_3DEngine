@@ -1,1 +1,5 @@
-find defScene
+new Vector3 1000 40 23
+print
+set vec
+find defScene.MainCamera.transform.position
+print

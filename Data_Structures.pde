@@ -5,13 +5,13 @@ class OcTreeRenderer extends Component {
   
   @Override
   void Start() {    
-
+    ocTree.MaxCount = 2;
   }
   
   @Override
   void Update() {
     if(input.GetKey('r').Pressed) {
-      transform.Translate(new Vector3(10,10,10));
+      transform.Translate(new Vector3(10F,10F,10F));
       transform.Rotate(new Vector3(.1,.1,.1));
     } 
     /*
@@ -51,7 +51,7 @@ class OcTreeRenderer extends Component {
         DisplayBuffer.popMatrix();
       }
       DisplayBuffer.popMatrix();
-      println(node.Elements.size());
+      //println(node.Elements.size());
     }
     
     DisplayBuffer.popMatrix();
@@ -83,7 +83,7 @@ class OcTree<T> {
   int MaxCount = 1;
   
   OcTree(float size) {
-    Root = new OcTreeNode(size, new Vector3(0));
+    Root = new OcTreeNode(size, new Vector3(0F));
   }
   
   void Insert(T e, Vector3 pos) {
@@ -124,14 +124,14 @@ class OcTree<T> {
   }
   
   final Vector3[] OcTreeNodeLocations = {
-    new Vector3(1,1,1),
-    new Vector3(-1,1,1),
-    new Vector3(1,-1,1),
-    new Vector3(-1,-1,1),
-    new Vector3(1,1,-1),
-    new Vector3(-1,1,-1),
-    new Vector3(1,-1,-1),
-    new Vector3(-1,-1,-1)
+    new Vector3(1F,1F,1F),
+    new Vector3(-1F,1F,1F),
+    new Vector3(1F,-1F,1F),
+    new Vector3(-1F,-1F,1F),
+    new Vector3(1F,1F,-1F),
+    new Vector3(-1F,1F,-1F),
+    new Vector3(1F,-1F,-1F),
+    new Vector3(-1F,-1F,-1F)
   };
   
   class OcTreeNode {
@@ -180,6 +180,12 @@ class OcTree<T> {
           }
         }
         
+        println(dir.toString());
+        
+        if(index == -1) {
+          return;
+        }
+
         OcTreeNode node = SubNodes.get(index);
         node.Insert(e, pos);
       }

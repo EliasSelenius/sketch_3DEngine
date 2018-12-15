@@ -38,16 +38,16 @@ class SpaceShip extends Component {
     
     camZoom += input.mouseWheel;
     
-    cam.position.setValue(transform.position.plus(transform.Forward().multiply(camZoom).plus(transform.Up().multiply(10))));
+    cam.position.setValue(transform.position.plus(transform.Forward().multiply(camZoom).plus(transform.Up().multiply(10f))));
     
     Quaternion q = new Quaternion();
-    q.SetEuler(new Vector3(0, PI, PI));
+    q.SetEuler(new Vector3(0f, PI, PI));
     
     cam.rotation.setValue(transform.rotation.multiply(q));
     
     if(input.GetKey('f').Pressed){
-      p.Velocity.setValue(0);
-      p.AngularVelocity.setValue(0);
+      p.Velocity.setValue(0f);
+      p.AngularVelocity.setValue(0f);
     }
   }
 }

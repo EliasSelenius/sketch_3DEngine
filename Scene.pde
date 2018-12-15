@@ -170,7 +170,7 @@ class BackgroundLayer extends ObjectLayer {
   @Override
   void Draw(){
     super.Draw();
-    skybox.Render(scene.MainCamera.transform.position, new Vector3(1000), new Quaternion());
+    skybox.Render(scene.MainCamera.transform.position, new Vector3(1000f), new Quaternion());
   }
 }
 
