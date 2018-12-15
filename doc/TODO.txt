@@ -1,0 +1,12 @@
+
+
+Command Executor:
+
+todo: use Command {
+    use "Hello World"
+    print
+
+    only prints Hell
+    we need to replace string.split(' ') with something that
+    doesnt fuck up the string
+}
