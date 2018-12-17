@@ -1,10 +1,66 @@
 
-global is an internal reference to any object in the code
-vars is a list of references to any objects in the code
+Commands:
 
-global // prints the instance of global
-find <varname> // finds a variable <varname> and places it in global
-set <varname> // places the global in vars with the name <varname>
-vars // prints the content of the vars array
-invoke <methodname> // invokes method <methodname> on global
-exec <scriptname> // executes a script named <scriptname> 
+command:
+find <varname>
+description:
+finds a variable <varname> and sets it to the active element
+usage:
+find defScene.MainCamera.transform.position
+
+
+
+command:
+invoke <methodname>
+description:
+invokes method <methodname> on the active element
+usage:
+find defScene.MainCamera.transform
+invoke Forward
+
+
+command:
+use <value>
+description:
+sets the active element to a new value
+usage:
+use true // boolean
+use "hey" // string
+use null // null
+use 59 // float
+use Vector3 200 40 50 // any datatype
+
+
+command:
+set <varname>
+description:
+saves the active element with the name <varname> for later use with "get" command
+usage:
+use Vector3 200
+set MyVector
+
+
+command:
+get <varname>
+description:
+gets the variable named <varname> as the active element
+usage:
+get MyVector
+print
+
+
+command:
+print
+description:
+prints the active element
+usage:
+find planetMass
+print
+
+
+command:
+exec <filename>
+description:
+executes the file <filename>
+usage:
+exec myFunc.txt

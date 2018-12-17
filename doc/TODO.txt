@@ -47,3 +47,38 @@ todo: class Curve2D {
 
     would be cool with intuitive chainable api for creating a curve in code
 }
+
+todo: class Animation {
+    
+    things to figure out:
+
+    what needs animating?
+     - GameObjects?
+     - RenderObjects?
+
+    how do we get animations from blender?
+
+    
+
+}
+
+
+Assets:
+
+todo: Assets auto loading {
+    all assets should be loaded without me telling them to be loaded
+}
+<Done> todo: shader assets {
+    deffine vertex, fragment etc shaders in one "shaderProgram" file
+    so we dont need to use loadShaderAsset(name, vertex, fragment) 
+
+    to figure out:
+    can we create PShaders from strings // yes it seem like it
+}
+
+
+General:
+
+todo: file path sepperator {
+    find the path sepperator to get correct file paths on both windows, linux, mac
+}
