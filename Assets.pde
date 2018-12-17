@@ -1,15 +1,11 @@
 
 
-class Assets{
+class Assets {
 
   ArrayList<ModellAsset> Modells = new ArrayList<ModellAsset>();
   ArrayList<TextureAsset> Textures = new ArrayList<TextureAsset>(); 
   ArrayList<ShaderAsset> Shaders = new ArrayList<ShaderAsset>(); 
-  
-  void Hello() {
-    println("Hello from assets");
-  }
-  
+
   void loadModdelAssets(String... nameList){
     for(int i = 0; i < nameList.length; i++){
       Modells.add(new ModellAsset(nameList[i]));
@@ -26,9 +22,9 @@ class Assets{
     Shaders.add(new ShaderAsset(Name, vert, frag));
   }
   
-  PShader getShader(String Name){
+  PShader getShader(String name){
     for(ShaderAsset shd : Shaders){
-      if(shd.name == Name){
+      if(shd.Name == name){
         return shd.shader;
       }
     }
@@ -55,12 +51,46 @@ class Assets{
 }
 
 class ShaderAsset{
+  
   PShader shader;
-  String name;
+  String Name;
+  String[] Source;
+
   ShaderAsset(String n, String vertex, String fragment){
-    name = n;
+    Name = n;
     shader = loadShader("shaders\\" + fragment, "shaders\\" + vertex);
   }
+
+
+  ShaderAsset(String n) {
+    Name = n;
+
+    Source = loadStrings("shaders\\test\\" + Name);
+    
+    shader = new PShader(This, GetArea("vert"), GetArea("frag"));
+    
+  }
+
+
+  String[] GetArea(String name) {
+    ArrayList<String> area = new ArrayList<String>();
+    boolean read = false;
+    for(int i = 0; i < Source.length; i++) {
+      String line = Source[i];
+      if(read) {
+        if (line.equals("end:" + name)) {
+          return area.toArray(new String[area.size()]);
+        }
+        area.add(line);
+      } else {
+        if (line.equals("start:" + name)) {
+          read = true;
+        }
+      }
+    }
+    return null;
+  }
+
 }
 
 class TextureAsset {

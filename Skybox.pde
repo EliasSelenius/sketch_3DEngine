@@ -12,7 +12,8 @@ class Skybox extends RenderObject {
     right = assets.getTexture("Skyboxes\\Skybox_right");
     left = assets.getTexture("Skyboxes\\Skybox_left");
     
-    shader = assets.getShader("texShader");
+    //shader = assets.getShader("texShader");
+    shader = assets.getShader("default.shader");
   }
   
   @Override

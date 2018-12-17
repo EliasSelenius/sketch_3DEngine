@@ -34,8 +34,8 @@ class Scene {
   }
   
   ObjectLayer FindLayer(String name){
-    for(ObjectLayer l : Layers){
-      if(l.Name == name){
+    for(ObjectLayer l : Layers) {
+      if(l.Name.equals(name)) {
         return l;
       }
     }
@@ -182,6 +182,6 @@ class DefaultLayer extends ObjectLayer {
   @Override
   void Draw(){
     super.Draw();
-    Draw_Debug();
+    //Draw_Debug();
   }
 }

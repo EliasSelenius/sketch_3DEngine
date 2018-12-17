@@ -8,6 +8,23 @@ interface IEquatable<T>{
   boolean Equal(T value);
 }
 
+enum operators {
+  equal,
+  less,
+  greater,
+  lessEqual,
+  greaterEqual
+}
+
+class QueryList<T> extends ArrayList<T> {
+
+  QueryList<T> Where() {
+    return null;
+  }
+
+}
+
+
 
 boolean ExsistInArray(Object obj, Object[] array) {
   for(Object o : array) {

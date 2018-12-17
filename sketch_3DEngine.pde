@@ -36,17 +36,22 @@ float planetMass = 1500;
 
 CommandExecutor exc;
 
-void setup(){
+void setup() {
   
   fullScreen(P3D);
   
   DisplayBuffer = createGraphics(width, height, P3D);
+  
   
 
   //----init-Inputs-----
   input = new Input();
   input.Init();
   //--------------------
+  
+
+  
+
   
   //----init-Assets-----  
   assets = new Assets();
@@ -55,7 +60,12 @@ void setup(){
   // shader loading:
   assets.loadShaderAsset("InvertShader", "vertex.glsl", "fragment.glsl");
   assets.loadShaderAsset("texShader", "texvert.glsl", "texfrag.glsl");
+  assets.Shaders.add(new ShaderAsset("default.shader"));
   //--------------------
+  
+  
+
+
   
   //----init-Prefabs----
   Prefabs = new PrefabManager();
@@ -66,19 +76,19 @@ void setup(){
   
   //defScene.Instantiate("tree", new OcTreeRenderer());
   
-  //defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
+  defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
 
-  //defScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
+  defScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
 
 
   exc = new CommandExecutor();
   exc.LoadScript();
   
-
+  
   //XMLConverter xconv = new XMLConverter();
   //saveXML(xconv.GetXML(new Physics(10f)), "data\\prefabs\\NewTestXML");
   
-  CreateGalaxy();
+  //CreateGalaxy();
 } 
 
 
@@ -102,3 +112,5 @@ void draw(){
   
   //println(frameRate);
 }
+
+
