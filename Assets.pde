@@ -2,9 +2,23 @@
 
 class Assets {
 
+  
+
   ArrayList<ModellAsset> Modells = new ArrayList<ModellAsset>();
   ArrayList<TextureAsset> Textures = new ArrayList<TextureAsset>(); 
   ArrayList<ShaderAsset> Shaders = new ArrayList<ShaderAsset>(); 
+
+
+  void LoadShaders() {
+    File file = new File(sketchPath() + "\\data\\shaders");
+    for(String s : file.list(new FileExtensionFilter(".shader"))) {
+      Shaders.add(new ShaderAsset(s));
+      println(s);
+    }
+  }
+
+
+
 
   void loadModdelAssets(String... nameList){
     for(int i = 0; i < nameList.length; i++){
@@ -22,9 +36,9 @@ class Assets {
     Shaders.add(new ShaderAsset(Name, vert, frag));
   }
   
-  PShader getShader(String name){
+  PShader GetShader(String name){
     for(ShaderAsset shd : Shaders){
-      if(shd.Name == name){
+      if(shd.Name.equals(name)) {
         return shd.shader;
       }
     }
@@ -50,7 +64,7 @@ class Assets {
   }
 }
 
-class ShaderAsset{
+class ShaderAsset {
   
   PShader shader;
   String Name;
@@ -63,9 +77,9 @@ class ShaderAsset{
 
 
   ShaderAsset(String n) {
-    Name = n;
-
-    Source = loadStrings("shaders\\test\\" + Name);
+    Name = n.substring(0, n.indexOf('.'));
+    println(Name);
+    Source = loadStrings("shaders\\" + n);
     
     shader = new PShader(This, GetArea("vert"), GetArea("frag"));
     

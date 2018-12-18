@@ -8,6 +8,27 @@ interface IEquatable<T>{
   boolean Equal(T value);
 }
 
+
+class FileExtensionFilter implements FilenameFilter {
+  
+  String[] extensions;
+
+  FileExtensionFilter(String... exts) {
+    extensions = exts;
+  }
+
+  @Override
+  boolean accept(File dir, String name) {
+    for(String s : extensions) {
+      if (name.endsWith(s)) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+
+
 enum operators {
   equal,
   less,

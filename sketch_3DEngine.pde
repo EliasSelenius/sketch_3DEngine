@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.awt.*;
+import java.io.*;
 
 
 
@@ -14,6 +15,8 @@ import java.awt.*;
 float deltaTime;
 // assets: controls loading of all assets.
 Assets assets;
+// SystemPathSeparator: the path seperator for file paths
+String SystemPathSeparator = File.pathSeparator;
 // prefabs: controls saving and loading of GameObject.
 PrefabManager Prefabs;
 // Math: a collection of usefull functions.
@@ -53,12 +56,12 @@ void setup() {
   
   //----init-Assets-----  
   assets = new Assets();
+  assets.LoadShaders();
   assets.loadModdelAssets("lowPolyDragon", "GalleonBoat", "box", "spaceCraft");
   assets.loadTextureAssets("front", "Skyboxes\\Skybox_front", "Skyboxes\\Skybox_back", "Skyboxes\\Skybox_up", "Skyboxes\\Skybox_down", "Skyboxes\\Skybox_right", "Skyboxes\\Skybox_left");
   // shader loading:
   assets.loadShaderAsset("InvertShader", "vertex.glsl", "fragment.glsl");
   assets.loadShaderAsset("texShader", "texvert.glsl", "texfrag.glsl");
-  assets.Shaders.add(new ShaderAsset("default.shader"));
   //--------------------
   
   
