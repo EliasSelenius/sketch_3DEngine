@@ -67,6 +67,10 @@ Assets:
 
 todo: Assets auto loading {
     all assets should be loaded without me telling them to be loaded
+
+    - Shaders <Done>
+    - meshes
+    - textures
 }
 <Done> todo: shader assets {
     deffine vertex, fragment etc shaders in one "shaderProgram" file
@@ -82,3 +86,50 @@ General:
 todo: file path sepperator {
     find the path sepperator to get correct file paths on both windows, linux, mac
 }
+
+todo: class Func {
+    base class for representing a function that may be invoked
+}
+
+todo: class QueryList : ArrayList {
+    list with Linq like methods
+}
+
+
+
+ObjectSystem:
+
+todo: init gameObject api {
+
+    the Scene.Initialize() functions is all we got.
+    new api:
+    chainable api to create gameObject in the api
+
+    Draft:
+    builder.Create("myGameObj")
+        .positioned(<pos>)
+        .oriented(<rot>)
+        .with(<comp>, <comp>, ...)
+        .InitAt(defScene);
+
+        
+
+
+    class GameObjectBuilder
+
+}
+
+todo: GameObject tags {
+    GameObjects should have a String[] field
+    for <Tags> 
+    with potential query selection
+}
+
+todo: GameObject hirarchy {
+    GameObjects should be orderd in a hirarchy
+}
+
+
+
+
+
