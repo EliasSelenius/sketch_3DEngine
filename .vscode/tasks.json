@@ -24,8 +24,8 @@
       "windows": {
         "args": [
           "--force",
-          "--sketch=D:/Documents/Processing/sketch_3DEngine",
-          "--output=D:/Documents/Processing/sketch_3DEngine/out",
+          "--sketch=${workspaceRoot}",
+          "--output=${workspaceRoot}\\out",
           "--run"
         ]
       }

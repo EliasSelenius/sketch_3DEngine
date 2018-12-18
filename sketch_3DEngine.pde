@@ -41,8 +41,6 @@ void setup() {
   fullScreen(P3D);
   
   DisplayBuffer = createGraphics(width, height, P3D);
-  
-  
 
   //----init-Inputs-----
   input = new Input();

@@ -122,7 +122,7 @@ class Reflect {
   // GetClass(): gets a Class from given string;
   Class GetClass(String n){
     try{
-      return (Class.forName("sketch_3DEngine$" + n));
+      return (Class.forName(This.getClass().getName() + "$" + n));
     } catch(Exception w){
       w.printStackTrace();
     }
