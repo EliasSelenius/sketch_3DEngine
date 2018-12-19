@@ -76,6 +76,8 @@ class Reflect {
       return GetFieldSuper(obj.getClass(), name).get(obj);  
     } catch (IllegalAccessException x) {
       x.printStackTrace();
+    } catch (NullPointerException x) {
+      x.printStackTrace();
     }
     return null;
   }

@@ -33,6 +33,19 @@ todo: semicolon syntax {
     use semicolon after every command
 }
 
+todo: invoke command arguments {
+    pass arguments to the invoked function, simular to use command arguments
+}
+
+todo: Integer support
+
+
+Reflection:
+
+todo: GetObject{super}() {
+    should return null if it doesnt find the object
+}
+
 
 Animation libray:
 
@@ -87,12 +100,15 @@ todo: file path sepperator {
     find the path sepperator to get correct file paths on both windows, linux, mac
 }
 
-todo: class Func {
-    base class for representing a function that may be invoked
-}
+<Done> todo: class boolOperator
 
 todo: class QueryList : ArrayList {
     list with Linq like methods
+
+    - Where <Done>
+    - Select <Done>
+    - Insert <Done>
+    - OrderBy
 }
 
 
