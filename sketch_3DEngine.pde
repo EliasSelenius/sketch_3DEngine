@@ -15,8 +15,6 @@ import java.io.*;
 float deltaTime;
 // assets: controls loading of all assets.
 Assets assets;
-// SystemPathSeparator: the path seperator for file paths
-String SystemPathSeparator = File.pathSeparator;
 // prefabs: controls saving and loading of GameObject.
 PrefabManager Prefabs;
 // Math: a collection of usefull functions.
@@ -42,24 +40,10 @@ CommandExecutor exc;
 void setup() {
   
   fullScreen(P3D);
-  
 
-  QueryList<String> list = new QueryList<String>();
+  assets = new Assets();
+  println(assets.GetDataFiles().get(0).getName());
 
-  list.add("Hhe");
-  list.add("Worlde");
-  list.add("a");
-  list.add("gre");
-  list.add("w");
-
-  QueryList<Integer> iList = new QueryList<Integer>();
-  iList.add(23);
-  iList.add(63);
-  iList.add(123);
-  iList.add(533);
-  iList.add(2233);
-
-  println("print: " + iList.Where(Funcs.Gt(38))); 
   }
 
   /*

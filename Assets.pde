@@ -18,6 +18,25 @@ class Assets {
   }
 
 
+  QueryList<File> GetDataFiles() {
+    QueryList<File> res = new QueryList<File>();
+    File dataDir = new File(sketchPath() + "\\data");
+    res.addAll(GetFiles(dataDir));
+    return res;
+  }
+
+  QueryList<File> GetFiles(File root) {
+    QueryList<File> files = new QueryList<File>();
+    for(File f : root.listFiles()) {
+      if(f.isFile()) {
+        files.add(f);
+      } else {
+        files.addAll(GetFiles(f));
+      }
+    }
+    return files;
+  }
+
 
 
   void loadModdelAssets(String... nameList){

@@ -42,19 +42,6 @@ enum operators {
 
 
 
-class QueryList<T> extends ArrayList<T> {
-
-  QueryList<T> Where(Func<T> func) {
-    QueryList<T> res = new QueryList<T>();
-    for(T t : this) {
-      if(func.Invoke(t)) {
-        res.add(t);
-      }
-    }
-    return res;
-  }
-
-}
 
 
 

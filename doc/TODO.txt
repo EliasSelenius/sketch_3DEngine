@@ -42,7 +42,7 @@ todo: Integer support
 
 Reflection:
 
-todo: GetObject{super}() {
+<Done> todo: GetObject{super}() {
     should return null if it doesnt find the object
 }
 
@@ -109,6 +109,8 @@ todo: class QueryList : ArrayList {
     - Select <Done>
     - Insert <Done>
     - OrderBy
+    - Invoke
+    - First
 }
 
 
