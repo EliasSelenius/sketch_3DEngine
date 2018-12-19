@@ -43,7 +43,30 @@ void setup() {
   
   fullScreen(P3D);
   
+
+  QueryList<String> list = new QueryList<String>();
+
+  list.add("Hhe");
+  list.add("Worlde");
+  list.add("a");
+  list.add("gre");
+  list.add("w");
+
+  QueryList<Integer> iList = new QueryList<Integer>();
+  iList.add(23);
+  iList.add(63);
+  iList.add(123);
+  iList.add(533);
+  iList.add(2233);
+
+  println("print: " + iList.Where(Funcs.Gt(38))); 
+  }
+
+  /*
+
   DisplayBuffer = createGraphics(width, height, P3D);
+
+  
 
   //----init-Inputs-----
   input = new Input();
@@ -90,6 +113,8 @@ void setup() {
   //saveXML(xconv.GetXML(new Physics(10f)), "data\\prefabs\\NewTestXML");
   
   //CreateGalaxy();
+
+  
 } 
 
 
@@ -115,3 +140,4 @@ void draw(){
 }
 
 
+*/

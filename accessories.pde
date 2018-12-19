@@ -37,21 +37,14 @@ enum operators {
   greaterEqual
 }
 
-abstract class Func<Tresult> {
-  abstract Tresult Invoke();
-}
-abstract class Func<Targ, Tresult> {
-  abstract Tresult Invoke(Targ arg);
-}
 
 
-abstract class QueryFunction<T> {
-  abstract boolean Evaluate(T element);
-}
+
+
 
 class QueryList<T> extends ArrayList<T> {
 
-  QueryList<T> Where(Func<int, boolean> func) {
+  QueryList<T> Where(Func<T> func) {
     QueryList<T> res = new QueryList<T>();
     for(T t : this) {
       if(func.Invoke(t)) {
