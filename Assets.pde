@@ -2,7 +2,7 @@
 
 class Assets {
 
-  
+  String DataPath = sketchPath() + "\\data\\";
 
   ArrayList<ModellAsset> Modells = new ArrayList<ModellAsset>();
   ArrayList<TextureAsset> Textures = new ArrayList<TextureAsset>(); 

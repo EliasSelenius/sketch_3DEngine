@@ -149,5 +149,17 @@ todo: GameObject hirarchy {
 
 
 
+Serialization:
+
+todo: XMLConverter {
+    convert java objects to xml, and xml to objects
+
+    api: 
+    XML ToXML(object obj)
+
+    object FromXML(XML xml)
+}
+
+
 
 

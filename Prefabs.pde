@@ -1,29 +1,41 @@
 
-class XMLConverter {
+class XmlConverter {
   
-  XML NewXML(String Name){
+  XML NewXml(String Name){
     return parseXML("<" + Name + "></" + Name + ">");
   }
-  
-  XML GetXML(Object c){
-    XML xml = NewXML("Component");
-    xml.setString("Type", c.getClass().getName());
-    
-    //Field[] fields = FindFields(c.getClass(), SerializeField.class);
-    //println(fields);
-    
-    //Constructor constructor = compClass.getConstructor();
-    
-    //child = xml.addChild()
+
+  XML NewXml(String Name, String inner) {
+    return parseXML("<" + Name + ">" + inner + "</" + Name + ">");
+  }
+
+  XML ToXml(String name, Object obj) {
+    XML xml = NewXml(name);
+    if (obj == null) {
+      xml.setContent("null");
+      return xml;
+    }
+    xml.setString("type", obj.getClass().getName());
+    QueryList<Field> fields = Reflect.GetFieldsFilter(obj.getClass(), 0);
+    Object[] objs = Reflect.GetObjectsFilter(obj, 0);
+    for(int i = 0; i < objs.length; i++) {
+      Field f = fields.get(i);
+      Object o = objs[i];
+      if(f.getType().isPrimitive()) {
+        xml.addChild(NewXml(f.getName(), o.toString()));
+      } else {
+        xml.addChild(ToXml(f.getName(), objs[i]));
+      }
+    }
     return xml;
   }
-  
-  Object GetObject(XML xml){
-    Component comp = null;
-    
-    //Constructor
-    
-    return comp;
+
+  void SaveToXml(String name, Object obj) {
+    saveXML(ToXml(name, obj), assets.DataPath + "prefabs\\" + name + ".xml");
+  }
+
+  Object FromXml(XML xml) {
+    return null;
   }
 }
 

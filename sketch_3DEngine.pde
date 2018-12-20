@@ -5,6 +5,7 @@ import java.lang.annotation.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.awt.*;
 import java.io.*;
 
@@ -37,12 +38,29 @@ float planetMass = 1500;
 
 CommandExecutor exc;
 
+
+class MyTestClass {
+  int hey;
+  String name = "Hello";
+  float height;
+  Vector3 vec = new Vector3(23F);
+}
+
+
 void setup() {
   
   fullScreen(P3D);
 
   assets = new Assets();
-  println(assets.GetDataFiles().get(0).getName());
+  //println(assets.GetDataFiles().get(0).getName());
+
+  
+  XmlConverter xmlc = new XmlConverter();
+
+  xmlc.SaveToXml("MyObj", new GameObject(new Physics(314F), new Camera()));
+  xmlc.SaveToXml("MySavedObj", new MyTestClass());
+
+  println(xmlc.ToXml("myFloat", new MyTestClass()));
 
   }
 

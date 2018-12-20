@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MyObj type="sketch_3DEngine$GameObject">
+  <transform type="sketch_3DEngine$Transform">
+    <position type="sketch_3DEngine$Vector3">
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </position>
+    <scale type="sketch_3DEngine$Vector3">
+      <x>1.0</x>
+      <y>1.0</y>
+      <z>1.0</z>
+    </scale>
+    <rotation type="sketch_3DEngine$Quaternion">
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+      <w>1.0</w>
+    </rotation>
+  </transform>
+  <Name>null</Name>
+  <components type="java.util.ArrayList"/>
+  <scene>null</scene>
+</MyObj>

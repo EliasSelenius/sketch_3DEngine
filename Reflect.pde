@@ -43,8 +43,21 @@ class Reflect {
   Field[] GetFields(Class c) {
     return c.getDeclaredFields();
   }
+
+
+
+  QueryList<Field> GetFieldsFilter(Class c, int modFilter) {
+    QueryList<Field> fields = new QueryList<Field>();
+    for(Field f : GetFieldsSuper(c)) {
+      if(f.getModifiers() == modFilter) {
+        fields.add(f);
+      }
+    }
+    return fields;
+  }
   
-  // GetFieldsSuper(): returns all the fields in the given Class and its super Classes
+  
+  // GetFieldsSuper(): returns all the fields (private|public, static, final) in the given Class and its super Classes 
   Field[] GetFieldsSuper(Class<?> cls) {
     ArrayList<Field> fields = new ArrayList<Field>();
     Class<?> c = cls;
@@ -93,7 +106,21 @@ class Reflect {
     }
     return objs;
   }
-  
+
+  Object[] GetObjectsFilter(Object obj, int modFilter) {
+    QueryList<Field> fields = GetFieldsFilter(obj.getClass(), modFilter);
+    Object[] objs = new Object[fields.size()];
+    for(int i = 0; i < objs.length; i++) {
+      try{
+        objs[i] = fields.get(i).get(obj);
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
+    return objs;
+  }
+
+
   // GetObjectSuper(): returns all objects in the given object and all its super objects
   Object[] GetObjectsSuper(Object obj){
     Field[] fields = GetFieldsSuper(obj.getClass());

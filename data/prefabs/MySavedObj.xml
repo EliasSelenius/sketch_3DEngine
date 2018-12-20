@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MySavedObj type="sketch_3DEngine$MyTestClass">
+  <hey>0</hey>
+  <name type="java.lang.String"/>
+  <height>0.0</height>
+  <vec type="sketch_3DEngine$Vector3">
+    <x>23.0</x>
+    <y>23.0</y>
+    <z>23.0</z>
+  </vec>
+</MySavedObj>
