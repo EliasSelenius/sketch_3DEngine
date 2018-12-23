@@ -2,20 +2,32 @@
 
 
 // Canvas: a system for all user interface elements 
-class Canvas extends RenderObject {
+class Canvas {
   
-  ArrayList<UIElement> Elements = new ArrayList<UIElement>();
+  QueryList<UIElement> Elements = new QueryList<UIElement>();
   
-  @Override
   void Draw(){
-    DisplayBuffer.text(frameRate, width / 2,height / 2);
-    DisplayBuffer.image(assets.getTexture("front"), 0, 0, width, height);
-    for(int i = 0; i < Elements.size(); i++){
-      Elements.get(i).Draw();
+    UIGraphics.text(frameRate, width / 2,height / 2);
+    UIGraphics.image(assets.getTexture("front"), 0, 0, width, height);
+    for(UIElement elm : Elements) {
+      elm.Draw();
     }
   }
+
+
+  //Canvas Add(UIElement) 
+}
+
+abstract class UIElement {
   
-  abstract class UIElement{
-    void Draw(){}
-  }
+  Vector2 Pos;
+  Rectangle Rect;
+
+  void Draw() { }
+}
+
+abstract class ResponsiveUIElement extends UIElement {
+  void OnHover() { }
+  void OnLClick() { }
+  void OnRClick() { }
 }

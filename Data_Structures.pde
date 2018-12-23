@@ -26,35 +26,35 @@ class OcTreeRenderer extends Component {
   
   @Override
   void Render() {
-    DisplayBuffer.pushMatrix();
+    WorldGraphics.pushMatrix();
     
-    DisplayBuffer.translate(transform.position.x, transform.position.y, transform.position.z);    
-    DisplayBuffer.scale(transform.scale.x, transform.scale.y, transform.scale.z);          
+    WorldGraphics.translate(transform.position.x, transform.position.y, transform.position.z);    
+    WorldGraphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);          
     Vector4 a = transform.rotation.GetAxisAngle();   
-    DisplayBuffer.rotate(a.w, a.x, a.y, a.z);
+    WorldGraphics.rotate(a.w, a.x, a.y, a.z);
     
-    DisplayBuffer.noFill();
-    DisplayBuffer.stroke(0, 255,255);
+    WorldGraphics.noFill();
+    WorldGraphics.stroke(0, 255,255);
     
-    //DisplayBuffer.box(ocTree.Root.cube.Size);
+    //WorldGraphics.box(ocTree.Root.cube.Size);
     
 
     for(OcTree.OcTreeNode node : ocTree.GetLeafNodes()) {
-      DisplayBuffer.pushMatrix();
-      DisplayBuffer.translate(node.position.x, node.position.y, node.position.z);
-      DisplayBuffer.box(node.cube.Size);
+      WorldGraphics.pushMatrix();
+      WorldGraphics.translate(node.position.x, node.position.y, node.position.z);
+      WorldGraphics.box(node.cube.Size);
       for(int i = 0; i < node.Elements.size(); i++) {
         Vector3 p = ((OcTree.OcTreeIndex)node.Elements.get(i)).pos.minus(node.position);
-        DisplayBuffer.pushMatrix();
-        DisplayBuffer.translate(p.x, p.y, p.z);
-        DisplayBuffer.sphere(50);
-        DisplayBuffer.popMatrix();
+        WorldGraphics.pushMatrix();
+        WorldGraphics.translate(p.x, p.y, p.z);
+        WorldGraphics.sphere(50);
+        WorldGraphics.popMatrix();
       }
-      DisplayBuffer.popMatrix();
+      WorldGraphics.popMatrix();
       //println(node.Elements.size());
     }
     
-    DisplayBuffer.popMatrix();
+    WorldGraphics.popMatrix();
   }
 }
 

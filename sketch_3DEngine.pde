@@ -22,8 +22,10 @@ PrefabManager Prefabs;
 MathLib Math = new MathLib();
 // defScene: the scene that gets updated.
 Scene defScene;
-// DisplayBuffer: the PGraphics object that gets drawn to the display.
-PGraphics DisplayBuffer;
+// WorldGraphics: the PGraphics object that RenderObjects gets drawn to.
+PGraphics WorldGraphics;
+// UIGraphics: the PGraphics object that UI is rendered to.
+PGraphics UIGraphics;
 // This: this app:
 sketch_3DEngine This = this;
 // Reflect: collection of functions for java.lang.reflect
@@ -51,23 +53,27 @@ void setup() {
   
   fullScreen(P3D);
 
-  assets = new Assets();
   //println(assets.GetDataFiles().get(0).getName());
 
-  
+
+/*  
   XmlConverter xmlc = new XmlConverter();
 
   xmlc.SaveToXml("MyObj", new GameObject(new Physics(314F), new Camera()));
   xmlc.SaveToXml("MySavedObj", new MyTestClass());
 
   println(xmlc.ToXml("myFloat", new MyTestClass()));
+*/
+  
+  QueryList<Object> list = new QueryList<Object>();
+  list.Insert("Hello World", new Transform(), 123, 34f, new Physics(7F), 12F, "djaw", new Transform(), new Vector3());
+  println(list);
+  println("res: " + list.Where(
+    Its.OfType(Transform.class)
+  ));
 
-  }
-
-  /*
-
-  DisplayBuffer = createGraphics(width, height, P3D);
-
+  WorldGraphics = createGraphics(width, height, P3D);
+  UIGraphics = createGraphics(width, height, P3D);
   
 
   //----init-Inputs-----
@@ -134,7 +140,8 @@ void draw(){
   defScene.Update();
   defScene.Render();
   
-  image(DisplayBuffer, 0, 0);
+  image(WorldGraphics, 0, 0);
+  image(UIGraphics, 0, 0);
   
   input.Update();
   
@@ -142,4 +149,3 @@ void draw(){
 }
 
 
-*/

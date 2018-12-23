@@ -27,9 +27,7 @@ class Camera extends Component {
       gameObject.scene.MainCamera = null;
     }
   }
-  
-  Canvas c = new Canvas();
-  
+    
   @Override
   void Update(){
     //FieldOfView = 85 + sin(frameCount / 100f) * 85;
@@ -39,14 +37,13 @@ class Camera extends Component {
   void LateUpdate(){
     Vector3 forward = transform.Forward();
     Vector3 up = transform.Up();
-    DisplayBuffer.camera(transform.position.x, transform.position.y, transform.position.z, 
+    WorldGraphics.camera(transform.position.x, transform.position.y, transform.position.z, 
       forward.x + transform.position.x, 
       forward.y + transform.position.y, 
       forward.z + transform.position.z,
       up.x, up.y, up.z);   
-    DisplayBuffer.perspective(radians(FieldOfView), (float)width / (float)height, NearClipPlane, FarClipPlane);
+    WorldGraphics.perspective(radians(FieldOfView), (float)width / (float)height, NearClipPlane, FarClipPlane);
     Buffer = copy();
-    
   }  
   
   @Override

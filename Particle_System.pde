@@ -65,12 +65,12 @@ class ParticleSystem extends Component {
   @Override
   void Render(){
   
-    DisplayBuffer.pushMatrix();
+    WorldGraphics.pushMatrix();
     if(LocalSpace){
-      DisplayBuffer.translate(transform.position.x, transform.position.y, transform.position.z);
-      DisplayBuffer.scale(transform.scale.x, transform.scale.y, transform.scale.z);
+      WorldGraphics.translate(transform.position.x, transform.position.y, transform.position.z);
+      WorldGraphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);
       Vector4 axisAngle = transform.rotation.GetAxisAngle();
-      DisplayBuffer.rotate(axisAngle.w, axisAngle.x, axisAngle.y, axisAngle.z);
+      WorldGraphics.rotate(axisAngle.w, axisAngle.x, axisAngle.y, axisAngle.z);
     }    
     
 
@@ -81,7 +81,7 @@ class ParticleSystem extends Component {
       renderObj.Render(p.transform.position, p.transform.scale.multiply(Scaler), p.transform.rotation);
     }
     
-    DisplayBuffer.popMatrix();
+    WorldGraphics.popMatrix();
   }
   
   // Update(): Updates the Physics of each particle.

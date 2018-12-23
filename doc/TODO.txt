@@ -111,6 +111,7 @@ todo: class QueryList : ArrayList {
     - OrderBy
     - Invoke
     - First
+    - OfType <Done> does not work with primitives
 }
 
 
@@ -158,6 +159,25 @@ todo: XMLConverter {
     XML ToXML(object obj)
 
     object FromXML(XML xml)
+}
+
+
+
+
+
+User Interface:
+
+todo: Canvas {
+    the Canvas class is the base for all UI rendering
+
+}
+
+
+todo: Figure out render method {
+    
+    how do we get all UI rendered on the screen and not in the World
+
+    Camera.Buffer can be directly rendered to
 }
 
 

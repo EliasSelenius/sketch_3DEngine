@@ -38,6 +38,9 @@ class Is {
     BoolOperator NotNull() {
         return new IsNotNullOperation();
     }
+    BoolOperator OfType(Class type) {
+        return new OfTypeOperation(type);
+    }
 } 
 Is Its = new Is();
 
@@ -96,5 +99,17 @@ class IsNotNullOperation<T> extends BoolOperator<T> {
     @Override
     boolean evaluate(T element) {
         return element != null;
+    }
+}
+
+
+class OfTypeOperation<T> extends BoolOperator<T> {
+    Class Type;
+    OfTypeOperation(Class type) {
+        Type = type;
+    }
+    @Override
+    boolean evaluate(T element) {
+        return Type.isInstance(element);
     }
 }

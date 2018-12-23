@@ -25,9 +25,9 @@ class DebugComponent extends Component{
   
   @Override
   void Render(){
-    DisplayBuffer.pushMatrix();
-    DisplayBuffer.translate(transform.position.x, transform.position.y, transform.position.z);
-    DisplayBuffer.sphere(100);
-    DisplayBuffer.popMatrix();
+    WorldGraphics.pushMatrix();
+    WorldGraphics.translate(transform.position.x, transform.position.y, transform.position.z);
+    WorldGraphics.sphere(100);
+    WorldGraphics.popMatrix();
   }
 }

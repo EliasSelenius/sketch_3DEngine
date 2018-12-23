@@ -93,16 +93,16 @@ class SphereCollider extends Collider {
   }
   
   void DebugDraw(){
-    DisplayBuffer.pushMatrix();
-    DisplayBuffer.translate(transform.position.x, transform.position.y, transform.position.z);
-    DisplayBuffer.noFill();
+    WorldGraphics.pushMatrix();
+    WorldGraphics.translate(transform.position.x, transform.position.y, transform.position.z);
+    WorldGraphics.noFill();
     if(Colliding){
-      DisplayBuffer.stroke(255,0,0);
+      WorldGraphics.stroke(255,0,0);
     }else{
-      DisplayBuffer.stroke(0, 255, 0);
+      WorldGraphics.stroke(0, 255, 0);
     }
-    DisplayBuffer.sphere(Radius);
-    DisplayBuffer.popMatrix();
+    WorldGraphics.sphere(Radius);
+    WorldGraphics.popMatrix();
   }
   
   boolean isColliding(SphereCollider other){

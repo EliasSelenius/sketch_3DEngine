@@ -13,7 +13,6 @@ class Scene {
   Scene(){        
     Layers.add(new BackgroundLayer(this));
     Layers.add(new DefaultLayer(this));
-    Layers.add(new ObjectLayer(this, "UI"));    
   }
   
   void Update(){    
@@ -25,9 +24,9 @@ class Scene {
   }
   
   void Render(){
-    DisplayBuffer.beginDraw();
-    DisplayBuffer.background(0);
-    DisplayBuffer.endDraw();
+    WorldGraphics.beginDraw();
+    WorldGraphics.background(0);
+    WorldGraphics.endDraw();
     for(int i = 0; i < Layers.size(); i++){
       Layers.get(i).Render();
     }
@@ -147,12 +146,12 @@ class ObjectLayer {
     }
   }
   final void Render(){
-    DisplayBuffer.beginDraw();
+    WorldGraphics.beginDraw();
     Draw();
-    DisplayBuffer.endDraw();
+    WorldGraphics.endDraw();
   }
   void Draw(){
-    DisplayBuffer.lights();
+    WorldGraphics.lights();
     for(int i = 0; i < gameObjects.size(); i++){
       gameObjects.get(i).Render();
     }
@@ -180,8 +179,9 @@ class DefaultLayer extends ObjectLayer {
   }
   
   @Override
-  void Draw(){
+  void Draw() {
     super.Draw();
     //Draw_Debug();
   }
 }
+
