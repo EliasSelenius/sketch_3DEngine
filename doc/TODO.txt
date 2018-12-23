@@ -173,11 +173,29 @@ todo: Canvas {
 }
 
 
-todo: Figure out render method {
+<Done> todo: Figure out render method {
     
     how do we get all UI rendered on the screen and not in the World
 
     Camera.Buffer can be directly rendered to
+
+    soluton {
+        do Not use DisplayBuffer,
+        DisplayBuffer has been renamed to WorldGraphics to avoid confusion
+
+        there is a new UIGraphics that can be drawn to
+    }
+}
+
+
+
+Screen Management:
+
+todo: class ScreenSurface {
+    has a graphics object that we can draw to
+
+    by putting several ScreenSurface objects in a list we get drawing layers,
+    this will replace ObjectLayers 
 }
 
 
