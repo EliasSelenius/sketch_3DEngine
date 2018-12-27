@@ -78,7 +78,4 @@ class GameObject {
     }
     return null;
   }
-  
-  
-
 }

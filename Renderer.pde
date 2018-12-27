@@ -46,24 +46,24 @@ abstract class RenderObject {
   }
   
   void Render(Vector3 position, Vector3 scale, Quaternion rotation){
-    WorldGraphics.pushMatrix();
+    ScreenSurface.graphics.pushMatrix();
     
-    WorldGraphics.translate(position.x, position.y, position.z);    
-    WorldGraphics.scale(scale.x, scale.y, scale.z);          
+    ScreenSurface.graphics.translate(position.x, position.y, position.z);    
+    ScreenSurface.graphics.scale(scale.x, scale.y, scale.z);          
     Vector4 a = rotation.GetAxisAngle();   
-    WorldGraphics.rotate(a.w, a.x, a.y, a.z);
+    ScreenSurface.graphics.rotate(a.w, a.x, a.y, a.z);
     
     if(shader != null){
-      WorldGraphics.shader(shader);
+      ScreenSurface.graphics.shader(shader);
     }else{
-      WorldGraphics.resetShader();
+      ScreenSurface.graphics.resetShader();
     }
     
-    WorldGraphics.tint(TintColor);
+    ScreenSurface.graphics.tint(TintColor);
     
     Draw();
     
-    WorldGraphics.popMatrix();
+    ScreenSurface.graphics.popMatrix();
   }
   
   abstract void Draw(); 
@@ -80,7 +80,7 @@ class Sprite extends RenderObject {
   
   @Override
   void Draw(){    
-    WorldGraphics.image(image, 0, 0, 1, 1);    
+    ScreenSurface.graphics.image(image, 0, 0, 1, 1);    
   }
 }
 
@@ -121,7 +121,7 @@ class Mesh extends RenderObject {
   
   @Override
   void Draw(){    
-    WorldGraphics.shape(shape);    
+    ScreenSurface.graphics.shape(shape);    
   }
 } 
 
@@ -132,8 +132,8 @@ class PrimitiveSphere extends RenderObject {
   
   @Override
   void Draw(){
-    WorldGraphics.noStroke();
-    WorldGraphics.fill(255);
-    WorldGraphics.sphere(1);
+    ScreenSurface.graphics.noStroke();
+    ScreenSurface.graphics.fill(255);
+    ScreenSurface.graphics.sphere(1);
   }
 }

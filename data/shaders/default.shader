@@ -37,7 +37,11 @@ start:frag
     varying vec4 vertTexCoord;
 
     void main() {
-        gl_FragColor = texture2D(texture, vertTexCoord.st) * vertColor;
+
+        vec4 c = vertColor * (1.0f + 4f) / 1.0;
+
+
+        gl_FragColor = texture2D(texture, vertTexCoord.st) * c;
     }
     
 end:frag

@@ -1,95 +1,52 @@
-//skybox.Queue(MainCamera.transform.position, new Vector3(100), new Quaternion());
 
-class Scene {
+class Scene extends ScreenLayer {
 
+  QueryList<GameObject> gameObjects = new QueryList<GameObject>();
   
-  ArrayList<ObjectLayer> Layers = new ArrayList<ObjectLayer>();
-  
+  // todo: remove this from here:
   ColliderArray colliderArray = new ColliderArray();
       
+
   Camera MainCamera;
   
   
-  Scene(){        
-    Layers.add(new BackgroundLayer(this));
-    Layers.add(new DefaultLayer(this));
-  }
-  
   void Update(){    
     colliderArray.Update();
-    for(ObjectLayer be : Layers){      
-      be.Update();   
-    }        
-    
+    for(GameObject obj : gameObjects){      
+      obj.Update();   
+    }       
+    for(GameObject obj : gameObjects){      
+      obj.LateUpdate();   
+    }  
   }
   
-  void Render(){
-    WorldGraphics.beginDraw();
-    WorldGraphics.background(0);
-    WorldGraphics.endDraw();
-    for(int i = 0; i < Layers.size(); i++){
-      Layers.get(i).Render();
+  @Override
+  void Render() {
+    ScreenSurface.graphics.lights();
+    //ScreenSurface.graphics.background(0);
+    for(GameObject obj : gameObjects){
+      obj.Render();
     }
   }
   
-  ObjectLayer FindLayer(String name){
-    for(ObjectLayer l : Layers) {
-      if(l.Name.equals(name)) {
-        return l;
-      }
-    }
-    return null;
-  }
   
   
-  void AddObject(GameObject obj, String layerName){
+  void AddObject(GameObject obj){
     obj.scene = this;
-    ObjectLayer layer = FindLayer(layerName);
     if(obj.Name == "" || obj.Name == null){
-      obj.Name = layer.Name + " GameObject Nr." + layer.gameObjects.size() + 1;
+      obj.Name = "GameObjectName";
     }
-    layer.gameObjects.add(obj);
+    gameObjects.add(obj);
     obj.Start();
   }
   
-  void AddObject(GameObject obj){
-    AddObject(obj, "Default");
-  }
-  
-  
-  
   void RemoveObject(GameObject o){
     o.End();
-    for(ObjectLayer l : Layers){
-      l.gameObjects.remove(o);
-    }
+    gameObjects.remove(o);
   }
   
-  // FindObject: returns GameObject with given name.
-  GameObject FindObject(String name){    
-    for(ObjectLayer l : Layers){
-      for(GameObject o : l.gameObjects){
-        if(o.Name == name){
-          return o;
-        }
-      }
-    }
-    return null;
-  }
-  
-  // FindObjects returns all GameObjects with given name.
-  ArrayList<GameObject> FindObjects(String name){
-    ArrayList<GameObject> objs = new ArrayList<GameObject>();
-    for(ObjectLayer l : Layers){
-      for(GameObject o : l.gameObjects){
-        if(o.Name == name){
-          objs.add(o);
-        }
-      }
-    }
-    return objs;
-  }
-  
+
+
   GameObject Instantiate(){
     GameObject o = new GameObject();
     AddObject(o);
@@ -128,60 +85,3 @@ class Scene {
   }
 
 }
-
-
-class ObjectLayer {
-  String Name;
-  ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-  Scene scene;
-  ObjectLayer(Scene sc, String name){
-    scene = sc; Name = name;
-  }
-  void Update(){
-    for(int i = 0; i < gameObjects.size(); i++){
-      gameObjects.get(i).Update();
-    }
-    for(int i = 0; i < gameObjects.size(); i++){
-      gameObjects.get(i).LateUpdate();
-    }
-  }
-  final void Render(){
-    WorldGraphics.beginDraw();
-    Draw();
-    WorldGraphics.endDraw();
-  }
-  void Draw(){
-    WorldGraphics.lights();
-    for(int i = 0; i < gameObjects.size(); i++){
-      gameObjects.get(i).Render();
-    }
-  }
-}
-
-class BackgroundLayer extends ObjectLayer {
-  
-  Skybox skybox = new Skybox();
-  
-  BackgroundLayer(Scene scene){
-    super(scene, "Background");
-  }
-  
-  @Override
-  void Draw(){
-    super.Draw();
-    skybox.Render(scene.MainCamera.transform.position, new Vector3(1000f), new Quaternion());
-  }
-}
-
-class DefaultLayer extends ObjectLayer {
-  DefaultLayer(Scene s){
-    super(s, "Default");
-  }
-  
-  @Override
-  void Draw() {
-    super.Draw();
-    //Draw_Debug();
-  }
-}
-

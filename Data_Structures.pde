@@ -26,35 +26,35 @@ class OcTreeRenderer extends Component {
   
   @Override
   void Render() {
-    WorldGraphics.pushMatrix();
+    ScreenSurface.graphics.pushMatrix();
     
-    WorldGraphics.translate(transform.position.x, transform.position.y, transform.position.z);    
-    WorldGraphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);          
+    ScreenSurface.graphics.translate(transform.position.x, transform.position.y, transform.position.z);    
+    ScreenSurface.graphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);          
     Vector4 a = transform.rotation.GetAxisAngle();   
-    WorldGraphics.rotate(a.w, a.x, a.y, a.z);
+    ScreenSurface.graphics.rotate(a.w, a.x, a.y, a.z);
     
-    WorldGraphics.noFill();
-    WorldGraphics.stroke(0, 255,255);
+    ScreenSurface.graphics.noFill();
+    ScreenSurface.graphics.stroke(0, 255,255);
     
-    //WorldGraphics.box(ocTree.Root.cube.Size);
+    //ScreenSurface.graphics.box(ocTree.Root.cube.Size);
     
 
     for(OcTree.OcTreeNode node : ocTree.GetLeafNodes()) {
-      WorldGraphics.pushMatrix();
-      WorldGraphics.translate(node.position.x, node.position.y, node.position.z);
-      WorldGraphics.box(node.cube.Size);
+      ScreenSurface.graphics.pushMatrix();
+      ScreenSurface.graphics.translate(node.position.x, node.position.y, node.position.z);
+      ScreenSurface.graphics.box(node.cube.Size);
       for(int i = 0; i < node.Elements.size(); i++) {
         Vector3 p = ((OcTree.OcTreeIndex)node.Elements.get(i)).pos.minus(node.position);
-        WorldGraphics.pushMatrix();
-        WorldGraphics.translate(p.x, p.y, p.z);
-        WorldGraphics.sphere(50);
-        WorldGraphics.popMatrix();
+        ScreenSurface.graphics.pushMatrix();
+        ScreenSurface.graphics.translate(p.x, p.y, p.z);
+        ScreenSurface.graphics.sphere(50);
+        ScreenSurface.graphics.popMatrix();
       }
-      WorldGraphics.popMatrix();
+      ScreenSurface.graphics.popMatrix();
       //println(node.Elements.size());
     }
     
-    WorldGraphics.popMatrix();
+    ScreenSurface.graphics.popMatrix();
   }
 }
 

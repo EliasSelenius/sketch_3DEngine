@@ -22,12 +22,8 @@ PrefabManager Prefabs;
 MathLib Math = new MathLib();
 // defScene: the scene that gets updated.
 Scene defScene;
-// WorldGraphics: the PGraphics object that RenderObjects gets drawn to.
-PGraphics WorldGraphics;
-// UIGraphics: the PGraphics object that UI is rendered to.
-PGraphics UIGraphics;
 // This: this app:
-sketch_3DEngine This = this;
+static sketch_3DEngine App;
 // Reflect: collection of functions for java.lang.reflect
 Reflect Reflect = new Reflect();
 // G: the Gravitational constant.
@@ -51,6 +47,8 @@ class MyTestClass {
 
 void setup() {
   
+  App = this;
+
   fullScreen(P3D);
 
   //println(assets.GetDataFiles().get(0).getName());
@@ -65,16 +63,6 @@ void setup() {
   println(xmlc.ToXml("myFloat", new MyTestClass()));
 */
   
-  QueryList<Object> list = new QueryList<Object>();
-  list.Insert("Hello World", new Transform(), 123, 34f, new Physics(7F), 12F, "djaw", new Transform(), new Vector3());
-  println(list);
-  println("res: " + list.Where(
-    Its.OfType(Transform.class)
-  ));
-
-  WorldGraphics = createGraphics(width, height, P3D);
-  UIGraphics = createGraphics(width, height, P3D);
-  
 
   //----init-Inputs-----
   input = new Input();
@@ -82,7 +70,6 @@ void setup() {
   //--------------------
   
 
-  
 
   
   //----init-Assets-----  
@@ -98,12 +85,6 @@ void setup() {
   
 
 
-  
-  //----init-Prefabs----
-  Prefabs = new PrefabManager();
-  //--------------------
-
-
   defScene = new Scene();
   
   //defScene.Instantiate("tree", new OcTreeRenderer());
@@ -116,19 +97,21 @@ void setup() {
   exc = new CommandExecutor();
   exc.LoadScript();
   
-  
-  //XMLConverter xconv = new XMLConverter();
-  //saveXML(xconv.GetXML(new Physics(10f)), "data\\prefabs\\NewTestXML");
-  
-  //CreateGalaxy();
 
+  ScreenSurface ssf = new ScreenSurface();
+  ssf.Layers.Insert(
+    new BackgroundLayer(),
+    defScene,
+    new Canvas()
+  );
+
+  ScreenSurface = ssf;
   
 } 
 
 
 
 void draw(){
-  
   //----Update-Globals----
   deltaTime = 1 / frameRate;
   //----------------------
@@ -138,10 +121,8 @@ void draw(){
   //ambientLight(100,100,100);
   
   defScene.Update();
-  defScene.Render();
   
-  image(WorldGraphics, 0, 0);
-  image(UIGraphics, 0, 0);
+  ScreenSurface.Render();
   
   input.Update();
   

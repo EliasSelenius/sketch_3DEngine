@@ -153,7 +153,7 @@ class Reflect {
   // GetClass(): gets a Class from given string;
   Class GetClass(String n){
     try{
-      return (Class.forName(This.getClass().getName() + "$" + n));
+      return (Class.forName(App.getClass().getName() + "$" + n));
     } catch(Exception w){
       w.printStackTrace();
     }
@@ -164,7 +164,7 @@ class Reflect {
   Object InstantiateObject(Class type, Object... params) {
     
     Class[] paramsType = new Class[params.length + 1];
-    paramsType[0] = This.getClass();
+    paramsType[0] = App.getClass();
     for(int i = 0; i < params.length; i++){
       paramsType[i + 1] = params[i].getClass();
     }
@@ -180,7 +180,7 @@ class Reflect {
     Object object = null;
     try{
       Object[] paro = new Object[params.length + 1];
-      paro[0] = This;
+      paro[0] = App;
       for(int i = 0; i < params.length; i++){
         paro[i + 1] = params[i];
       }

@@ -37,13 +37,13 @@ class Camera extends Component {
   void LateUpdate(){
     Vector3 forward = transform.Forward();
     Vector3 up = transform.Up();
-    WorldGraphics.camera(transform.position.x, transform.position.y, transform.position.z, 
+    ScreenSurface.graphics.camera(transform.position.x, transform.position.y, transform.position.z, 
       forward.x + transform.position.x, 
       forward.y + transform.position.y, 
       forward.z + transform.position.z,
       up.x, up.y, up.z);   
-    WorldGraphics.perspective(radians(FieldOfView), (float)width / (float)height, NearClipPlane, FarClipPlane);
-    Buffer = copy();
+    ScreenSurface.graphics.perspective(radians(FieldOfView), (float)width / (float)height, NearClipPlane, FarClipPlane);
+    Buffer = ScreenSurface.graphics.copy();
   }  
   
   @Override

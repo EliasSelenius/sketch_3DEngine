@@ -23,7 +23,7 @@ class CommandExecutor {
     switch(args[0]){
       case "find":
         String[] path = args[1].split("\\.");
-        Global = Reflect.GetObjectSuper(This, path[0]);
+        Global = Reflect.GetObjectSuper(App, path[0]);
         for(int i = 1; i < path.length; i++){
           Global = Reflect.GetObjectSuper(Global, path[i]);
         }

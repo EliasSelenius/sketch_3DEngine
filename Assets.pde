@@ -13,7 +13,6 @@ class Assets {
     File file = new File(sketchPath() + "\\data\\shaders");
     for(String s : file.list(new FileExtensionFilter(".shader"))) {
       Shaders.add(new ShaderAsset(s));
-      println(s);
     }
   }
 
@@ -97,10 +96,9 @@ class ShaderAsset {
 
   ShaderAsset(String n) {
     Name = n.substring(0, n.indexOf('.'));
-    println(Name);
     Source = loadStrings("shaders\\" + n);
     
-    shader = new PShader(This, GetArea("vert"), GetArea("frag"));
+    shader = new PShader(App, GetArea("vert"), GetArea("frag"));
     
   }
 

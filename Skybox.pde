@@ -18,64 +18,64 @@ class Skybox extends RenderObject {
   
   @Override
   void Draw(){
-    
-    WorldGraphics.textureMode(NORMAL);
+    ScreenSurface.graphics.textureMode(NORMAL);
         
-    WorldGraphics.noStroke();
+    ScreenSurface.graphics.noStroke();
     
     // front
-    WorldGraphics.beginShape(QUADS);    
-    WorldGraphics.texture(front);
-    WorldGraphics.vertex(1,1,1, 0,0);
-    WorldGraphics.vertex(-1,1,1, 1,0);
-    WorldGraphics.vertex(-1,-1,1, 1,1);
-    WorldGraphics.vertex(1,-1,1, 0,1);
-    WorldGraphics.endShape();
+    ScreenSurface.graphics.beginShape(QUADS);    
+    ScreenSurface.graphics.texture(front);
+    ScreenSurface.graphics.vertex(1,1,1, 0,0);
+    ScreenSurface.graphics.vertex(-1,1,1, 1,0);
+    ScreenSurface.graphics.vertex(-1,-1,1, 1,1);
+    ScreenSurface.graphics.vertex(1,-1,1, 0,1);
+    ScreenSurface.graphics.endShape();
     
     // back
-    WorldGraphics.beginShape(QUADS);    
-    WorldGraphics.texture(back);
-    WorldGraphics.vertex(1,1,-1, 1,0);
-    WorldGraphics.vertex(-1,1,-1, 0,0);
-    WorldGraphics.vertex(-1,-1,-1, 0,1);
-    WorldGraphics.vertex(1,-1,-1, 1,1);
-    WorldGraphics.endShape();
+    ScreenSurface.graphics.beginShape(QUADS);    
+    ScreenSurface.graphics.texture(back);
+    ScreenSurface.graphics.vertex(1,1,-1, 1,0);
+    ScreenSurface.graphics.vertex(-1,1,-1, 0,0);
+    ScreenSurface.graphics.vertex(-1,-1,-1, 0,1);
+    ScreenSurface.graphics.vertex(1,-1,-1, 1,1);
+    ScreenSurface.graphics.endShape();
     
     // up
-    WorldGraphics.beginShape(QUADS);    
-    WorldGraphics.texture(up);
-    WorldGraphics.vertex(1,1,1, 0,1);
-    WorldGraphics.vertex(-1,1,1, 1,1);
-    WorldGraphics.vertex(-1,1,-1, 1,0);
-    WorldGraphics.vertex(1,1,-1, 0,0);
-    WorldGraphics.endShape();
+    ScreenSurface.graphics.beginShape(QUADS);    
+    ScreenSurface.graphics.texture(up);
+    ScreenSurface.graphics.vertex(1,1,1, 0,1);
+    ScreenSurface.graphics.vertex(-1,1,1, 1,1);
+    ScreenSurface.graphics.vertex(-1,1,-1, 1,0);
+    ScreenSurface.graphics.vertex(1,1,-1, 0,0);
+    ScreenSurface.graphics.endShape();
     
     // down
-    WorldGraphics.beginShape(QUADS);    
-    WorldGraphics.texture(down);
-    WorldGraphics.vertex(1,-1,1, 0,0);
-    WorldGraphics.vertex(-1,-1,1, 1,0);
-    WorldGraphics.vertex(-1,-1,-1, 1,1);
-    WorldGraphics.vertex(1,-1,-1, 0,1);
-    WorldGraphics.endShape();
+    ScreenSurface.graphics.beginShape(QUADS);    
+    ScreenSurface.graphics.texture(down);
+    ScreenSurface.graphics.vertex(1,-1,1, 0,0);
+    ScreenSurface.graphics.vertex(-1,-1,1, 1,0);
+    ScreenSurface.graphics.vertex(-1,-1,-1, 1,1);
+    ScreenSurface.graphics.vertex(1,-1,-1, 0,1);
+    ScreenSurface.graphics.endShape();
     
     // Right
-    WorldGraphics.beginShape(QUADS);    
-    WorldGraphics.texture(right);
-    WorldGraphics.vertex(1,1,1, 1,0);
-    WorldGraphics.vertex(1,1,-1, 0,0);
-    WorldGraphics.vertex(1,-1,-1, 0,1);
-    WorldGraphics.vertex(1,-1,1, 1,1);
-    WorldGraphics.endShape();
+    ScreenSurface.graphics.beginShape(QUADS);    
+    ScreenSurface.graphics.texture(right);
+    ScreenSurface.graphics.vertex(1,1,1, 1,0);
+    ScreenSurface.graphics.vertex(1,1,-1, 0,0);
+    ScreenSurface.graphics.vertex(1,-1,-1, 0,1);
+    ScreenSurface.graphics.vertex(1,-1,1, 1,1);
+    ScreenSurface.graphics.endShape();
     
     // left
-    WorldGraphics.beginShape(QUADS);    
-    WorldGraphics.texture(left);
-    WorldGraphics.vertex(-1,1,1, 0,0);
-    WorldGraphics.vertex(-1,1,-1, 1,0);
-    WorldGraphics.vertex(-1,-1,-1, 1,1);
-    WorldGraphics.vertex(-1,-1,1, 0,1);
-    WorldGraphics.endShape();
+    ScreenSurface.graphics.beginShape(QUADS);    
+    ScreenSurface.graphics.texture(left);
+    ScreenSurface.graphics.vertex(-1,1,1, 0,0);
+    ScreenSurface.graphics.vertex(-1,1,-1, 1,0);
+    ScreenSurface.graphics.vertex(-1,-1,-1, 1,1);
+    ScreenSurface.graphics.vertex(-1,-1,1, 0,1);
+    ScreenSurface.graphics.endShape();
+    
     
   }
 }

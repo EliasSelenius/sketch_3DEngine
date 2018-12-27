@@ -111,7 +111,25 @@ todo: class QueryList : ArrayList {
     - OrderBy
     - Invoke
     - First
+    
+}
+
+
+todo: boolOperator API {
+
+    - BoolOperator.And() <Done>
+    - BoolOperator.Or()
+    - BoolOperator.Xor() ??
+
+
+    - LessThan <Done>
+    - GreaterThan <Done>
+    - Equal <Done>
+    - IsNull <Done>
+    - IsNotNull <Done>
     - OfType <Done> does not work with primitives
+    - InBetween
+
 }
 
 
@@ -191,11 +209,30 @@ todo: Canvas {
 
 Screen Management:
 
-todo: class ScreenSurface {
+<Done> todo: class ScreenSurface {
     has a graphics object that we can draw to
 
     by putting several ScreenSurface objects in a list we get drawing layers,
     this will replace ObjectLayers 
+
+    API Draft {
+
+        class ScreenSurface {
+            QueryList<IScreenLayer> layers;
+            PGraphics ScreenSurface.graphics;
+
+            void Draw() {
+                for layers
+                    ScreenSurface.graphics.beginDraw();
+                    layer.Render();
+                    ScreenSurface.graphics.endDraw();
+            }
+        }
+
+        Interface IScreenLayer {
+            void Render();
+        }
+    }
 }
 
 
