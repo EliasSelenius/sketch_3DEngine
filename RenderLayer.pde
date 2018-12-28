@@ -10,7 +10,6 @@ class ScreenSurface {
         for(ScreenLayer layer : Layers) {
             graphics.beginDraw();
             layer.Render();
-            println("layer: " + layer);
             graphics.endDraw();
         }
         image(graphics, 0, 0);
