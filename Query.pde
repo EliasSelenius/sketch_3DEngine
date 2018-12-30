@@ -38,10 +38,10 @@ class QueryList<T> extends ArrayList<T> {
     return res;
   }
 
-  QueryList<T> Where(ObjFuncArg1<Boolean, T> func) {
+  QueryList<T> Where(Func func) {
     QueryList<T> res = new QueryList<T>();
     for(T t : this) {
-      if(func.Invoke(t)) {
+      if((boolean)func.Invoke(t)) {
         res.add(t);
       }
     }
@@ -63,9 +63,9 @@ class QueryList<T> extends ArrayList<T> {
     return this;
   }
 
-  void ForEach(VoidFuncArg1<T> func) {
-    for(T t : this) {
-      func.Invoke(t);
+  void ForEach(Func func) {
+    for(int i = 0; i < size(); i++) {
+      func.Invoke(get(i), i);
     }
   }
 

@@ -42,12 +42,46 @@ class MyTestClass {
   String name = "Hello";
   float height;
   Vector3 vec = new Vector3(23F);
+
+  String GetName() {
+    println("MyTestClassGetName");
+    return name;
+  }
 }
 
 
-void setup() {
 
+
+void TestAppMethod() {
+  println("TestAppMethod");
+}
+
+
+Event event = new Event();
+
+void setup() {
   App = this;
+
+  MyTestClass testObj = new MyTestClass();
+
+  event.AddListner("TestAppMethod", App);
+  event.AddListner("GetName", testObj);
+  event.AddListner(new Func() {
+    public Object Invoke(Object... args) {
+      println("VoidFunc");
+      return null;
+    }
+  });
+  event.AddListner(new Func(){
+    public Object Invoke(Object... args){
+      MyTestClass tst = new MyTestClass();
+      println(tst.name);
+      return tst;
+    }
+  });
+
+
+  event.Run();
 
   fullScreen(P3D);
 

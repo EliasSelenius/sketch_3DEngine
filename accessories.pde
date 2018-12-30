@@ -39,43 +39,7 @@ enum operators {
 
 
 
-class MethodPointer implements Func {
-  String name;
-  Object object;
-  MethodPointer(String n, Object o) {
-    name = n; object = o;
-  }
-  Object Invoke(Object... params) {
-    return Reflect.InvokeMethod(object, name, params);
-  }
-}
 
-
-class Event {
-  QueryList<Func> Methods = new QueryList<Func>();
-
-
-}
-
-
-// Func: base interface for a function
-interface Func { }
-// VoidFunc: returns void and has no arguments
-interface VoidFunc extends Func {
-  void Invoke();
-}
-// VoidFuncArgs: returns void and has one argument
-interface VoidFuncArg1<P> extends Func {
-  void Invoke(P arg);
-}
-// ObjFunc: returns an Object and has no arguments
-interface ObjFunc<R> extends Func {
-  R Invoke();
-}
-// ObjFunc: returns an Object and has one argument
-interface ObjFuncArg1<R, P> extends Func {
-  R Invoke(P arg);
-}
 
 
 boolean ExsistInArray(Object obj, Object[] array) {
