@@ -46,7 +46,7 @@ class MyTestClass {
 
 
 void setup() {
-  
+
   App = this;
 
   fullScreen(P3D);
@@ -101,6 +101,11 @@ void setup() {
   ScreenSurface ssf = new ScreenSurface();
   ssf.Layers.Insert(
     new BackgroundLayer(),
+    new ScreenLayer() {
+      public void Render() {
+        Draw_Debug();
+      }
+    },
     defScene,
     new Canvas()
   );

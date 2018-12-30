@@ -111,6 +111,7 @@ todo: class QueryList : ArrayList {
     - OrderBy
     - Invoke
     - First
+    - ForEach <Done>
     
 }
 
