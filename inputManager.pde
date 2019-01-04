@@ -185,3 +185,27 @@ void mouseReleased(){
 void mouseWheel(MouseEvent event) {
   input.mouseWheel = event.getCount();
 }
+
+
+
+/*
+
+static class Input {
+  class Key {
+
+  }
+  class Axis {
+
+  }
+  static class Mouse {
+    enum MouseMode {
+      Free,
+      Locked
+    }
+    static App.Vector2 Pos;
+    static MouseMode Mode;
+    static App.Event OnClick;
+  }
+}
+
+*/

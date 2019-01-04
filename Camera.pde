@@ -44,7 +44,7 @@ class Camera extends Component {
       up.x, up.y, up.z);   
     ScreenSurface.graphics.perspective(radians(FieldOfView), (float)width / (float)height, NearClipPlane, FarClipPlane);
     Buffer = ScreenSurface.graphics.copy();
-  }  
+  }
   
   @Override
   void Render(){

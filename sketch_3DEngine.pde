@@ -11,6 +11,7 @@ import java.io.*;
 
 
 
+
 //----Global-Variables------
 // deltaTime: seconds since last update.
 float deltaTime;
@@ -49,41 +50,31 @@ class MyTestClass {
   }
 }
 
-
-
-
-void TestAppMethod() {
-  println("TestAppMethod");
-}
-
-
-Event event = new Event();
+Function<String> myfunc = new Function<String>() {
+  String Run(Float f) {
+    println("Hello Function " + f);
+    return "da " + f * 2;
+  }
+  void Run() {
+    println("Void");
+  }
+  String SomeOtherMethod(Float f) {
+    return "Meth: " + f;
+  }
+};
 
 void setup() {
   App = this;
 
-  MyTestClass testObj = new MyTestClass();
-
-  event.AddListner("TestAppMethod", App);
-  event.AddListner("GetName", testObj);
-  event.AddListner(new Func() {
-    public Object Invoke(Object... args) {
-      println("VoidFunc");
-      return null;
-    }
-  });
-  event.AddListner(new Func(){
-    public Object Invoke(Object... args){
-      MyTestClass tst = new MyTestClass();
-      println(tst.name);
-      return tst;
-    }
-  });
-
-
-  event.Run();
-
   fullScreen(P3D);
+
+
+  String obj = myfunc.Invoke(12f);
+  println(obj);
+
+  println(myfunc.Invoke());
+
+  println(myfunc.Invoke("SomeOtherMethod", 234f));
 
   //println(assets.GetDataFiles().get(0).getName());
 
@@ -98,11 +89,14 @@ void setup() {
 */
   
 
+
   //----init-Inputs-----
   input = new Input();
   input.Init();
+  input.mouseMode = MouseMode.Locked;
+  input.ShowMouse(false);
   //--------------------
-  
+
 
 
   
@@ -145,7 +139,6 @@ void setup() {
   );
 
   ScreenSurface = ssf;
-  
 } 
 
 
@@ -167,5 +160,3 @@ void draw(){
   
   //println(frameRate);
 }
-
-

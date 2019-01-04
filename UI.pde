@@ -18,7 +18,13 @@ class Canvas extends ScreenLayer {
     ScreenSurface.graphics.image(assets.getTexture("front"), 0, 0, 100, 100);
     //ScreenSurface.graphics.shape(assets.getMesh("box"), width / 2, height / 2, 100, 100);
     for(UIElement elm : Elements) {
-      elm.Draw();
+      elm.Render();
+    }
+  }
+
+  void Update() {
+    for(UIElement elm : Elements) {
+      elm.Update();
     }
   }
 
@@ -31,10 +37,33 @@ abstract class UIElement {
   Vector2 Pos;
   Rectangle Rect;
 
-  void Draw() { }
+  QueryList<UIElementComponent> Components = new QueryList<UIElementComponent>();
+
+  void Render() { 
+    for(UIElementComponent comp : Components) {
+      comp.Render();
+    }
+  }
+  void Update() {
+    for(UIElementComponent comp : Components) {
+      comp.Update();
+    }
+  }
 }
 
-abstract class ResponsiveUIElement extends UIElement {
+abstract class UIElementComponent {
+  UIElement element;
+
+  void Render() { }
+  void Update() { }
+}
+
+abstract class ResponsiveUIComponent extends UIElementComponent {
+
+  Event OnHover = new Event();
+  Event OnLeftClick = new Event();
+  Event OnRightClick = new Event();
+
   void OnHover() { }
   void OnLClick() { }
   void OnRClick() { }

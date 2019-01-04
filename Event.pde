@@ -4,6 +4,12 @@
 class Event {
   QueryList<Func> Methods = new QueryList<Func>();
 
+  Event(Func... funcs) {
+    for(Func func : funcs) {
+      Methods.add(func);
+    }
+  }
+
   void AddListner(String name, Object obj) {
     Methods.add(new MethodPointer(name, obj));
   }
@@ -20,12 +26,20 @@ class Event {
 }
 
 
-
 // Func: base interface for a function
 abstract class Func { 
   abstract Object Invoke(Object... args);
 }
 
+abstract class Function<T> extends Func {
+  @Override
+  final T Invoke(Object... args) {
+    return (T)Reflect.InvokeMethod(this, "Run", args);
+  }
+  final T Invoke(String methodName, Object... args) {
+    return (T)Reflect.InvokeMethod(this, methodName, args);
+  }
+}
 
 
 class MethodPointer extends Func {
@@ -39,3 +53,4 @@ class MethodPointer extends Func {
     return Reflect.InvokeMethod(object, name, params);
   }
 }
+

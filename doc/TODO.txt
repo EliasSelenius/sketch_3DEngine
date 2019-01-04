@@ -94,6 +94,7 @@ todo: Assets auto loading {
 }
 
 
+
 General:
 
 todo: file path sepperator {
@@ -198,17 +199,20 @@ todo: Canvas {
 
     Camera.Buffer can be directly rendered to
 
-    soluton {
+    soluton { 
         do Not use DisplayBuffer,
         DisplayBuffer has been renamed to WorldGraphics to avoid confusion
 
         there is a new UIGraphics that can be drawn to
+
+        Edit:
+        this solution is no longer relevant as we have the new ScreenSurface solution
     }
 }
 
 
 
-Screen Management:
+Screen Management & Rendering:
 
 <Done> todo: class ScreenSurface {
     has a graphics object that we can draw to
@@ -237,5 +241,35 @@ Screen Management:
 }
 
 
+todo: Material & Shader {
+    all RenderObjects shuold have a list of Materials
 
+    a Material has a shader
+    a shader deffines the properties of a Material
+    the material class will be an interface to those properties
+
+    Exsample:
+    a material could have:
+    - texture
+    - color
+    and a shader that accepts those properties
+
+    other more specific Exsamples:
+    a glow shader could have a "glowLevel" property
+}
+
+
+InputManager:
+
+todo: Rewrite input system {
+    the Input class (the input system encapsulator) needs to be static
+
+    all input related classes are innerclasses of Input class
+    E.g: Key, InpAxis, Mouse
+
+    Input class use Event objects for extensibility
+
+    can we do this without continuous Update calls?
+
+}
 
