@@ -23,7 +23,7 @@ PrefabManager Prefabs;
 MathLib Math = new MathLib();
 // defScene: the scene that gets updated.
 Scene defScene;
-// This: this app:
+// App: this app:
 static sketch_3DEngine App;
 // Reflect: collection of functions for java.lang.reflect
 Reflect Reflect = new Reflect();
@@ -63,6 +63,15 @@ Function<String> myfunc = new Function<String>() {
   }
 };
 
+
+Func myThreadTest = new Func() {
+  @Override
+  Object Invoke(Object... args) {
+    println("ThreadInvoke");
+    return null;
+  }
+};
+
 void setup() {
   App = this;
 
@@ -75,6 +84,9 @@ void setup() {
   println(myfunc.Invoke());
 
   println(myfunc.Invoke("SomeOtherMethod", 234f));
+
+  myfunc.InvokeInThread();
+  
 
   //println(assets.GetDataFiles().get(0).getName());
 
@@ -139,8 +151,8 @@ void setup() {
   );
 
   ScreenSurface = ssf;
-} 
 
+} 
 
 
 void draw(){

@@ -8,6 +8,7 @@ abstract class Component {
   void Render(){}
   void Start(){}
   void End(){}
+  // todo: OnColliderHit shuold be an EventListner
   void OnColliderHit(Collider other){}
   final Component GetComponent(Class cls) {
     for(Component comp : gameObject.components){

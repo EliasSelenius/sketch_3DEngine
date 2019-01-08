@@ -26,9 +26,18 @@ class Event {
 }
 
 
+
 // Func: base interface for a function
 abstract class Func { 
   abstract Object Invoke(Object... args);
+  void InvokeInThread(Object... args) {
+    new Thread() {
+      @Override
+      public void run() {
+        Invoke();
+      }
+    }.start();
+  }
 }
 
 abstract class Function<T> extends Func {
