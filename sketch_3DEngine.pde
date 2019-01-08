@@ -50,27 +50,7 @@ class MyTestClass {
   }
 }
 
-Function<String> myfunc = new Function<String>() {
-  String Run(Float f) {
-    println("Hello Function " + f);
-    return "da " + f * 2;
-  }
-  void Run() {
-    println("Void");
-  }
-  String SomeOtherMethod(Float f) {
-    return "Meth: " + f;
-  }
-};
 
-
-Func myThreadTest = new Func() {
-  @Override
-  Object Invoke(Object... args) {
-    println("ThreadInvoke");
-    return null;
-  }
-};
 
 void setup() {
   App = this;
@@ -78,15 +58,15 @@ void setup() {
   fullScreen(P3D);
 
 
-  String obj = myfunc.Invoke(12f);
-  println(obj);
-
-  println(myfunc.Invoke());
-
-  println(myfunc.Invoke("SomeOtherMethod", 234f));
-
-  myfunc.InvokeInThread();
+  QueryList<String> strs = new QueryList<String>();
+  strs.Insert("Hello", "ello", "ass", "HellWordl", "world", "EloWorld", "ssay", "oss");
   
+  println(strs.Where(new Function(){
+    boolean Run(String elm) {
+      return StringDifference(elm, "Hello World") < 5;
+    }
+  }));
+
 
   //println(assets.GetDataFiles().get(0).getName());
 
