@@ -1,5 +1,12 @@
 
 
+
+Notes:
+platform == MACOSX
+surface.setVisible(bool);
+void keyTyped()
+
+
 Command Executor:
 
 todo: use Command string value bug {
@@ -97,6 +104,11 @@ todo: Assets auto loading {
 
 General:
 
+todo: Invoke Functions in threads {
+    class Func shuold have a method for invoking it inside a thread
+    Events should also be able to run all listeners in one thread 
+} 
+
 todo: file path sepperator {
     find the path sepperator to get correct file paths on both windows, linux, mac
 }
@@ -131,6 +143,7 @@ todo: boolOperator API {
     - IsNotNull <Done>
     - OfType <Done> does not work with primitives
     - InBetween
+    - Like String with wildcards?: '_' '%'
 
 }
 
@@ -162,10 +175,49 @@ todo: GameObject tags {
     GameObjects should have a String[] field
     for <Tags> 
     with potential query selection
+
+    example usage:
+    all GameObjects that are considerd an enemy of the player has the tag: "Enemy"
+    to get all enemys:
+    select all gameObjects with the tag "Enemy"
 }
 
 todo: GameObject hirarchy {
     GameObjects should be orderd in a hirarchy
+
+    how do we sepperate from local and world space regarding transform
+     - 
+
+
+    Draft {
+        GameObject has a refernce to its parent
+        or GameObject has a list of refernces to its children
+
+        question is:
+         - do we want child gameObjects to be a list in the parent?
+         - or de we want all gameObjects to be stored in the Scene, and only have gameObjects refernce eachother 
+
+        with this api we can make "Root gameobjects" because Scene itself has gameObjects but not any parent gameObject
+        API: {
+            abstract class GameObjectContainer { 
+                QueryList<GameObject> gameObjs;
+                void Add(GameObject obj) { }
+            } 
+            class Scene extends GameObjectContainer { }
+            class GameObject extends GameObjectContainer { 
+                GameObjectContainer Parent;
+            }
+        }
+        also the GameObjectContainer should be where the gameObject instantiation occures
+
+        favored sulotion: {
+            Scene is the container of all gameObjects, including child objects
+            gameObjects only refer to each other
+            E.g:
+            GameObject Parent;
+            QueryList<GameObject> Children;
+        }
+    }
 }
 
 
