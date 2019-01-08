@@ -125,6 +125,7 @@ todo: class QueryList : ArrayList {
     - Invoke
     - First
     - ForEach <Done>
+    - SwapIndex <Done>
     
 }
 

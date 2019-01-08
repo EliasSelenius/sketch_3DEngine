@@ -58,16 +58,6 @@ void setup() {
   fullScreen(P3D);
 
 
-  QueryList<String> strs = new QueryList<String>();
-  strs.Insert("Hello", "ello", "ass", "HellWordl", "world", "EloWorld", "ssay", "oss");
-  
-  println(strs.Where(new Function(){
-    boolean Run(String elm) {
-      return StringDifference(elm, "Hello World") < 5;
-    }
-  }));
-
-
   //println(assets.GetDataFiles().get(0).getName());
 
 

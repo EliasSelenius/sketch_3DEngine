@@ -10,10 +10,18 @@ abstract class Query<T> {
         res.add(t);
       }
     }
+
+    for(int i = 0; i < res.size(); i++) {
+      T index = res.get(i);
+      for(T t : res) {
+
+      }
+    }
     return res;
   }
 
   abstract boolean Where(T arg);
+  abstract boolean OrderBy(T last, T next);
 
 }
 
@@ -67,6 +75,16 @@ class QueryList<T> extends ArrayList<T> {
     for(int i = 0; i < size(); i++) {
       func.Invoke(get(i), i);
     }
+  }
+
+  QueryList<T> OrderBy(String field) {
+    return null;
+  }
+
+  void SwapIndex(int i, int j) {
+    T t = get(i);
+    set(i, get(j));
+    set(j, t);
   }
 
 }
