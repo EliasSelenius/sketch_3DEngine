@@ -63,6 +63,9 @@ class ConicalFrustum implements IShape {
 
 class Rectangle implements IShape {
   float Width, Height;
+  Rectangle(Float w, Float h) {
+    Widht = w; Height = h;
+  }
   float Volume() { return Area(); }
   float Area() { return Width * Height; }
   float MaxLengthFromPivot() { return Math.VecDist2(0, 0, Width * .5f, Height * .5f); }
