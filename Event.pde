@@ -1,7 +1,7 @@
 
 
 
-class Event {
+class Event extends Function {
   QueryList<Func> Methods = new QueryList<Func>();
 
   Event(Func... funcs) {
@@ -27,7 +27,7 @@ class Event {
 
 
 
-// Func: base interface for a function
+// Func: base class for a function
 abstract class Func { 
   abstract Object Invoke(Object... args);
   void InvokeInThread(Object... args) {
