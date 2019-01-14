@@ -63,6 +63,12 @@ class Input {
   MouseMode mouseMode;
   
   Robot robot;
+
+
+  Event OnKeyPressed = new Event();
+  Event OnKeyReleased = new Event();
+  Event OnMouseLeftClick = new Event();
+  Event OnMouseRightClick = new Event();
   
   Input(){
     mouseMove = new Vector2();
@@ -143,6 +149,9 @@ class Input {
 Input input;
 
 
+
+// Processing Events:
+
 void keyPressed(){
   for(int i = 0; i < input.keys.length; i++){
     char k = input.keys[i].Name;
@@ -150,6 +159,7 @@ void keyPressed(){
       input.keys[i].Pressed = true;
     }
   }
+  input.OnKeyPressed.Run();
 }
 
 void keyReleased(){
@@ -160,13 +170,16 @@ void keyReleased(){
       input.keys[i].Released = true;
     }
   }
+  input.OnKeyReleased.Run();
 }
 
 void mousePressed(){
   switch (mouseButton){
     case LEFT:
+      input.OnMouseLeftClick.Run();
       break;
     case RIGHT: 
+      input.OnMouseRightClick.Run();
       break;
     case CENTER:
       break;

@@ -75,12 +75,23 @@ void setup() {
   //----init-Inputs-----
   input = new Input();
   input.Init();
-  input.mouseMode = MouseMode.Locked;
-  input.ShowMouse(false);
+  //input.mouseMode = MouseMode.Locked;
+  //input.ShowMouse(false);
   //--------------------
 
 
+  input.OnMouseLeftClick.AddListner(new Function() {
+    void Run() {
+      println("LeftClick");
+    }
+  });
+  input.OnMouseRightClick.AddListner(new Function() {
+    void Run() {
+      println("RightClick");
+    }
+  });
 
+  
   
   //----init-Assets-----  
   assets = new Assets();
@@ -104,6 +115,11 @@ void setup() {
   defScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
 
 
+
+  page = CreatTestUI();
+
+
+
   exc = new CommandExecutor();
   exc.LoadScript();
   
@@ -117,13 +133,15 @@ void setup() {
       }
     },
     defScene,
-    new Canvas()
+    page
   );
 
   ScreenSurface = ssf;
 
 } 
 
+
+UICanvas page;
 
 void draw(){
   //----Update-Globals----
@@ -135,7 +153,8 @@ void draw(){
   //ambientLight(100,100,100);
   
   defScene.Update();
-  
+  page.Update();
+
   ScreenSurface.Render();
   
   input.Update();
