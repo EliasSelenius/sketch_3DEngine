@@ -88,7 +88,7 @@ Assets:
 todo: Assets auto loading {
     all assets should be loaded without me telling them to be loaded
 
-    - Shaders <Done>
+    - Shaders <Done> // shader files now have the (.shdp) file extension, shdp = ShaderProgram
     - meshes
     - textures
 }

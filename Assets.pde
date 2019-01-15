@@ -11,7 +11,7 @@ class Assets {
 
   void LoadShaders() {
     File file = new File(sketchPath() + "\\data\\shaders");
-    for(String s : file.list(new FileExtensionFilter(".shader"))) {
+    for(String s : file.list(new FileExtensionFilter(".shdp"))) {
       Shaders.add(new ShaderAsset(s));
     }
   }
