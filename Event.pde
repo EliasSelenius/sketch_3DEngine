@@ -1,6 +1,44 @@
 
 
 
+
+class ThreadLoop extends Thread {
+
+  Func startFunc;
+  Func loopFunc;
+  Func endFunc;
+
+  boolean Active = true;
+
+  ThreadLoop(Func l) {
+    loopFunc = l;
+  }
+
+  ThreadLoop(Func s, Func l) {
+    startFunc = s; loopFunc = l;
+  }
+
+  ThreadLoop(Func s, Func l, Func e) {
+    startFunc = s; loopFunc = l; endFunc = e;
+  }
+
+  @Override
+  public void run() {
+    if(startFunc != null) {
+      startFunc.Invoke();
+    }
+    while(Active) {
+      loopFunc.Invoke();
+    }
+    if(endFunc != null) {
+      endFunc.Invoke();
+    }
+  }
+
+}
+
+
+
 class Event extends Function {
   QueryList<Func> Methods = new QueryList<Func>();
 
@@ -11,7 +49,7 @@ class Event extends Function {
   }
 
   void AddListner(String name, Object obj) {
-    Methods.add(new MethodPointer(name, obj));
+    Methods.add(new FuncPointer(name, obj));
   }
 
   void AddListner(Func func) {
@@ -45,16 +83,16 @@ abstract class Function<T> extends Func {
   final T Invoke(Object... args) {
     return (T)Reflect.InvokeMethod(this, "Run", args);
   }
-  final T Invoke(String methodName, Object... args) {
+  final T InvokeMethod(String methodName, Object... args) {
     return (T)Reflect.InvokeMethod(this, methodName, args);
   }
 }
 
 
-class MethodPointer extends Func {
+class FuncPointer extends Func {
   String name;
   Object object;
-  MethodPointer(String n, Object o) {
+  FuncPointer(String n, Object o) {
     name = n; object = o;
   }
   @Override
