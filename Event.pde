@@ -4,34 +4,33 @@
 
 class ThreadLoop extends Thread {
 
-  Func startFunc;
-  Func loopFunc;
-  Func endFunc;
+  Event StartEvent = new Event();
+  Event LoopEvent = new Event();
+  Event EndEvent = new Event();
 
-  boolean Active = true;
+  boolean Active = false;
 
-  ThreadLoop(Func l) {
-    loopFunc = l;
+  ThreadLoop() { }
+
+  void StartLoop() {
+    Active = true;
+    start();
   }
 
-  ThreadLoop(Func s, Func l) {
-    startFunc = s; loopFunc = l;
-  }
-
-  ThreadLoop(Func s, Func l, Func e) {
-    startFunc = s; loopFunc = l; endFunc = e;
+  void EndLoop() {
+    Active = false;
   }
 
   @Override
   public void run() {
-    if(startFunc != null) {
-      startFunc.Invoke();
+    if(StartEvent != null) {
+      StartEvent.Run();
     }
     while(Active) {
-      loopFunc.Invoke();
+      LoopEvent.Run();
     }
-    if(endFunc != null) {
-      endFunc.Invoke();
+    if(EndEvent != null) {
+      EndEvent.Run();
     }
   }
 

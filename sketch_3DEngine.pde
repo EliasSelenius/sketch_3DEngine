@@ -51,26 +51,7 @@ class MyTestClass {
 }
 
 
-ThreadLoop otherThread = new ThreadLoop(
-  
-  new Function() {
-    void Run() {
-      println("Start OtherThread");
-    }
-  },
-  new Function() {
-    int frame = 0;
-    void Run() {
-      frame++;
-      println(frame);
-    } 
-  },
-  new Function() {
-    void Run() {
-      println("End OtherThread");
-    }
-  }
-);
+ThreadLoop otherThread = new ThreadLoop();
 
 
 void setup() {
@@ -78,10 +59,27 @@ void setup() {
 
   fullScreen(P3D);
 
+  otherThread.StartEvent.AddListner(new Function() {
+    void Run () {
+      println("Start");
+    }
+  });
 
-  otherThread.start();
-  Thread.currentThread().sleep(1000);
-  otherThread.Active = false;
+  otherThread.LoopEvent.AddListner(new Function() {
+    void Run () {
+      println("Running Loop");
+    }
+  });
+
+  otherThread.EndEvent.AddListner(new Function() {
+    void Run () {
+      println("Ending");
+    }
+  });
+
+  otherThread.StartLoop();
+  //Thread.currentThread().sleep(1000);
+  //otherThread.Active = false;
 
   //println(assets.GetDataFiles().get(0).getName());
 
@@ -108,7 +106,7 @@ void setup() {
   input.OnMouseLeftClick.AddListner(new Function() {
     void Run() {
       println("LeftClick");
-      otherThread.Active = false;
+      otherThread.EndLoop();
     }
   });
   input.OnMouseRightClick.AddListner(new Function() {
