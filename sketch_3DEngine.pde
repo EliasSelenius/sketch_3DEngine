@@ -57,7 +57,7 @@ ThreadLoop otherThread = new ThreadLoop();
 void setup() {
   App = this;
 
-  fullScreen(P3D);
+  fullScreen(P2D);
 
   otherThread.StartEvent.AddListner(new Function() {
     void Run () {
