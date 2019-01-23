@@ -108,14 +108,18 @@ class Quaternion {
     return eul;
   }
   
-  void SetEuler(Vector3 eul){
+  void SetEuler(Vector3 eul) {
+    SetEuler(eul.x, eul.y, eul.z);
+  }
+
+  void SetEuler(float _x, float _y, float _z){
     
-    float cy = cos(eul.z * .5f);
-    float sy = sin(eul.z * .5f);
-    float cr = cos(eul.x * .5f);
-    float sr = sin(eul.x * .5f);
-    float cp = cos(eul.y * .5f);
-    float sp = sin(eul.y * .5f);
+    float cy = cos(_z * .5f);
+    float sy = sin(_z * .5f);
+    float cr = cos(_x * .5f);
+    float sr = sin(_x * .5f);
+    float cp = cos(_y * .5f);
+    float sp = sin(_y * .5f);
     
     w = cy * cr * cp + sy * sr * sp;
     x = cy * sr * cp - sy * cr * sp;
@@ -173,5 +177,10 @@ class Quaternion {
     y += q.y;
     z += q.z;
     w += q.w;
+  }
+
+  @Override
+  String toString() {
+    return GetEuler().toString();
   }
 }

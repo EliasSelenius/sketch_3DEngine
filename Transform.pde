@@ -25,10 +25,24 @@ class Transform{
     rotation.setValue(t.rotation);
   }
   
+  void Translate(float x, float y) {
+    position.addVec(x, y);
+  }
+
+  void Translate(float x, float y, float z) {
+    position.addVec(x, y, z);
+  }
+
   void Translate(Vector3 v){
     position.addVec(v);
   }
   
+  void Rotate(float x, float y, float z) {
+    Quaternion q = new Quaternion();
+    q.SetEuler(x, y, z);
+    rotation = rotation.multiply(q);
+  }
+
   void Rotate(Vector3 eul){       
     Quaternion q = new Quaternion();
     q.SetEuler(eul);

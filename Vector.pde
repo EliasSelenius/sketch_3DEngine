@@ -40,13 +40,26 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     y = yp;
     z = zp;
   }
+
+  void setValue(Float xp, Float yp){
+    x = xp;
+    y = yp;
+  }
   
   void setValue(Vector3 v){
     x = v.x;
     y = v.y;
     z = v.z;
   }
+
+  void addVec(Float X, Float Y) {
+    x = X; y = Y;
+  }
   
+  void addVec(Float X, Float Y, Float Z) {
+    x = X; y = Y; z = Z;
+  }
+
   void addVec(Vector3 v){
     this.x += v.x;
     this.y += v.y;
