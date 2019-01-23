@@ -58,6 +58,7 @@ void setup() {
   App = this;
 
   fullScreen(P2D);
+  
 
   otherThread.StartEvent.AddListner(new Function() {
     void Run () {
@@ -162,6 +163,9 @@ void setup() {
 
   ScreenSurface = ssf;
 
+
+  // NOTE: frameRate needs to be set at the end of setup:
+  frameRate(200);
 } 
 
 
