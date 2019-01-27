@@ -10,10 +10,28 @@ class ThreadLoop extends Thread {
 
   boolean Active = false;
 
+  int UpdateCount;
+  int StartTime; 
+
   ThreadLoop() { }
+
+
+  float UpdatesPerSecond() {
+    return UpdateCount / (float)(RunningTimeMillis() / 1000f);
+  }
+
+  int RunningTimeMillis() {
+    return millis() - StartTime;
+  }
+
+  float DeltaTime() { 
+    return 1f / UpdatesPerSecond();
+  }
 
   void StartLoop() {
     Active = true;
+    UpdateCount = 0;
+    StartTime = millis();
     start();
   }
 
@@ -27,6 +45,7 @@ class ThreadLoop extends Thread {
       StartEvent.Run();
     }
     while(Active) {
+      UpdateCount++;
       LoopEvent.Run();
     }
     if(EndEvent != null) {
