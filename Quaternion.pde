@@ -17,19 +17,19 @@ class Quaternion {
   
   
   Vector3 Forward(){
-    return new Vector3(2 * (x*z + w*y),
-                       2 * (y*z - w*x),
-                       1 - 2 * (x*x + y*y));
+    return new Vector3(2f * (x*z + w*y),
+                       2f * (y*z - w*x),
+                       1f - 2f * (x*x + y*y));
   } 
   Vector3 Right(){
-    return new Vector3(1 - 2 * (y*y + z*z),
-                       2 * (x*y + w*z),
-                       2 * (x*z - w*y));
+    return new Vector3(1f - 2f * (y*y + z*z),
+                       2f * (x*y + w*z),
+                       2f * (x*z - w*y));
   }
   Vector3 Up(){
-    return new Vector3(2 * (x*y - w*z),
-                       1 - 2 * (x*x + z*z),
-                       2 * (y*z + w*x));
+    return new Vector3(2f * (x*y - w*z),
+                       1f - 2f * (x*x + z*z),
+                       2f * (y*z + w*x));
   }
   
   
