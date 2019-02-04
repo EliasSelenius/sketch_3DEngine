@@ -28,7 +28,7 @@ static sketch_3DEngine App;
 // Reflect: collection of functions for java.lang.reflect
 Reflect Reflect = new Reflect();
 // G: the Gravitational constant.
-final float G = 6.67 * (pow(10, -11));
+final float G = 6.67f * (pow(10f, -11f));
 // variables for a planet.
 Vector3 planetpoint = new Vector3(4000F,2000F,0F);
 float planetMass = 1500;
@@ -68,7 +68,7 @@ void setup() {
 
   otherThread.LoopEvent.AddListner(new Function() {
     void Run () {
-      println("Running Loop");
+      println("Running Loop: " + otherThread.UpdatesPerSecond());
     }
   });
 
@@ -78,9 +78,8 @@ void setup() {
     }
   });
 
-  otherThread.StartLoop();
+  //otherThread.StartLoop();
   //Thread.currentThread().sleep(1000);
-  //otherThread.Active = false;
 
   //println(assets.GetDataFiles().get(0).getName());
 
@@ -94,7 +93,7 @@ void setup() {
   println(xmlc.ToXml("myFloat", new MyTestClass()));
 */
   
-
+  
 
   //----init-Inputs-----
   input = new Input();
@@ -132,23 +131,13 @@ void setup() {
 
 
   defScene = new Scene();
-  
-  //defScene.Instantiate("tree", new OcTreeRenderer());
-  
-  defScene.Instantiate("cam", new Camera(), new CamFlyMovment());
-
-  defScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
-
-
-
   page = CreatTestUI();
-
-
-
   exc = new CommandExecutor();
   exc.LoadScript();
   
 
+
+  //----Init-ScreenSurface-------
   ScreenSurface ssf = new ScreenSurface();
   ssf.Layers.Insert(
     new BackgroundLayer(),
@@ -162,14 +151,43 @@ void setup() {
   );
 
   ScreenSurface = ssf;
+  //-----------------------------
 
 
+
+
+
+  //defScene.Instantiate("tree", new OcTreeRenderer());
+  
+  defScene.Instantiate("cam", new CameraHandler(), new CamFlyMovment());
+
+  defScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
+
+  GameObject cube = defScene.Instantiate("TestCube", new MeshRenderer("box"), new DebugComponent());
+  cube.transform.position.setValue(100f,100f,100f);
+
+  //CreateGalaxy();
+
+
+  LogicThread.LoopEvent.AddListner(new Function() {
+    void Run() {
+      defScene.Update();
+      page.Update();
+      input.Update();
+    }
+  });
+
+  LogicThread.StartLoop();
   // NOTE: frameRate needs to be set at the end of setup:
   frameRate(200);
 } 
 
 
 UICanvas page;
+
+
+ThreadLoop LogicThread = new ThreadLoop();
+
 
 void draw(){
   //----Update-Globals----
@@ -180,12 +198,13 @@ void draw(){
   //directionalLight(200,200,200, 0,-1,0);
   //ambientLight(100,100,100);
   
-  defScene.Update();
-  page.Update();
+  //defScene.Update();
+  //page.Update();
 
   ScreenSurface.Render();
   
-  input.Update();
+
+  //input.Update();
   
   //println(frameRate);
 }

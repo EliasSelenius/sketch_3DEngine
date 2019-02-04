@@ -74,6 +74,10 @@ class Event extends Function {
     Methods.add(func);
   }
 
+  void RemoveListner(Func func) {
+    Methods.remove(func);
+  }
+
   void Run() {
     for(Func func : Methods) {
       func.Invoke();
