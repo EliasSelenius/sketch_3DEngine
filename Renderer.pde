@@ -126,6 +126,12 @@ class Mesh extends RenderObject {
 } 
 
 
+class DebugRenderObject extends RenderObject {
+  @Override
+  void Draw() {
+    
+  }
+}
 
 
 class PrimitiveSphere extends RenderObject {

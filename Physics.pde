@@ -16,7 +16,7 @@ class Physics extends Component {
     Mass = m;
   }
   
-  void Update(){
+  void Update() {
     
     transform.Translate(Velocity.multiply(deltaTime));
     

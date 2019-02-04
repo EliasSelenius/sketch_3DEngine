@@ -97,6 +97,8 @@ void Draw_Debug(){
     Vector3 u = new Vector3(0f,1000f,0f);
     Vector3 r = new Vector3(1000f,0f,0f);
   
+    ScreenSurface.graphics.strokeWeight(1);
+
     ScreenSurface.graphics.scale(10);
     ScreenSurface.graphics.stroke(color(255,0,0));
     ScreenSurface.graphics.line(0,0,0,r.x, r.y, r.z);

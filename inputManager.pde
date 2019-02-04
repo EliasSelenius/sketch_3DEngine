@@ -76,7 +76,7 @@ class Input {
     mouseMode = MouseMode.Free;
   }
   
-  void Init(){
+  void Init() {
     char[] ch = {' ', 'w', 'a', 's', 'd', 'g', 'e', 'q', 'f', 'r'};
     keys = new Key[ch.length];
     for(int i = 0; i < ch.length; i++){

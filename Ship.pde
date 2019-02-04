@@ -27,7 +27,7 @@ class SpaceShip extends Component {
     r = input.GetAxis("Roll");
     p = (Physics)GetComponent(Physics.class);
     
-    //cam = gameObject.scene.FindObject("Camera").transform;
+    cam = gameObject.scene.FindObjectWithName("Camera").transform;
     input.mouseMode = MouseMode.Locked;
   }
   

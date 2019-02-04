@@ -49,7 +49,7 @@ class GalaxyEmission extends EmissionShape {
 void CreateGalaxy(){
   Scene scene = new Scene();
   
-  scene.Instantiate("Camera", new Camera());
+  scene.Instantiate("Camera", new CameraHandler());
     
   scene.Instantiate("Boat", new MeshRenderer("GalleonBoat"));
   

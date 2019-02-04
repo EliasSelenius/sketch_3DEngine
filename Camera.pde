@@ -1,40 +1,23 @@
 
-
-class Camera extends Component {
+class Camera {
+  
+  Transform transform = new Transform();
   
   PImage Buffer;
+
   int NearClipPlane;
   int FarClipPlane;
   float FieldOfView;
-  
-  Camera(){
+
+
+  Camera() {
     NearClipPlane = 3;
     FarClipPlane = 100000;
     // FieldOfView: in degrees, must be from 1 to 179.
     FieldOfView = 90;
   }
-  
-  @Override
-  void Start(){
-    if(gameObject.scene.MainCamera == null){
-      gameObject.scene.MainCamera = this;
-    }
-  }
-  
-  @Override  
-  void End(){
-    if(gameObject.scene.MainCamera == this){
-      gameObject.scene.MainCamera = null;
-    }
-  }
-    
-  @Override
-  void Update(){
-    //FieldOfView = 85 + sin(frameCount / 100f) * 85;
-  }
-  
-  @Override
-  void LateUpdate(){
+
+  void ApplySettings() {
     Vector3 forward = transform.Forward();
     Vector3 up = transform.Up();
     ScreenSurface.graphics.camera(transform.position.x, transform.position.y, transform.position.z, 
@@ -45,15 +28,22 @@ class Camera extends Component {
     ScreenSurface.graphics.perspective(radians(FieldOfView), (float)width / (float)height, NearClipPlane, FarClipPlane);
     Buffer = ScreenSurface.graphics.copy();
   }
-  
-  @Override
-  void Render(){
-    //c.Render(transform.position.plus(transform.Forward().multiply(100)), new Vector3(1), transform.rotation);
-  }
 }
 
 
-class CamFlyMovment extends Component{
+class CameraHandler extends Component {
+  Camera cam;
+  @Override
+  void Start() {
+    cam = ScreenSurface.MainCamera;
+  }
+  @Override
+  void Update() {
+    cam.transform.setValue(transform);
+  }
+}
+
+class CamFlyMovment extends Component {
   
   InpAxis h, v, r;
   
@@ -75,13 +65,15 @@ class CamFlyMovment extends Component{
       speed *= 4;      
     }
       
+    float d = LogicThread.DeltaTime(); 
+
     // fly movement:
-    transform.Translate(transform.Forward().multiply(-v.getValue() * speed));
-    transform.Translate(new Vector3(0F,(input.GetKey(' ').Pressed)? 1F : 0F,0F));
-    transform.Translate(transform.Right().multiply(-h.getValue() * speed));
+    transform.Translate(transform.Forward().multiply(-v.getValue() * speed).multiply(d));
+    transform.Translate(transform.Up().multiply(((input.GetKey(' ').Pressed)? -1F : 0F) * speed).multiply(d));
+    transform.Translate(transform.Right().multiply(-h.getValue() * speed).multiply(d));
     
-        // look rotation:    
-    transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).devide(100F));
+    // look rotation:    
+    transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).multiply(d));
     
     if(input.GetKey('g').Pressed){
       exc.ExecuteLine("exec invokeTest.txt");
