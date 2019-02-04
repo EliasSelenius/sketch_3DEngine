@@ -1,0 +1,44 @@
+
+
+TextBox-                  <== startTag
+@align right              <== attribute
+the result of 12 / 2 is   <== Content
+$[12 / 2]                 <== Math expression
+-/                        <== endTag
+
+
+TextBox-
+@align left
+Hello i am a paragraph
+-/
+
+
+Button-
+@action exitApp
+@margin 30
+Quit Game
+-/
+
+img-
+@source front.png
+@position 100 600 
+@rotation eul pi 0.54 tau radians
+-/
+
+
+grid-
+@width $[screenWidth / 2]
+@align left
+@cols 3
+
+    img-
+    @maxsize
+    @source animal.png
+    -/
+    TextBox-
+    @maxsize
+    this is a picture of an animal
+    -/
+
+-/
+
