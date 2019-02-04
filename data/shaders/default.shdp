@@ -1,12 +1,13 @@
 
 
 start:props
-
 end:props
 
 
 
 start:vert
+
+    #version 130
 
     uniform mat4 transform;
     uniform mat4 texMatrix;
@@ -30,6 +31,8 @@ end:vert
 
 
 start:frag
+
+    #version 130
 
     uniform sampler2D texture;
 
