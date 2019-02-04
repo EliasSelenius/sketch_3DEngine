@@ -5,9 +5,6 @@ class Scene extends ScreenLayer {
   
   // todo: remove this from here:
   ColliderArray colliderArray = new ColliderArray();
-      
-
-  Camera MainCamera;
   
   
   void Update(){    
@@ -29,7 +26,14 @@ class Scene extends ScreenLayer {
     }
   }
   
-  
+  GameObject FindObjectWithName(String name) {
+    for (GameObject o : gameObjects) {
+      if(o.Name.equals(name)) {
+        return o;
+      }
+    }
+    return null;
+  }
   
   void AddObject(GameObject obj){
     obj.scene = this;
