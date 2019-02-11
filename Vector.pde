@@ -57,7 +57,7 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
   }
   
   void addVec(Float X, Float Y, Float Z) {
-    x = X; y = Y; z = Z;
+    x += X; y += Y; z += Z;
   }
 
   void addVec(Vector3 v){
@@ -151,6 +151,11 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
 class Vector2 {
   
   float x, y;
+
+  @Override
+  String toString() {
+    return "x: " + x + " y: " + y;
+  }
   
   Vector2(){
     x = 0;

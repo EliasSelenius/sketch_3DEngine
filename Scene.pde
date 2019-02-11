@@ -1,4 +1,5 @@
 
+
 class Scene extends ScreenLayer {
 
   QueryList<GameObject> gameObjects = new QueryList<GameObject>();
@@ -8,21 +9,21 @@ class Scene extends ScreenLayer {
   
   
   void Update(){    
-    colliderArray.Update();
-    for(GameObject obj : gameObjects){      
-      obj.Update();   
+    //colliderArray.Update();
+    for(int i = 0; i < gameObjects.size(); i++){      
+      gameObjects.get(i).Update();   
     }       
-    for(GameObject obj : gameObjects){      
-      obj.LateUpdate();   
+    for(int i = 0; i < gameObjects.size(); i++){      
+      gameObjects.get(i).LateUpdate();   
     }  
   }
   
   @Override
   void Render() {
-    ScreenSurface.graphics.lights();
-    //ScreenSurface.graphics.background(0);
-    for(GameObject obj : gameObjects){
-      obj.Render();
+    GameManager.graphics.lights();
+    //GameManager.graphics.background(0);
+    for(int i = 0; i < gameObjects.size(); i++){
+      gameObjects.get(i).Render();
     }
   }
   

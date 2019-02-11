@@ -21,8 +21,6 @@ Assets assets;
 PrefabManager Prefabs;
 // Math: a collection of usefull functions.
 MathLib Math = new MathLib();
-// defScene: the scene that gets updated.
-Scene defScene;
 // App: this app:
 static sketch_3DEngine App;
 // Reflect: collection of functions for java.lang.reflect
@@ -51,8 +49,6 @@ class MyTestClass {
 }
 
 
-ThreadLoop otherThread = new ThreadLoop();
-
 
 void setup() {
   App = this;
@@ -60,26 +56,6 @@ void setup() {
   fullScreen(P2D);
   
 
-  otherThread.StartEvent.AddListner(new Function() {
-    void Run () {
-      println("Start");
-    }
-  });
-
-  otherThread.LoopEvent.AddListner(new Function() {
-    void Run () {
-      println("Running Loop: " + otherThread.UpdatesPerSecond());
-    }
-  });
-
-  otherThread.EndEvent.AddListner(new Function() {
-    void Run () {
-      println("Ending");
-    }
-  });
-
-  //otherThread.StartLoop();
-  //Thread.currentThread().sleep(1000);
 
   //println(assets.GetDataFiles().get(0).getName());
 
@@ -106,7 +82,6 @@ void setup() {
   input.OnMouseLeftClick.AddListner(new Function() {
     void Run() {
       println("LeftClick");
-      otherThread.EndLoop();
     }
   });
   input.OnMouseRightClick.AddListner(new Function() {
@@ -129,28 +104,28 @@ void setup() {
   
   
 
+  GameManager.InitRenderer(P3D);
 
-  defScene = new Scene();
+  GameManager.ActiveScene = new Scene();
   page = CreatTestUI();
   exc = new CommandExecutor();
   exc.LoadScript();
   
 
 
-  //----Init-ScreenSurface-------
-  ScreenSurface ssf = new ScreenSurface();
-  ssf.Layers.Insert(
+  //----Init-RenderLayers-------
+  
+  GameManager.Layers.Insert(
     new BackgroundLayer(),
     new ScreenLayer() {
       public void Render() {
         Draw_Debug();
       }
     },
-    defScene,
+    GameManager.ActiveScene,
     page
   );
 
-  ScreenSurface = ssf;
   //-----------------------------
 
 
@@ -159,25 +134,21 @@ void setup() {
 
   //defScene.Instantiate("tree", new OcTreeRenderer());
   
-  defScene.Instantiate("cam", new CameraHandler(), new CamFlyMovment());
+  GameManager.ActiveScene.Instantiate("cam", new CameraHandler(), new CamFlyMovment());
 
-  defScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
+  GameManager.ActiveScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
 
-  GameObject cube = defScene.Instantiate("TestCube", new MeshRenderer("box"), new DebugComponent());
-  cube.transform.position.setValue(100f,100f,100f);
+  
 
   //CreateGalaxy();
 
 
-  LogicThread.LoopEvent.AddListner(new Function() {
-    void Run() {
-      defScene.Update();
-      page.Update();
-      input.Update();
-    }
-  });
+  LogicThread.LoopEvent.AddListner("Update", GameManager);
 
   LogicThread.StartLoop();
+
+  GameManager.RenderTime.Start();
+
   // NOTE: frameRate needs to be set at the end of setup:
   frameRate(200);
 } 
@@ -201,8 +172,9 @@ void draw(){
   //defScene.Update();
   //page.Update();
 
-  ScreenSurface.Render();
-  
+  GameManager.Render();
+
+  //println(LogicThread.UpdatesPerSecond());  
 
   //input.Update();
   

@@ -20,13 +20,13 @@ class Camera {
   void ApplySettings() {
     Vector3 forward = transform.Forward();
     Vector3 up = transform.Up();
-    ScreenSurface.graphics.camera(transform.position.x, transform.position.y, transform.position.z, 
+    GameManager.graphics.camera(transform.position.x, transform.position.y, transform.position.z, 
       forward.x + transform.position.x, 
       forward.y + transform.position.y, 
       forward.z + transform.position.z,
       up.x, up.y, up.z);   
-    ScreenSurface.graphics.perspective(radians(FieldOfView), (float)width / (float)height, NearClipPlane, FarClipPlane);
-    Buffer = ScreenSurface.graphics.copy();
+    GameManager.graphics.perspective(radians(FieldOfView), (float)width / (float)height, NearClipPlane, FarClipPlane);
+    Buffer = GameManager.graphics.copy();
   }
 }
 
@@ -35,11 +35,8 @@ class CameraHandler extends Component {
   Camera cam;
   @Override
   void Start() {
-    cam = ScreenSurface.MainCamera;
-  }
-  @Override
-  void Update() {
-    cam.transform.setValue(transform);
+    cam = GameManager.MainCamera;
+    cam.transform = transform;
   }
 }
 
@@ -57,26 +54,48 @@ class CamFlyMovment extends Component {
     
     //tree = (OcTreeRenderer)gameObject.scene.FindObject("tree").GetComponent(OcTreeRenderer.class);
   }
+
+  int timesGpressed = 0;
   
   void Update(){    
       
-    float speed = 10;
+    float speed = 10f;
     if(keyPressed && keyCode == SHIFT){
-      speed *= 4;      
+      speed *= 4f;      
     }
       
-    float d = LogicThread.DeltaTime(); 
+    float d = LogicThread.Time.Delta(); 
 
     // fly movement:
+    /*
     transform.Translate(transform.Forward().multiply(-v.getValue() * speed).multiply(d));
     transform.Translate(transform.Up().multiply(((input.GetKey(' ').Pressed)? -1F : 0F) * speed).multiply(d));
     transform.Translate(transform.Right().multiply(-h.getValue() * speed).multiply(d));
-    
+    */
     // look rotation:    
-    transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).multiply(d));
+    //transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).multiply(d));
     
-    if(input.GetKey('g').Pressed){
-      exc.ExecuteLine("exec invokeTest.txt");
+    //transform.Translate(1f * d, 1f * d, 1f * d);
+
+    //println(input.mouseMove);
+
+    //println(transform.position);
+    
+    //println(LogicThread.Time.Delta());
+
+    //println(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).multiply(d));
+
+
+    if(input.GetKey('g').Released){
+      
+      timesGpressed++;
+      println("timesGpressed: "+timesGpressed);
+
+      GameObject cube = gameObject.scene.Instantiate("TestCube", new MeshRenderer("box"), new DebugComponent());
+      cube.transform.position.setValue(transform.position);
+
+      
+      //exc.ExecuteLine("exec invokeTest.txt");
       
       //tree.ocTree.Insert(new Physics(10f), transform.position);
       

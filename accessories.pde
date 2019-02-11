@@ -91,34 +91,34 @@ ArrayList<Object> ExcludeIndices(Object[] array, Integer... indices) {
 
 
 void Draw_Debug(){
-    ScreenSurface.graphics.pushMatrix();
+    GameManager.graphics.pushMatrix();
   
     Vector3 f = new Vector3(0f,0f,1000f);
     Vector3 u = new Vector3(0f,1000f,0f);
     Vector3 r = new Vector3(1000f,0f,0f);
   
-    ScreenSurface.graphics.strokeWeight(1);
+    GameManager.graphics.strokeWeight(1);
 
-    ScreenSurface.graphics.scale(10);
-    ScreenSurface.graphics.stroke(color(255,0,0));
-    ScreenSurface.graphics.line(0,0,0,r.x, r.y, r.z);
-    ScreenSurface.graphics.stroke(color(0,255,0));
-    ScreenSurface.graphics.line(0,0,0,u.x, u.y, u.z);
-    ScreenSurface.graphics.stroke(color(0,0,255));
-    ScreenSurface.graphics.line(0,0,0,f.x, f.y, f.z);
+    GameManager.graphics.scale(10);
+    GameManager.graphics.stroke(color(255,0,0));
+    GameManager.graphics.line(0,0,0,r.x, r.y, r.z);
+    GameManager.graphics.stroke(color(0,255,0));
+    GameManager.graphics.line(0,0,0,u.x, u.y, u.z);
+    GameManager.graphics.stroke(color(0,0,255));
+    GameManager.graphics.line(0,0,0,f.x, f.y, f.z);
   
-    ScreenSurface.graphics.scale(.1);
-    ScreenSurface.graphics.stroke(255);
-    ScreenSurface.graphics.line(0,0,0,  width, 0,0);
-    ScreenSurface.graphics.line(0,0,0,  0, height,0);
-    ScreenSurface.graphics.line(width,0,0, width, height,0);
-    ScreenSurface.graphics.line(0,height,0,  width, height, 0);
+    GameManager.graphics.scale(.1);
+    GameManager.graphics.stroke(255);
+    GameManager.graphics.line(0,0,0,  width, 0,0);
+    GameManager.graphics.line(0,0,0,  0, height,0);
+    GameManager.graphics.line(width,0,0, width, height,0);
+    GameManager.graphics.line(0,height,0,  width, height, 0);
   
-    ScreenSurface.graphics.line(0,0,0, 0,0,width);
-    ScreenSurface.graphics.line(0,height,0 ,0, height, width);
-    ScreenSurface.graphics.line(0,0,width, 0,height, width);
+    GameManager.graphics.line(0,0,0, 0,0,width);
+    GameManager.graphics.line(0,height,0 ,0, height, width);
+    GameManager.graphics.line(0,0,width, 0,height, width);
 
-    ScreenSurface.graphics.popMatrix();
+    GameManager.graphics.popMatrix();
 }
 
 

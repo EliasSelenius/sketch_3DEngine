@@ -26,35 +26,35 @@ class OcTreeRenderer extends Component {
   
   @Override
   void Render() {
-    ScreenSurface.graphics.pushMatrix();
+    GameManager.graphics.pushMatrix();
     
-    ScreenSurface.graphics.translate(transform.position.x, transform.position.y, transform.position.z);    
-    ScreenSurface.graphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);          
+    GameManager.graphics.translate(transform.position.x, transform.position.y, transform.position.z);    
+    GameManager.graphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);          
     Vector4 a = transform.rotation.GetAxisAngle();   
-    ScreenSurface.graphics.rotate(a.w, a.x, a.y, a.z);
+    GameManager.graphics.rotate(a.w, a.x, a.y, a.z);
     
-    ScreenSurface.graphics.noFill();
-    ScreenSurface.graphics.stroke(0, 255,255);
+    GameManager.graphics.noFill();
+    GameManager.graphics.stroke(0, 255,255);
     
-    //ScreenSurface.graphics.box(ocTree.Root.cube.Size);
+    //GameManager.graphics.box(ocTree.Root.cube.Size);
     
 
     for(OcTree.OcTreeNode node : ocTree.GetLeafNodes()) {
-      ScreenSurface.graphics.pushMatrix();
-      ScreenSurface.graphics.translate(node.position.x, node.position.y, node.position.z);
-      ScreenSurface.graphics.box(node.cube.Size);
+      GameManager.graphics.pushMatrix();
+      GameManager.graphics.translate(node.position.x, node.position.y, node.position.z);
+      GameManager.graphics.box(node.cube.Size);
       for(int i = 0; i < node.Elements.size(); i++) {
         Vector3 p = ((OcTree.OcTreeIndex)node.Elements.get(i)).pos.minus(node.position);
-        ScreenSurface.graphics.pushMatrix();
-        ScreenSurface.graphics.translate(p.x, p.y, p.z);
-        ScreenSurface.graphics.sphere(50);
-        ScreenSurface.graphics.popMatrix();
+        GameManager.graphics.pushMatrix();
+        GameManager.graphics.translate(p.x, p.y, p.z);
+        GameManager.graphics.sphere(50);
+        GameManager.graphics.popMatrix();
       }
-      ScreenSurface.graphics.popMatrix();
+      GameManager.graphics.popMatrix();
       //println(node.Elements.size());
     }
     
-    ScreenSurface.graphics.popMatrix();
+    GameManager.graphics.popMatrix();
   }
 }
 

@@ -65,12 +65,12 @@ class ParticleSystem extends Component {
   @Override
   void Render(){
   
-    ScreenSurface.graphics.pushMatrix();
+    GameManager.graphics.pushMatrix();
     if(LocalSpace){
-      ScreenSurface.graphics.translate(transform.position.x, transform.position.y, transform.position.z);
-      ScreenSurface.graphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);
+      GameManager.graphics.translate(transform.position.x, transform.position.y, transform.position.z);
+      GameManager.graphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);
       Vector4 axisAngle = transform.rotation.GetAxisAngle();
-      ScreenSurface.graphics.rotate(axisAngle.w, axisAngle.x, axisAngle.y, axisAngle.z);
+      GameManager.graphics.rotate(axisAngle.w, axisAngle.x, axisAngle.y, axisAngle.z);
     }    
     
 
@@ -81,7 +81,7 @@ class ParticleSystem extends Component {
       renderObj.Render(p.transform.position, p.transform.scale.multiply(Scaler), p.transform.rotation);
     }
     
-    ScreenSurface.graphics.popMatrix();
+    GameManager.graphics.popMatrix();
   }
   
   // Update(): Updates the Physics of each particle.

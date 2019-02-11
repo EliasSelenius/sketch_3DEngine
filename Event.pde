@@ -1,5 +1,33 @@
 
 
+// TODO: use nanos instead of millis
+class FrequencyTimer {
+  int UpdateCount = 0;
+  int StartTimeMillis;
+  int LastUpdateMillis;
+
+  void Start() {
+    UpdateCount = 0;
+    StartTimeMillis = millis();
+  }
+
+  void Next() {
+    UpdateCount++;
+    LastUpdateMillis = millis();
+  }
+
+  int Millis() {
+    return millis() - StartTimeMillis;
+  }
+
+  float Frequency() {
+    return UpdateCount / (float)(Millis() / 1000f);
+  }
+
+  float Delta() {
+    return 1f / Frequency();
+  }
+}
 
 
 class ThreadLoop extends Thread {
@@ -10,28 +38,13 @@ class ThreadLoop extends Thread {
 
   boolean Active = false;
 
-  int UpdateCount;
-  int StartTime; 
+  FrequencyTimer Time = new FrequencyTimer();
 
   ThreadLoop() { }
 
-
-  float UpdatesPerSecond() {
-    return UpdateCount / (float)(RunningTimeMillis() / 1000f);
-  }
-
-  int RunningTimeMillis() {
-    return millis() - StartTime;
-  }
-
-  float DeltaTime() { 
-    return 1f / UpdatesPerSecond();
-  }
-
   void StartLoop() {
     Active = true;
-    UpdateCount = 0;
-    StartTime = millis();
+    Time.Start();
     start();
   }
 
@@ -45,8 +58,8 @@ class ThreadLoop extends Thread {
       StartEvent.Run();
     }
     while(Active) {
-      UpdateCount++;
       LoopEvent.Run();
+      Time.Next();
     }
     if(EndEvent != null) {
       EndEvent.Run();

@@ -104,7 +104,7 @@ todo: Assets auto loading {
 
 General:
 
-todo: Invoke Functions in threads {
+<Done> todo: Invoke Functions in threads {
     class Func shuold have a method for invoking it inside a thread
     Events should also be able to run all listeners in one thread 
 } 
@@ -277,13 +277,13 @@ Screen Management & Rendering:
 
         class ScreenSurface {
             QueryList<IScreenLayer> layers;
-            PGraphics ScreenSurface.graphics;
+            PGraphics graphics;
 
             void Draw() {
                 for layers
-                    ScreenSurface.graphics.beginDraw();
+                    graphics.beginDraw();
                     layer.Render();
-                    ScreenSurface.graphics.endDraw();
+                    graphics.endDraw();
             }
         }
 

@@ -93,16 +93,16 @@ class SphereCollider extends Collider {
   }
   
   void DebugDraw(){
-    ScreenSurface.graphics.pushMatrix();
-    ScreenSurface.graphics.translate(transform.position.x, transform.position.y, transform.position.z);
-    ScreenSurface.graphics.noFill();
+    GameManager.graphics.pushMatrix();
+    GameManager.graphics.translate(transform.position.x, transform.position.y, transform.position.z);
+    GameManager.graphics.noFill();
     if(Colliding){
-      ScreenSurface.graphics.stroke(255,0,0);
+      GameManager.graphics.stroke(255,0,0);
     }else{
-      ScreenSurface.graphics.stroke(0, 255, 0);
+      GameManager.graphics.stroke(0, 255, 0);
     }
-    ScreenSurface.graphics.sphere(Radius);
-    ScreenSurface.graphics.popMatrix();
+    GameManager.graphics.sphere(Radius);
+    GameManager.graphics.popMatrix();
   }
   
   boolean isColliding(SphereCollider other){

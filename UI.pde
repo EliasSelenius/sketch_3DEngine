@@ -32,9 +32,9 @@ class UICanvas extends ScreenLayer {
 
     @Override
     void Render() {
-        ScreenSurface.graphics.camera();
-        ScreenSurface.graphics.perspective();
-        ScreenSurface.graphics.text(frameRate, 600,600);
+        GameManager.graphics.camera();
+        GameManager.graphics.perspective();
+        GameManager.graphics.text(frameRate, 600,600);
         for(UIObject el : Elements) {
             el.Render();
         }
@@ -76,8 +76,8 @@ abstract class UIObject extends RenderObject {
 
 	final void Render() { 
 		Render(transform);
-		ScreenSurface.graphics.fill(0);
-		ScreenSurface.graphics.ellipse(transform.position.x, transform.position.y, 20,20);
+		GameManager.graphics.fill(0);
+		GameManager.graphics.ellipse(transform.position.x, transform.position.y, 20,20);
 	}
 }
 
@@ -96,7 +96,7 @@ class TextBox extends UIObject {
 
 		float hw = rect.Width / 2f;
 		float hh = rect.Height / 2f;
-        ScreenSurface.graphics.text(text, 
+        GameManager.graphics.text(text, 
 									-hw,
 									-hh,
 									rect.Width, rect.Height);
@@ -118,7 +118,7 @@ class Button extends UIObject {
 
 		float hw = rect.Width / 2f;
 		float hh = rect.Height / 2f;
-		ScreenSurface.graphics.rect(-hw,
+		GameManager.graphics.rect(-hw,
 									-hh,
 									rect.Width,
 									rect.Height);	

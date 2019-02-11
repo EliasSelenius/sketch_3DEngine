@@ -18,63 +18,63 @@ class Skybox extends RenderObject {
   
   @Override
   void Draw(){
-    ScreenSurface.graphics.textureMode(NORMAL);
+    GameManager.graphics.textureMode(NORMAL);
         
-    ScreenSurface.graphics.noStroke();
+    GameManager.graphics.noStroke();
     
     // front
-    ScreenSurface.graphics.beginShape(QUADS);    
-    ScreenSurface.graphics.texture(front);
-    ScreenSurface.graphics.vertex(1,1,1, 0,0);
-    ScreenSurface.graphics.vertex(-1,1,1, 1,0);
-    ScreenSurface.graphics.vertex(-1,-1,1, 1,1);
-    ScreenSurface.graphics.vertex(1,-1,1, 0,1);
-    ScreenSurface.graphics.endShape();
+    GameManager.graphics.beginShape(QUADS);    
+    GameManager.graphics.texture(front);
+    GameManager.graphics.vertex(1,1,1, 0,0);
+    GameManager.graphics.vertex(-1,1,1, 1,0);
+    GameManager.graphics.vertex(-1,-1,1, 1,1);
+    GameManager.graphics.vertex(1,-1,1, 0,1);
+    GameManager.graphics.endShape();
     
     // back
-    ScreenSurface.graphics.beginShape(QUADS);    
-    ScreenSurface.graphics.texture(back);
-    ScreenSurface.graphics.vertex(1,1,-1, 1,0);
-    ScreenSurface.graphics.vertex(-1,1,-1, 0,0);
-    ScreenSurface.graphics.vertex(-1,-1,-1, 0,1);
-    ScreenSurface.graphics.vertex(1,-1,-1, 1,1);
-    ScreenSurface.graphics.endShape();
+    GameManager.graphics.beginShape(QUADS);    
+    GameManager.graphics.texture(back);
+    GameManager.graphics.vertex(1,1,-1, 1,0);
+    GameManager.graphics.vertex(-1,1,-1, 0,0);
+    GameManager.graphics.vertex(-1,-1,-1, 0,1);
+    GameManager.graphics.vertex(1,-1,-1, 1,1);
+    GameManager.graphics.endShape();
     
     // up
-    ScreenSurface.graphics.beginShape(QUADS);    
-    ScreenSurface.graphics.texture(up);
-    ScreenSurface.graphics.vertex(1,1,1, 0,1);
-    ScreenSurface.graphics.vertex(-1,1,1, 1,1);
-    ScreenSurface.graphics.vertex(-1,1,-1, 1,0);
-    ScreenSurface.graphics.vertex(1,1,-1, 0,0);
-    ScreenSurface.graphics.endShape();
+    GameManager.graphics.beginShape(QUADS);    
+    GameManager.graphics.texture(up);
+    GameManager.graphics.vertex(1,1,1, 0,1);
+    GameManager.graphics.vertex(-1,1,1, 1,1);
+    GameManager.graphics.vertex(-1,1,-1, 1,0);
+    GameManager.graphics.vertex(1,1,-1, 0,0);
+    GameManager.graphics.endShape();
     
     // down
-    ScreenSurface.graphics.beginShape(QUADS);    
-    ScreenSurface.graphics.texture(down);
-    ScreenSurface.graphics.vertex(1,-1,1, 0,0);
-    ScreenSurface.graphics.vertex(-1,-1,1, 1,0);
-    ScreenSurface.graphics.vertex(-1,-1,-1, 1,1);
-    ScreenSurface.graphics.vertex(1,-1,-1, 0,1);
-    ScreenSurface.graphics.endShape();
+    GameManager.graphics.beginShape(QUADS);    
+    GameManager.graphics.texture(down);
+    GameManager.graphics.vertex(1,-1,1, 0,0);
+    GameManager.graphics.vertex(-1,-1,1, 1,0);
+    GameManager.graphics.vertex(-1,-1,-1, 1,1);
+    GameManager.graphics.vertex(1,-1,-1, 0,1);
+    GameManager.graphics.endShape();
     
     // Right
-    ScreenSurface.graphics.beginShape(QUADS);    
-    ScreenSurface.graphics.texture(right);
-    ScreenSurface.graphics.vertex(1,1,1, 1,0);
-    ScreenSurface.graphics.vertex(1,1,-1, 0,0);
-    ScreenSurface.graphics.vertex(1,-1,-1, 0,1);
-    ScreenSurface.graphics.vertex(1,-1,1, 1,1);
-    ScreenSurface.graphics.endShape();
+    GameManager.graphics.beginShape(QUADS);    
+    GameManager.graphics.texture(right);
+    GameManager.graphics.vertex(1,1,1, 1,0);
+    GameManager.graphics.vertex(1,1,-1, 0,0);
+    GameManager.graphics.vertex(1,-1,-1, 0,1);
+    GameManager.graphics.vertex(1,-1,1, 1,1);
+    GameManager.graphics.endShape();
     
     // left
-    ScreenSurface.graphics.beginShape(QUADS);    
-    ScreenSurface.graphics.texture(left);
-    ScreenSurface.graphics.vertex(-1,1,1, 0,0);
-    ScreenSurface.graphics.vertex(-1,1,-1, 1,0);
-    ScreenSurface.graphics.vertex(-1,-1,-1, 1,1);
-    ScreenSurface.graphics.vertex(-1,-1,1, 0,1);
-    ScreenSurface.graphics.endShape();
+    GameManager.graphics.beginShape(QUADS);    
+    GameManager.graphics.texture(left);
+    GameManager.graphics.vertex(-1,1,1, 0,0);
+    GameManager.graphics.vertex(-1,1,-1, 1,0);
+    GameManager.graphics.vertex(-1,-1,-1, 1,1);
+    GameManager.graphics.vertex(-1,-1,1, 0,1);
+    GameManager.graphics.endShape();
     
     
   }
