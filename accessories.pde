@@ -1,7 +1,7 @@
 
 
 interface Interpolatable<T>{
-  T Lerp(T value, Float t);
+  T Lerp(T value, float t);
 }
 
 interface IEquatable<T>{

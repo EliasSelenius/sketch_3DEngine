@@ -51,7 +51,7 @@ class ParticleSystem extends Component {
   
   
   
-  ParticleSystem(EmissionShape emt, RenderObject renobj, Float rate, Float time){
+  ParticleSystem(EmissionShape emt, RenderObject renobj, float rate, float time){
     Emission = emt;
     renderObj = renobj;
     EmissionRate = rate;

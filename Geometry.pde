@@ -63,7 +63,7 @@ class ConicalFrustum implements IShape {
 
 class Rectangle implements IShape {
   float Width, Height;
-  Rectangle(Float w, Float h) {
+  Rectangle(float w, float h) {
     Width = w; Height = h;
   }
   float Volume() { return Area(); }

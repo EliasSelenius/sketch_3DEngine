@@ -12,7 +12,7 @@ class Physics extends Component {
   Vector3 AngularVelocity = new Vector3();
   
 
-  public Physics(Float m) {
+  public Physics(float m) {
     Mass = m;
   }
   

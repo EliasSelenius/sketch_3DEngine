@@ -10,38 +10,38 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
   }
   
   Vector3(){
-    x = 0;
-    y = 0;
-    z = 0;
+    x = 0f;
+    y = 0f;
+    z = 0f;
   }
   
   Vector3(Vector3 p){
     setValue(p);
   }
   
-  Vector3(Float xPos, Float yPos, Float zPos){  
+  Vector3(float xPos, float yPos, float zPos){  
     x = xPos;
     y = yPos; 
     z = zPos;
   }  
   
-  Vector3(Float pos){
+  Vector3(float pos){
     x = pos;
     y = pos; 
     z = pos;
   }
   
-  void setValue(Float xyz){
+  void setValue(float xyz){
     x = y = z = xyz;
   }
   
-  void setValue(Float xp, Float yp, Float zp){
+  void setValue(float xp, float yp, float zp){
     x = xp;
     y = yp;
     z = zp;
   }
 
-  void setValue(Float xp, Float yp){
+  void setValue(float xp, float yp){
     x = xp;
     y = yp;
   }
@@ -52,11 +52,11 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     z = v.z;
   }
 
-  void addVec(Float X, Float Y) {
-    x = X; y = Y;
+  void addVec(float X, float Y) {
+    x += X; y += Y;
   }
   
-  void addVec(Float X, Float Y, Float Z) {
+  void addVec(float X, float Y, float Z) {
     x += X; y += Y; z += Z;
   }
 
@@ -66,7 +66,7 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     this.z += v.z;
   }
   
-  Vector3 multiply(Float v){
+  Vector3 multiply(float v){
     return new Vector3(x * v, y * v, z * v);
   }
   
@@ -74,7 +74,7 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     return new Vector3(x * v.x, y * v.y, z * v.z);
   }
   
-  Vector3 devide(Float v){
+  Vector3 devide(float v){
     return new Vector3(x / v, y / v, z / v);
   }
   
@@ -82,7 +82,7 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     return new Vector3(x + v.x, y + v.y, z + v.z);
   }
   
-  Vector3 plus(Float v){
+  Vector3 plus(float v){
     return new Vector3(x + v, y + v, z + v);
   }
   
@@ -90,10 +90,10 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     return new Vector3(x - v.x, y - v.y, z - v.z); 
   }
   
-  Float Dot(Vector3 v){
+  float Dot(Vector3 v){
     return x * v.x + y * v.y + z * v.z;
   }
-  Float Dot(Float X, Float Y, Float Z){
+  float Dot(float X, float Y, float Z){
     return x * X + y * Y + z * Z;
   }
   Vector3 Cross(Vector3 v){
@@ -106,18 +106,18 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     
   }
   
-  Float distanceTo(Vector3 v){
+  float distanceTo(Vector3 v){
     return sqrt(sq(x - v.x) + sq(y - v.y) + sq(z - v.z));
   }
   
-  Float Magnitude(){
+  float Magnitude(){
     return sqrt(sq(x) + sq(y) + sq(z));
   }
   
-  Float angleTo(Vector3 v){
+  float angleTo(Vector3 v){
     return acos(Dot(v) / (Magnitude() * v.Magnitude()));
   }
-  Float angleTo(Float X, Float Y, Float Z){
+  float angleTo(float X, float Y, float Z){
     return acos(Dot(X,Y,Z) / (Magnitude() * sqrt(sq(X) + sq(Y) + sq(Z))));
   }
   
@@ -138,7 +138,7 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
   }
   
   // Lerp: interpolates between two vectors
-  Vector3 Lerp(Vector3 value, Float t){
+  Vector3 Lerp(Vector3 value, float t){
     return new Vector3((value.x - x) * t, (value.y - y) * t, (value.z - z) * t);
   }
   
@@ -162,39 +162,39 @@ class Vector2 {
     y = 0;
   }
   
-  Vector2(Float xPos, Float yPos){  
+  Vector2(float xPos, float yPos){  
     x = xPos;
     y = yPos;     
   }  
   
-  Vector2(Float pos){
+  Vector2(float pos){
     x = pos;
     y = pos;     
   }
   
-  void setValue(Float xp, Float yp){
+  void setValue(float xp, float yp){
     x = xp;
     y = yp;    
   }
   
-  Float Magnitude(){
+  float Magnitude(){
     return sqrt(sq(x) + sq(y));
   }
   
-  Float Dot(Vector2 v){
+  float Dot(Vector2 v){
     return x * v.x + y * v.y;
   }
-  Float Dot(float X, float Y){
+  float Dot(float X, float Y){
     return x * X + y * Y;
   }
   Vector2 Cross(){
     return new Vector2(y, -x);
   }
   
-  Float angleTo(Vector2 v){
+  float angleTo(Vector2 v){
     return acos(Dot(v) / (Magnitude() * v.Magnitude()));
   }
-  Float angleTo(Float X, Float Y){
+  float angleTo(float X, float Y){
     return acos(Dot(X, Y) / (Magnitude() * (sqrt(sq(X) + sq(Y))))); 
   }
   
@@ -216,11 +216,16 @@ class Vector4{
   
   }
   
-  Vector4(Float X, Float Y, Float Z, Float W){
+  Vector4(float X, float Y, float Z, float W){
     x = X;
     y = Y;
     z = Z;
     w = W;
+  }
+
+  @Override
+  String toString() {
+    return "x: " + x + " y: " + y + " z: " + z + " w: " + w;
   }
 
 }

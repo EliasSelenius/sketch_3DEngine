@@ -28,7 +28,7 @@ Reflect Reflect = new Reflect();
 // G: the Gravitational constant.
 final float G = 6.67f * (pow(10f, -11f));
 // variables for a planet.
-Vector3 planetpoint = new Vector3(4000F,2000F,0F);
+Vector3 planetpoint = new Vector3(4000f,2000f,0f);
 float planetMass = 1500;
 //--------------------------
 
@@ -162,7 +162,7 @@ ThreadLoop LogicThread = new ThreadLoop();
 
 void draw(){
   //----Update-Globals----
-  deltaTime = 1 / frameRate;
+  deltaTime = 1f / frameRate;
   //----------------------
 
   //pointLight(255,100,0, planetpoint.x, planetpoint.y, planetpoint.z);
