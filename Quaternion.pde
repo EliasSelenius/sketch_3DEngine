@@ -50,7 +50,7 @@ class Quaternion {
   }
   
   
-  void Normelize(){
+  void Normalize(){
     float norme = sqrt(sq(w) + sq(x) + sq(y) + sq(z));
     if(norme == 0.0f){
       x = y = z = 0.0f;
@@ -69,7 +69,7 @@ class Quaternion {
   Vector4 GetAxisAngle(){
     Vector4 a = new Vector4();
     if(w > 1){
-      this.Normelize();
+      this.Normalize();
     }
     float s = sqrt(1 - w * w);
     a.w = 2.0f * acos(w);
@@ -113,7 +113,7 @@ class Quaternion {
   }
 
   void SetEuler(float _x, float _y, float _z){
-    
+  
     float cy = cos(_z * .5f);
     float sy = sin(_z * .5f);
     float cr = cos(_x * .5f);
@@ -138,8 +138,20 @@ class Quaternion {
     
     return new Quaternion(nx, ny, nz, nw); 
   }
+
+  Quaternion multiplyEq(Quaternion q){
+    float nw = w * q.w - (x * q.x + y * q.y + z * q.z);
+    
+    float nx = w*q.x + q.w*x + y*q.z - z*q.y;
+    float ny = w*q.y + q.w*y + z*q.x - x*q.z;
+    float nz = w*q.z + q.w*z + x*q.y - y*q.x;
+    
+    x = nx; y = ny; z = nz; w = nw;
+    return this;
+  }
   
   
+  @Deprecated
   void SetAxisAngle(float angle, Vector3 axis){
     float omega, s, c;
     //int i;
@@ -149,6 +161,7 @@ class Quaternion {
     if(abs(s) > Float.MIN_VALUE){
       c = 1.0f / s;
       
+      // HERE the axis vector gets overriden!! not suppossed to hapen... this function wil be obselute TODO: make a propper Quaternion class 
       axis.x *= c;
       axis.y *= c;
       axis.z *= c;
@@ -165,7 +178,7 @@ class Quaternion {
       x = y = z = 0.0f;
       w = 1.0f;
     }
-    Normelize();    
+    Normalize();    
   }
   
   void SetRandom(){
@@ -179,8 +192,15 @@ class Quaternion {
     w += q.w;
   }
 
+
+/*
   @Override
   String toString() {
     return GetEuler().toString();
+  }*/
+
+  @Override
+  String toString() {
+    return "x: " + x + " y: " + y + " z: " + z + " w: " + w;
   }
 }

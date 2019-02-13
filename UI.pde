@@ -40,10 +40,11 @@ class UICanvas extends ScreenLayer {
         }
     }
 
-    Event UpdateEvent = new Event();
 
     void Update() {
-        UpdateEvent.Run();
+        for(UIObject el : Elements) {
+            el.Update();
+        }
     }
 }
 
@@ -76,9 +77,13 @@ abstract class UIObject extends RenderObject {
 
 	final void Render() { 
 		Render(transform);
+		GameManager.graphics.pushMatrix();
 		GameManager.graphics.fill(0);
 		GameManager.graphics.ellipse(transform.position.x, transform.position.y, 20,20);
+		GameManager.graphics.popMatrix();
 	}
+
+	void Update() { }
 }
 
 class TextBox extends UIObject {
@@ -114,14 +119,23 @@ class Button extends UIObject {
 	@Override
 	void Draw() {
 
-		transform.Rotate(0, .05, 0);
-
+		
 		float hw = rect.Width / 2f;
 		float hh = rect.Height / 2f;
 		GameManager.graphics.rect(-hw,
 									-hh,
 									rect.Width,
 									rect.Height);	
+	}
+
+	@Override
+	void Update() {
+		/*
+		println(PI * LogicThread.Time.Delta() + " AND " + (PI * deltaTime) + " AND " + (10000f * LogicThread.Time.Delta()) + " AND " + (millis()) );
+		transform.Rotate(0, 10000f * LogicThread.Time.Delta(), 0);
+		println("rotation " + transform.rotation);
+*/
+		//transform.Translate(sin(LogicThread.Time.UpdateCount / 0.1f) * 100f, 0f, 0f);
 	}
 }
 

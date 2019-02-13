@@ -67,14 +67,15 @@ class CamFlyMovment extends Component {
     float d = LogicThread.Time.Delta(); 
 
     // fly movement:
-    /*
     transform.Translate(transform.Forward().multiply(-v.getValue() * speed).multiply(d));
     transform.Translate(transform.Up().multiply(((input.GetKey(' ').Pressed)? -1F : 0F) * speed).multiply(d));
     transform.Translate(transform.Right().multiply(-h.getValue() * speed).multiply(d));
-    */
-    // look rotation:    
-    //transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).multiply(d));
     
+    // look rotation:    
+    transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).multiply(d));
+
+    println("Pos: " + transform.position + " Delta: " + d);
+
     //transform.Translate(1f * d, 1f * d, 1f * d);
 
     //println(input.mouseMove);

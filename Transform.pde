@@ -40,13 +40,13 @@ class Transform{
   void Rotate(float x, float y, float z) {
     Quaternion q = new Quaternion();
     q.SetEuler(x, y, z);
-    rotation = rotation.multiply(q);
+    rotation.multiplyEq(q);
   }
 
   void Rotate(Vector3 eul){       
     Quaternion q = new Quaternion();
     q.SetEuler(eul);
-    rotation = rotation.multiply(q);
+    rotation.multiplyEq(q);
   }
   
   void RotateAround(Vector3 eul, Vector3 point){

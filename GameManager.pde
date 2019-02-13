@@ -55,7 +55,7 @@ class GameManager {
         page.Update();
         input.Update();
 
-        println(RenderTime.Frequency());
+        //println(RenderTime.Frequency());
     }
 }
 

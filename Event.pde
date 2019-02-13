@@ -2,12 +2,12 @@
 
 // TODO: use nanos instead of millis
 class FrequencyTimer {
-  int UpdateCount = 0;
+  int UpdateCount = 1;
   int StartTimeMillis;
   int LastUpdateMillis;
 
   void Start() {
-    UpdateCount = 0;
+    UpdateCount = 1;
     StartTimeMillis = millis();
   }
 
@@ -60,6 +60,14 @@ class ThreadLoop extends Thread {
     while(Active) {
       LoopEvent.Run();
       Time.Next();
+
+/*
+      try {
+        sleep(1000);
+      } catch(InterruptedException e) {
+        e.printStackTrace();
+      }
+      */
     }
     if(EndEvent != null) {
       EndEvent.Run();
