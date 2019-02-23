@@ -90,6 +90,22 @@ ArrayList<Object> ExcludeIndices(Object[] array, Integer... indices) {
 }
 
 
+
+
+/*
+boolean isWrapper(Object o) {
+  switch (o.getClass()) {
+    case Integer:
+      return true;
+    case Float:
+      return true;
+    case Boolean:
+      return true;
+  }
+  return false;
+}*/
+
+
 void Draw_Debug(){
     GameManager.graphics.pushMatrix();
   
@@ -109,12 +125,9 @@ void Draw_Debug(){
   
     GameManager.graphics.scale(.1);
     GameManager.graphics.stroke(255);
-    GameManager.graphics.line(0,0,0,  width, 0,0);
-    GameManager.graphics.line(0,0,0,  0, height,0);
     GameManager.graphics.line(width,0,0, width, height,0);
     GameManager.graphics.line(0,height,0,  width, height, 0);
   
-    GameManager.graphics.line(0,0,0, 0,0,width);
     GameManager.graphics.line(0,height,0 ,0, height, width);
     GameManager.graphics.line(0,0,width, 0,height, width);
 

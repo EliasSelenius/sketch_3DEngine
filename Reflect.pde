@@ -154,8 +154,9 @@ class Reflect {
   Class GetClass(String n){
     try{
       return (Class.forName(App.getClass().getName() + "$" + n));
-    } catch(Exception w){
-      w.printStackTrace();
+    } catch(ClassNotFoundException w){
+      println("Reflect didnt find the class: " + n);
+      //w.printStackTrace();
     }
     return null;
   }
@@ -166,7 +167,7 @@ class Reflect {
     Class[] paramsType = new Class[params.length + 1];
     paramsType[0] = App.getClass();
     for(int i = 0; i < params.length; i++){
-      paramsType[i + 1] = params[i].getClass();
+      paramsType[i + 1] = GetType(params[i]);
     }
     
     Constructor constructor = null;
@@ -175,7 +176,7 @@ class Reflect {
     } catch(Exception e ){
       e.printStackTrace();
     }
-    if(constructor == null){System.err.println("the constructor is null in InstantiateObject()"); return null;}
+    if(constructor == null) { println("the constructor is null in InstantiateObject()"); return null; }
     
     Object object = null;
     try{
@@ -188,9 +189,30 @@ class Reflect {
     } catch (Exception e){
       e.printStackTrace();
     }
-    if(object == null){System.err.println("the object is null in InstantiateObject()"); return null;}
+    if(object == null) { println("the object is null in InstantiateObject()"); return null; }
     
     return object;
+  }
+
+  Class[] GetTypes(Object[] os) {
+    Class[] res = new Class[os.length];
+    for(int i = 0; i < os.length; i++) {
+      res[i] = GetType(os[i]);
+    }
+    return res;
+  }
+
+  Class GetType(Object o) { 
+    Class c = o.getClass();
+    if (c == Integer.class) {
+      return ((Integer)o).TYPE;
+    } else if (c == Float.class) {
+      return ((Float)o).TYPE;
+    } else if (c == Boolean.class) {
+      return ((Boolean)o).TYPE;
+    }
+    
+    return c;
   }
   
   // WIP

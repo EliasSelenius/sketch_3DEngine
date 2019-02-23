@@ -1,0 +1,116 @@
+
+ParticleSystem ps = new ParticleSystem(
+      new PointEmission(0, 4),
+      new Mesh(assets.getMesh("box")),
+      .5f,
+      6
+    );
+
+
+
+
+find assets;
+invoke getMesh "box";
+set boxShape;
+use ParticleSystem 
+    (PointEmission 0 4) 
+    (Mesh (get boxShape)) .5 6;
+
+
+# so we dont need to use "find" command
+invoke assets.getMesh "box";
+
+
+# find and use should be one command?
+
+
+use Transform () 
+
+
+
+
+
+ParticleSystem (PointEmission 0 4) (Mesh (get boxShape)) .5 6
+
+what to do:
+	sepperate the five substrings in the string
+
+	"ParticleSystem", "PointEmission 0 4"
+
+
+	list<String> subs
+	int start = 0
+	int end = 0
+	for c, i in string
+		if c is ' '
+			end = i
+			subs.add string.substring(start, end)
+			start = end
+		else if c is '('
+			String sub string.substring(start, string.length())
+			int count = 1
+			int whileIndex = 0
+			while count != 0
+				whileIndex++
+				char ch = sub.charAt(whileIndex)
+				if ch is '('
+					count++
+				else ch is ')'
+					count--
+			subs.add sub.substring(0, whileIndex)
+			i += whileIndex
+			 
+			
+
+
+
+
+
+
+Draft:
+
+	possible values:
+		Vector3 10 => [Vector3, 10]
+		Vector3 340 23 1 => [Vector3, 340, 23, 1]
+		Transform (Vector3 3 32 2) (Vector3 10) (Quaternion) => [Transform, Vector3 3 32 2, Vector3 10, Quaternion]
+		ParticleSystem (PointEmission 0 4) (Mesh (get boxShape)) .5 6 => [ParticleSystem, PointEmission 0 4, Mesh (get boxShape), .5, 6]
+		Tbase (Tsub (Tinner true)) (Tinner false) => [Tbase, Tsub (Tinner true), Tinner false]
+
+		true
+		null
+		Vector3
+		Vector3 10
+		Transform (Vector3) (Vector3 1) (Quaternion)
+		ParticleSystem (PointEmission 0 4) (Mesh (get boxshape)) .5 6
+		Mesh (get boxshape)
+		PointEmission 0 4
+
+	algorythm:
+
+		for c, i in string
+			list String subs
+			if c is '('
+				int newindex = (index of end parnthesis)
+				subs.add string.substring i newindex
+				i = newindex
+			else if c is '"'
+				int newindex = (index of next '"')
+				subs.add string.substring i newindex
+				i = newindex
+			else if c is not whitespace or i is 0
+				int newindex = (next index that is whitespace)
+				subs.add string.substring i newindex
+				i = newindex
+
+        
+
+
+	new Tbase(
+		new Tsub(
+			new Tinner(true),
+			"Hello"
+		),
+		new Tinner(false)
+	)
+
+	Tbase (Tsub (Tinner true) "Hello") (Tinner false)

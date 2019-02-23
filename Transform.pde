@@ -73,5 +73,10 @@ class Transform{
   Vector3 Up(){
     return rotation.Up();
   }
+
+  @Override
+  String toString() {
+    return "Position: " + position.toString() + " Scale: " + scale.toString() + " Rotation: " + rotation.toString();
+  }
   
 }
