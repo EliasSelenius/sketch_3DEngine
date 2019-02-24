@@ -1,6 +1,6 @@
  
 
-class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
+class Vector3 implements Interpolatable<Vector3> {
 
   float x, y, z;
  
@@ -70,9 +70,20 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     return new Vector3(x * v, y * v, z * v);
   }
   
+  Vector3 multiplyEq(float v){
+    x *= v; y *= v; z *= v;
+    return this;
+  }
+
   Vector3 multiply(Vector3 v){
     return new Vector3(x * v.x, y * v.y, z * v.z);
   }
+
+  Vector3 multiplyEq(Vector3 v){
+    x *= v.x; y *= v.y; z *= v.z;
+    return this;
+  }
+  
   
   Vector3 devide(float v){
     return new Vector3(x / v, y / v, z / v);
@@ -142,8 +153,21 @@ class Vector3 implements Interpolatable<Vector3>, IEquatable<Vector3> {
     return new Vector3((value.x - x) * t, (value.y - y) * t, (value.z - z) * t);
   }
   
-  boolean Equal(Vector3 value){
-    return x == value.x && y == value.y && z == value.z;
+
+  @Override
+  boolean equals(Object value) {
+
+    if(value == this) {
+      return true;
+    }
+
+    if(!(value instanceof Vector3)) {
+      return false;
+    }
+
+    Vector3 v = (Vector3)value;
+
+    return x == v.x && y == v.y && z == v.z;
   }
 
 }

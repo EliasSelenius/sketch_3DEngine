@@ -203,4 +203,23 @@ class Quaternion {
   String toString() {
     return "x: " + x + " y: " + y + " z: " + z + " w: " + w;
   }
+
+
+  
+  @Override
+  boolean equals(Object value) {
+
+    if(value == this) {
+      return true;
+    }
+
+    if(!(value instanceof Quaternion)) {
+      return false;
+    }
+
+    Quaternion v = (Quaternion)value;
+
+    return x == v.x && y == v.y && z == v.z && w == v.w;
+  }
+
 }

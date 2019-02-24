@@ -4,10 +4,6 @@ interface Interpolatable<T>{
   T Lerp(T value, float t);
 }
 
-interface IEquatable<T>{
-  boolean Equal(T value);
-}
-
 
 class FileExtensionFilter implements FilenameFilter {
   
