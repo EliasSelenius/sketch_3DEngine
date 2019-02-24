@@ -1,14 +1,18 @@
-
+"Hello World"; print;
 
 func main {
     
     Transform (Vector3) (Vector3 1) (Quaternion);
     print;
 
-    set t;
+    set t;"Hello World"; print;
 
-    "Hello World";
-    print;
+    find App;
+    invoke println "Hello";
+
+    find GameManager.ActiveScene;
+    invoke findObjectByName (invoke "HAlsd");
+
 
     get t;
     print;

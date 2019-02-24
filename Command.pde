@@ -161,7 +161,13 @@ class RilFunction {
 
 	RilFunction(String name, String source) {
 		Name = name;
-		body = source.split(";");
+		//body = source.split(";");
+		String[][] match = matchAll(source, "(\\b|\").+?;");
+		body = new String[match.length];
+		for(int i = 0; i < match.length; i++) {
+			body[i] = match[i][0].substring(0, match[i][0].length() - 1); // substring() to remove the semi at the end
+		}
+
 	}
 
 	void Execute() {
@@ -174,15 +180,16 @@ class RilFunction {
 
 	void EvaluateExpression(String string) {
 		
-		
-		if(type.equals("print")) {
+		if(string.startsWith("print")) {
 			println(currentObject); // TODO: print somewhere else, Logger!
 			return;
 		}
 
 
-		else if(type.equals("set")) {
-			locals.put(parsed.get(1), currentObject);
+		else if(string.startsWith("set")) {
+			String tmp = string.substring(string.indexOf(' ') + 1, string.length());
+			locals.put(tmp, currentObject);
+			return;
 		}
 
 
@@ -273,7 +280,7 @@ class RilFunction {
 void TestStringToObject() {
 
 
-	RilFunction f = new RilFunction("Test", "");
+	RilFunction f = new RilFunction("Test", "Transform (Vector3) (Vector3 1) (Quaternion); print; set t; \"Hello World\"; print; get t; print; ");
 
 	f.Execute();	
 
