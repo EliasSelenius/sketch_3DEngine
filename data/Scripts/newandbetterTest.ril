@@ -1,0 +1,16 @@
+
+
+func main {
+    
+    Transform (Vector3) (Vector3 1) (Quaternion);
+    print;
+
+    set t;
+
+    "Hello World";
+    print;
+
+    get t;
+    print;
+
+}

@@ -90,7 +90,7 @@ class CommandExecutor {
     }
   }
     
-  void LoadScript(){
+  void LoadScript() {
     File dir = new File(sketchPath() + "\\data\\Scripts");
     File[] files = dir.listFiles();
     Scripts = new Script[files.length];
@@ -117,113 +117,166 @@ class CommandExecutor {
 }
 
 
+class RilProgram {
 
-Object StringToObject(String string) {
-	ArrayList<String> parsed = SepperateString(string);
-	String type = parsed.get(0);
-
-
-	// float
-	Float f = float(type);
-	if(!f.isNaN()) {
-		return f;
-	}
-
-
-	// null
-	else if(type.equals("null")) {
-		return null;
-	}
-
-
-	// bool
-	else if(type.equals("true")) {
-		return true;
-	} else if (type.equals("false")) {
-		return false;
-	}
-
-
-	// String
-	if(type.charAt(0) == '\"') {
-		return type.substring(1, type.length());
-	}
-
-
-	// class type
-	Class c = Reflect.GetClass(type);
-	if(c != null) { // its a class
-		ArrayList<Object> args = new ArrayList<Object>();
-		for(int i = 1; i < parsed.size(); i++) {
-			args.add(StringToObject(parsed.get(i)));
-		}
-		return Reflect.InstantiateObject(c, args.toArray(new Object[args.size()]));
-	}
-
-
-
-	println("THERE WAS AN ERROR IN: StringToObject");
-	return null;	
 }
 
-void TestStringToObject() {
+class RilScript { 
 	
+	String Name;
+	
+	RilFunction[] Functions;
+
+	RilScript(String path) {
+		File f = new File(path);
+		Name = f.getName();
+		LoadFromFile(f);
+	}
+
+	void LoadFromFile(File f) {
+		Prepare(ConcatStringArray(loadStrings(f)));
+	}
+
+	void Prepare(String source) {
+
+	}
+
+	void ExecuteFunc(String name) { 
+		for(RilFunction f : Functions) { 
+			if(f.Name.equals(name)) {
+				f.Execute();
+				return;
+			}
+		}
+	}	
+}
+
+class RilFunction {
+	String Name;
+	String[] body;
+
+	Object currentObject;
+	HashMap<String, Object> locals = new HashMap<String, Object>();
+
+
+	RilFunction(String name, String source) {
+		Name = name;
+		body = source.split(";");
+	}
+
+	void Execute() {
+
+		for(String s : body) {
+			EvaluateExpression(s);
+		}
+	}
+
+
+	void EvaluateExpression(String string) {
+		
+		
+		if(type.equals("print")) {
+			println(currentObject); // TODO: print somewhere else, Logger!
+			return;
+		}
+
+
+		else if(type.equals("set")) {
+			locals.put(parsed.get(1), currentObject);
+		}
+
+
+		currentObject = StringToObject(string);
+	}
+
+
+	Object StringToObject(String string) {
+		ArrayList<String> parsed = SepperateString(string);
+		String type = parsed.get(0);
+
+		// float
+		Float f = float(type);
+		if(!f.isNaN()) {
+			return f;
+		}
+
+
+		// null
+		else if(type.equals("null")) {
+			return null;
+		}
+
+
+		// bool
+		else if(type.equals("true")) {
+			return true;
+		} else if (type.equals("false")) {
+			return false;
+		}
+
+
+		// String
+		else if(type.charAt(0) == '\"') {
+			return type.substring(1, type.length());
+		}
+
+
+		else if(type.equals("invoke")) {
+			
+		}
+
+
+		else if(type.equals("get")) {
+			return locals.get(parsed.get(1));
+		}
+
+
+		// class type
+		Class c = Reflect.GetClass(type);
+		if(c != null) { // its a class
+			ArrayList<Object> args = new ArrayList<Object>();
+			for(int i = 1; i < parsed.size(); i++) {
+				args.add(StringToObject(parsed.get(i)));
+			}
+			return Reflect.InstantiateObject(c, args.toArray(new Object[args.size()]));
+		}
+
+
+
+		println("THERE WAS AN ERROR IN: StringToObject");
+		return null;	
+	}
+
+
+	void ThrowError(String msg) {
+		//TODO: log the error somewhere...
+	}
+
+}
+
 /*
-	Class c = Vector3.class;
-	Object[] args = new Object[4];
-	args[0] = App;
-	args[1] = 123f;
-	args[2] = 564f;
-	args[3] = 10f;
 
-	Class[] argsType = new Class[4];
-	for(int i = 0; i < args.length; i++) {
-		argsType[i] = Reflect.GetType(args[i]);
-	}
+		Transform (Vector3) (Vector3 1) (Quaternion);
+    print;
 
-	try { 
-		Constructor con = c.getDeclaredConstructor(argsType);
+    set t;
 
-		println(con.newInstance(args));
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	if(true) {
-		return;
-	}
-	*/
+    \"Hello World\";
+    print;
 
-	println(StringToObject("Vector3 10 2 40"));
-
-
-	// ParticleSystem (PointEmission 0 4) (Mesh (get boxShape)) .5 6
-	String str = "Tbase (Tsub (Tinner true) \"Hello\") (Tinner false)";
-	
-	println(SepperateString(str));
-
-	/*
-	println(StringToObject("21"));
-	println(StringToObject("67f"));
-	println(StringToObject("6341d"));
-
-	println(StringToObject("null"));
-
-	println(StringToObject("true"));
-	println(StringToObject("false"));
+    get t;
+    print;
 */
 
-	//println(StringToObject("fdawd 10 50 34"));
-	println(StringToObject("Vector3"));
-	println(StringToObject("Vector3 10 50 34"));
-	println(StringToObject("null"));
-	println(StringToObject("true"));
-	println(StringToObject("false"));
-	println(StringToObject("ass"));
-	println(StringToObject("Transform (Vector3 100 200 300) (Vector3 10) (Quaternion)"));	
 
-	println(new Tbase(new Tsub(new Tinner(true), "Hello"), new Tinner(false)));
 
-	println(StringToObject("Tbase (Tsub (Tinner true) \"Hello\") (Tinner false)"));
+void TestStringToObject() {
+
+
+	RilFunction f = new RilFunction("Test", "");
+
+	f.Execute();	
+
 }
 
 
@@ -241,55 +294,6 @@ String InnerSubString(String string) {
 }
 
 
-/*
-  10
-  Vector3 100 30 731
-  Transform (Vector3 10) (Vector3 1) (Quaternion)
-  ParticleSystem (PointEmission 0 4) (Mesh (get boxShape)) .5 6
-
-	list<String> subs
-	int start = 0
-	int end = 0
-	for c, i in string
-		if c is ' '
-			end = i
-			subs.add string.substring(start, end)
-			start = end
-		else if c is '('
-			String sub string.substring(i, string.length())
-			int count = 1
-			int whileIndex = 0
-			while count != 0
-				whileIndex++
-				char ch = sub.charAt(whileIndex)
-				if ch is '('
-					count++
-				else ch is ')'
-					count--
-			subs.add sub.substring(0, whileIndex)
-			i += whileIndex
-
-
-		== new Doc
-
-		for c, i in string
-			list String subs
-			if c is '('
-				int newindex = (index of end parnthesis)
-				subs.add string.substring i newindex
-				i = newindex
-			else if c is '"'
-				int newindex = (index of next '"')
-				subs.add string.substring i newindex
-				i = newindex
-			else if c is not whitespace or i is 0
-				int newindex = (next index that is whitespace)
-				subs.add string.substring i newindex
-				i = newindex
-
-*/
-
-// ParticleSystem (PointEmission 0 4) (Mesh (get boxShape)) .5 6.0f
 
 ArrayList<String> SepperateString(String string) {
 	ArrayList<String> res = new ArrayList<String>();
@@ -408,29 +412,3 @@ String FirstSubstring(String string) {
 	return string.substring(startIndex + 1, index);
 }
 
-
-
-
-
-
-
-
-
-
-class Tbase {
-	Tbase(Tsub sub, Tinner in) {
-		println("Tbase was initialized");
-	}
-}
-
-class Tsub {
-	Tsub(Tinner inner, String n) {
-		println("Tsub was initialized with string: " + n);
-	}
-}
-
-class Tinner {
-	Tinner(boolean t) {
-		println("Tinner was initialized with value " + t);
-	}
-}

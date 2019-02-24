@@ -90,6 +90,13 @@ ArrayList<Object> ExcludeIndices(Object[] array, Integer... indices) {
 }
 
 
+String ConcatStringArray(String[] strs) {
+  String res = "";
+  for(String s : strs) {
+    res += s;
+  }
+  return res;
+}
 
 
 /*
