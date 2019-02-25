@@ -138,7 +138,12 @@ class RilScript {
 	}
 
 	void Prepare(String source) {
-
+		String[][] match = null;
+		match = matchAll(source, "func (\\w+) \\{((.|\\n)+?)\\}");
+		Functions = new RilFunction[match.length];
+		for (int i = 0; i < match.length; i++) {
+			Functions[i] = new RilFunction(match[i][1], match[i][2]);
+		}
 	}
 
 	void ExecuteFunc(String name) { 
@@ -161,8 +166,10 @@ class RilFunction {
 
 	RilFunction(String name, String source) {
 		Name = name;
-		//body = source.split(";");
 		String[][] match = matchAll(source, "(\\b|\").+?;");
+		if(match == null) {
+			return;
+		}
 		body = new String[match.length];
 		for(int i = 0; i < match.length; i++) {
 			body[i] = match[i][0].substring(0, match[i][0].length() - 1); // substring() to remove the semi at the end
@@ -229,7 +236,11 @@ class RilFunction {
 
 
 		else if(type.equals("invoke")) {
-			
+			Object[] args = new Object[parsed.size() - 2];
+			for(int i = 2; i < parsed.size(); i++) { 
+				args[i - 2] = StringToObject(parsed.get(i));
+			}
+			return Reflect.InvokeMethod(currentObject, parsed.get(1), args);
 		}
 
 
@@ -251,6 +262,7 @@ class RilFunction {
 
 
 		println("THERE WAS AN ERROR IN: StringToObject");
+		// use ThrowError() method...
 		return null;	
 	}
 
@@ -279,11 +291,16 @@ class RilFunction {
 
 void TestStringToObject() {
 
+	String test1 = "Vector3 10; set scale; Transform (Vector3) (get scale) (Quaternion); print; set t; \"Hello World\"; print; get t; print; ";
+	String test2 = "Vector3 21 34 3; set v; print; invoke setValue 10 12 5; get v; print;";
 
-	RilFunction f = new RilFunction("Test", "Transform (Vector3) (Vector3 1) (Quaternion); print; set t; \"Hello World\"; print; get t; print; ");
+	RilFunction f = new RilFunction("Test", test2);
 
-	f.Execute();	
+	//f.Execute();	
 
+	RilScript s = new RilScript(assets.DataPath + "\\Scripts\\newandbetterTest.ril");
+
+	s.ExecuteFunc("main");
 }
 
 

@@ -140,7 +140,7 @@ class Reflect {
   Object InvokeMethod(Object obj, String methodName, Object... params){
     Class[] paramTypes = new Class[params.length];    
     for(int i = 0; i < params.length; i++){
-      paramTypes[i] = params[i].getClass();
+      paramTypes[i] = GetType(params[i]);
     }    
     try{
       return GetMethod(obj, methodName, paramTypes).invoke(obj, params);
