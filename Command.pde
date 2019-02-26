@@ -179,6 +179,9 @@ class RilFunction {
 
 	void Execute() {
 
+		currentObject = null;
+		locals = new HashMap<String, Object>();
+
 		for(String s : body) {
 			EvaluateExpression(s);
 		}
@@ -203,10 +206,28 @@ class RilFunction {
 		currentObject = StringToObject(string);
 	}
 
+	Object Find(Object root, String path) {
+		Object o;
+		String[] split = path.split("\\.");
+		o = Reflect.GetObjectSuper(root, split[0]);
+		for(int i = 1; i < split.length; i++){
+			o = Reflect.GetObjectSuper(o, split[i]);
+		}
+		return o;
+	}
+
 
 	Object StringToObject(String string) {
 		ArrayList<String> parsed = SepperateString(string);
 		String type = parsed.get(0);
+
+
+		// int
+		try {
+			return Integer.parseInt(type);
+		} catch (NumberFormatException e) {  } // not an integer, continue...
+
+
 
 		// float
 		Float f = float(type);
@@ -240,12 +261,17 @@ class RilFunction {
 			for(int i = 2; i < parsed.size(); i++) { 
 				args[i - 2] = StringToObject(parsed.get(i));
 			}
-			return Reflect.InvokeMethod(currentObject, parsed.get(1), args);
+			return Reflect.InvokeMethodSuper(currentObject, parsed.get(1), args);
 		}
 
 
 		else if(type.equals("get")) {
 			return locals.get(parsed.get(1));
+		}
+
+
+		else if(type.equals("find")) {
+			return Find(App, parsed.get(1));
 		}
 
 
@@ -295,6 +321,8 @@ void TestStringToObject() {
 	String test2 = "Vector3 21 34 3; set v; print; invoke setValue 10 12 5; get v; print;";
 
 	RilFunction f = new RilFunction("Test", test2);
+
+	//println(f.Find(App, "GameManager.MainCamera.transform.position.x"));
 
 	//f.Execute();	
 

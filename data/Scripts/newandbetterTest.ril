@@ -1,19 +1,28 @@
 
 func main {
     
-    Vector3 10; set scale;
-    Vector3 100 300 100; set pos;
+    "Testing float and int types"; print;
+    10; print;
+    20f; print;
 
-    Transform (invoke multiply 2) (get scale) (Quaternion);
+
+    Vector3 10f; set scale;
+    Vector3 100f 300f 100f; set pos;
+
+    Transform (invoke multiply 2f) (get scale) (Quaternion);
     print;
     set t;
     
     "Hello World"; print;
 
     
-
     get t;
     print;
+
+    find deltaTime; print;
+    find GameManager.ActiveScene.gameObjects; print;
+    invoke get 0; print;
+
 
 }
 
