@@ -2,14 +2,22 @@
 func main {
     
     "Testing float and int types"; print;
-    10; print;
-    20f; print;
+    10; set i; print;
+    20f; set f; print;
+
+    typeof (get i); print;
+    typeof (get f); print;
+    typeof Transform; print;
 
 
     Vector3 10f; set scale;
     Vector3 100f 300f 100f; set pos;
+    Quaternion; set rot;
 
-    Transform (invoke multiply 2f) (get scale) (Quaternion);
+    invoke SetEuler 0f 1.55f 0f;
+    
+    get pos;
+    Transform (invoke multiply 2f) (get scale) (get rot);
     print;
     set t;
     
@@ -19,20 +27,20 @@ func main {
     get t;
     print;
 
+    "Testing find command"; print;
+
     find deltaTime; print;
     find GameManager.ActiveScene.gameObjects; print;
     invoke get 0; print;
-
+    find *.transform.position; set objpos; print;
+    invoke setValue -500f 800f -500f; get objpos; print;
 
 }
+
+
+
 
 func hello {
-    "Hello"; print;
+    "Hello from another function"; print;
+    invoke println "another way to print to the console";
 }
-
-func ass { }
-
-
-func \w+ {[a-zA-Z.0-9\n" ();]+}
-
-func (\w+) {((.|\n)+?)}

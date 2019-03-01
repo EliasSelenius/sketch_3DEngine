@@ -143,3 +143,17 @@ class PrimitiveSphere extends RenderObject {
     GameManager.graphics.sphere(1);
   }
 }
+
+
+
+
+// -----COLORS:------ //
+
+Colors Colors = new Colors();
+class Colors {
+  Color Red = color(255, 0, 0);
+  Color Green = color(0, 255, 0);
+  Color Blue = color(0, 0, 255);
+  Color White = color(255);
+  Color Black = color(0);
+}

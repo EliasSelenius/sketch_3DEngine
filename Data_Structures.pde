@@ -174,7 +174,7 @@ class OcTree<T> {
         Vector3 dir = new Vector3(Math.Normelized(p.x), Math.Normelized(p.y), Math.Normelized(p.z));
         int index = -1;
         for(int i = 0; i < 8; i++) {
-          if(dir.Equal(OcTreeNodeLocations[i])) {
+          if(dir.equals(OcTreeNodeLocations[i])) {
             index = i;
             break;
           }
@@ -194,7 +194,7 @@ class OcTree<T> {
     T GetObject(Vector3 pos) {
       if(Elements != null) {
         for(OcTreeIndex i : Elements) {
-          if(i.pos.Equal(pos)) {
+          if(i.pos.equals(pos)) {
             return i.obj;
           }
         }

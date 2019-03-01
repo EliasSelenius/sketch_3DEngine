@@ -134,15 +134,15 @@ class RilScript {
 	}
 
 	void LoadFromFile(File f) {
-		Prepare(ConcatStringArray(loadStrings(f)));
+		Parse(ConcatStringArray(loadStrings(f)));
 	}
 
-	void Prepare(String source) {
+	void Parse(String source) {
 		String[][] match = null;
 		match = matchAll(source, "func (\\w+) \\{((.|\\n)+?)\\}");
 		Functions = new RilFunction[match.length];
 		for (int i = 0; i < match.length; i++) {
-			Functions[i] = new RilFunction(match[i][1], match[i][2]);
+			Functions[i] = new RilFunction(match[i][1], match[i][2], this);
 		}
 	}
 
@@ -159,14 +159,18 @@ class RilScript {
 class RilFunction {
 	String Name;
 	String[] body;
+	String currentExpression;
+
+	RilScript script = null;
 
 	Object currentObject;
 	HashMap<String, Object> locals = new HashMap<String, Object>();
+	Object returnValue;
 
+	int execIndex = 0;
 
-	RilFunction(String name, String source) {
-		Name = name;
-		String[][] match = matchAll(source, "(\\b|\").+?;");
+	void Parse(String source) {
+		String[][] match = matchAll(source, "(\\b|\").+?;"); // <-- GetRilExpressions regex
 		if(match == null) {
 			return;
 		}
@@ -174,22 +178,49 @@ class RilFunction {
 		for(int i = 0; i < match.length; i++) {
 			body[i] = match[i][0].substring(0, match[i][0].length() - 1); // substring() to remove the semi at the end
 		}
-
 	}
 
-	void Execute() {
+	RilFunction(String name, String source) {
+		Name = name;
+		Parse(source);
+	}
 
+	RilFunction(String name, String source, RilScript s) {
+		Name = name;
+		script = s;
+		Parse(source);
+	}
+
+	void Reset() {
 		currentObject = null;
 		locals = new HashMap<String, Object>();
-
-		for(String s : body) {
-			EvaluateExpression(s);
-		}
+		returnValue = null;
+		currentExpression = null;
 	}
 
+	Object Execute() {
+
+		Reset();
+		
+		for(execIndex = 0; execIndex < body.length; execIndex++) {
+			currentExpression = body[execIndex];
+			EvaluateExpression(currentExpression);
+		}
+
+		return returnValue;
+	}
+
+	void Interrupt() {
+		execIndex = body.length;
+	}
+
+	void Return(Object o) {
+		returnValue = o;
+		Interrupt();
+	}
 
 	void EvaluateExpression(String string) {
-		
+	
 		if(string.startsWith("print")) {
 			println(currentObject); // TODO: print somewhere else, Logger!
 			return;
@@ -203,13 +234,26 @@ class RilFunction {
 		}
 
 
+		else if(string.startsWith("return")) {
+			String tmp = string.substring(string.indexOf(' ') + 1, string.length());
+			Return(StringToObject(tmp));
+			return;
+		}
+
+
 		currentObject = StringToObject(string);
 	}
 
-	Object Find(Object root, String path) {
+	
+
+	Object Find(String path) {
 		Object o;
 		String[] split = path.split("\\.");
-		o = Reflect.GetObjectSuper(root, split[0]);
+		if(split[0].equals("*")) {
+			o = currentObject;
+		} else {
+			o = Reflect.GetObjectSuper(App, split[0]);
+		}
 		for(int i = 1; i < split.length; i++){
 			o = Reflect.GetObjectSuper(o, split[i]);
 		}
@@ -256,7 +300,9 @@ class RilFunction {
 		}
 
 
+		// todo: throw error when the method isnt found
 		else if(type.equals("invoke")) {
+			if(currentObject == null) { ThrowError("Cannot invoke on null value"); return null; }
 			Object[] args = new Object[parsed.size() - 2];
 			for(int i = 2; i < parsed.size(); i++) { 
 				args[i - 2] = StringToObject(parsed.get(i));
@@ -271,7 +317,18 @@ class RilFunction {
 
 
 		else if(type.equals("find")) {
-			return Find(App, parsed.get(1));
+			return Find(parsed.get(1));
+		}
+
+
+		else if(type.equals("typeof")) {
+			return Reflect.GetType(StringToObject(parsed.get(1)));
+		}
+
+
+		else if(type.equals("call")) {
+			script.ExecuteFunc(parsed.get(1));
+			return null; // todo: funcs need return types
 		}
 
 
@@ -295,6 +352,8 @@ class RilFunction {
 
 	void ThrowError(String msg) {
 		//TODO: log the error somewhere...
+
+		
 	}
 
 }
@@ -327,8 +386,9 @@ void TestStringToObject() {
 	//f.Execute();	
 
 	RilScript s = new RilScript(assets.DataPath + "\\Scripts\\newandbetterTest.ril");
-
-	s.ExecuteFunc("main");
+	//s.ExecuteFunc("main");
+	RilScript myRilS = new RilScript(assets.DataPath + "\\Scripts\\myRilScript.ril");
+	myRilS.ExecuteFunc("main");
 }
 
 

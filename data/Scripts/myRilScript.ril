@@ -1,0 +1,42 @@
+
+
+func main {
+    
+    "Hello World"; print;
+
+
+    19; print;
+    2348f; print;
+
+    true; false; null;
+
+    Vector3 324f; print;
+    Vector3 0f 4f 2f; print;
+
+    Transform (Vector3 10f 50f 63f) (Vector3 1f) (Quaternion); print;
+    set t;
+
+    find *.position.y; print;
+
+    get t;
+
+    typeof true; print;
+    typeof 4f; print; 
+    typeof 4; print;
+    typeof (get t); print;
+
+    get t;
+
+    typeof (find *.position); print;
+    typeof (typeof 10f); print;
+
+    call process;
+
+}
+
+
+func process {
+    "Starting func: process"; print;
+    find App;
+    invoke println "white girl gets black nugget down her throat, McDonalds employee apolegize for burning the chickenMcNuggets";
+}

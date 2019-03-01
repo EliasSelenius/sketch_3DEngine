@@ -12,21 +12,36 @@ class Reflect {
     }
     return null;
   }
+
+  Method GetMethodSuper(Object obj, String methodName, Class... params) {
+    Class c = obj.getClass();
+    while(c != null) {
+      Method m = null;
+      try {
+        m = c.getDeclaredMethod(methodName, params);
+      } catch (NoSuchMethodException x) {
+        c = c.getSuperclass();
+        continue;
+      }
+      return m;
+    }
+    return null;
+  }
   
   // GetField(): returns a Field object in a Class from given string
-  Field GetField(Class c, String name){
+  Field GetField(Class c, String name) {
     try {
       return c.getDeclaredField(name);
-    } catch (Exception x){
+    } catch (Exception x) {
       x.printStackTrace();
     }
     return null;
   }
   
   // GetField(): returns a Field object in a Class and its super Classes from given string
-  Field GetFieldSuper(Class cls, String name){
+  Field GetFieldSuper(Class cls, String name) {
     Class c = cls;
-    while(c != null){
+    while(c != null) {
       Field f = null;
       try {
         f = c.getDeclaredField(name);
@@ -149,7 +164,23 @@ class Reflect {
     }
     return null;
   }
+
+  Object InvokeMethodSuper(Object obj, String methodName, Object... params) {
+    Class[] paramTypes = new Class[params.length];    
+    for(int i = 0; i < params.length; i++){
+      paramTypes[i] = GetType(params[i]);
+    }    
+    try{
+      return GetMethodSuper(obj, methodName, paramTypes).invoke(obj, params);
+    } catch (Exception x){
+      x.printStackTrace();
+      //x.getCause().printStackTrace();
+    }
+    return null;
+  }
   
+
+
   // GetClass(): gets a Class from given string;
   Class GetClass(String n){
     try{
