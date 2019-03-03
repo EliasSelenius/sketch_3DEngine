@@ -151,9 +151,9 @@ class PrimitiveSphere extends RenderObject {
 
 Colors Colors = new Colors();
 class Colors {
-  Color Red = color(255, 0, 0);
-  Color Green = color(0, 255, 0);
-  Color Blue = color(0, 0, 255);
-  Color White = color(255);
-  Color Black = color(0);
+  color Red = color(255, 0, 0);
+  color Green = color(0, 255, 0);
+  color Blue = color(0, 0, 255);
+  color White = color(255);
+  color Black = color(0);
 }

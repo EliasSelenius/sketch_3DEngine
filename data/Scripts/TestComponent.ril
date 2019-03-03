@@ -1,0 +1,29 @@
+
+
+func Start {
+    "RIL Component started"; print;
+
+    find transform.scale;
+    invoke setValue 5f;
+
+    call test; print;
+    call testnum; print;
+    call physics; print;
+    invoke addForce (Vector3 15f 30f 20f);
+    call physics; invoke addTorque (Vector3 2f);
+}
+
+
+func physics {
+    find this;
+    return (invoke GetComponent (typeof (Physics 1f)));
+}
+
+func test {
+    124f; set num;
+    return (Vector3 (call testnum) 341f (get num));
+}
+
+func testnum { 
+    return 103f;
+}

@@ -117,8 +117,12 @@ class CommandExecutor {
 }
 
 
-class RilProgram {
+class RilPack {
+	RilScript[] Scripts;
 
+	void LoadFromConfig(XML xml) {
+
+	}
 }
 
 class RilScript { 
@@ -127,7 +131,12 @@ class RilScript {
 	
 	RilFunction[] Functions;
 
-	RilScript(String path) {
+	Log log = new Console(); // new Console is temp until we get inGame console
+
+	Object baseObject;
+
+	RilScript(String path, Object base) {
+		baseObject = base;
 		File f = new File(path);
 		Name = f.getName();
 		LoadFromFile(f);
@@ -146,13 +155,13 @@ class RilScript {
 		}
 	}
 
-	void ExecuteFunc(String name) { 
+	Object ExecuteFunc(String name) { 
 		for(RilFunction f : Functions) { 
 			if(f.Name.equals(name)) {
-				f.Execute();
-				return;
+				return f.Execute();
 			}
 		}
+		return null; // todo: throw error
 	}	
 }
 
@@ -162,7 +171,9 @@ class RilFunction {
 	String currentExpression;
 
 	RilScript script = null;
+	Log log = null;
 
+	Object baseObject;
 	Object currentObject;
 	HashMap<String, Object> locals = new HashMap<String, Object>();
 	Object returnValue;
@@ -180,14 +191,19 @@ class RilFunction {
 		}
 	}
 
-	RilFunction(String name, String source) {
+	// used when the RilFunction doesnt belong to a RilScript
+	RilFunction(String name, String source, Log l, Object base) {
 		Name = name;
+		log = l;
+		baseObject = (base == null)? App : base;
 		Parse(source);
 	}
 
 	RilFunction(String name, String source, RilScript s) {
 		Name = name;
 		script = s;
+		log = script.log;
+		baseObject = script.baseObject;
 		Parse(source);
 	}
 
@@ -219,40 +235,42 @@ class RilFunction {
 		Interrupt();
 	}
 
-	void EvaluateExpression(String string) {
-	
-		if(string.startsWith("print")) {
-			println(currentObject); // TODO: print somewhere else, Logger!
+	void EvaluateExpression(String string) {	
+		ArrayList<String> parsed = SepperateString(string);
+		String type = parsed.get(0);
+
+		if(type.equals("print")) {
+			log.Write(currentObject);
 			return;
 		}
 
 
-		else if(string.startsWith("set")) {
-			String tmp = string.substring(string.indexOf(' ') + 1, string.length());
-			locals.put(tmp, currentObject);
+		else if(type.equals("set")) {
+			locals.put(parsed.get(1), currentObject);
 			return;
 		}
 
 
-		else if(string.startsWith("return")) {
-			String tmp = string.substring(string.indexOf(' ') + 1, string.length());
-			Return(StringToObject(tmp));
+		else if(type.equals("return")) {
+			Return(StringToObject(parsed.get(1)));
 			return;
 		}
 
 
-		currentObject = StringToObject(string);
+		currentObject = StringToObject(parsed);
 	}
 
 	
 
-	Object Find(String path) {
+	Object FindJavaObject(String path) {
 		Object o;
 		String[] split = path.split("\\.");
 		if(split[0].equals("*")) {
 			o = currentObject;
+		} else if (split[0].equals("this")) {
+			return baseObject;
 		} else {
-			o = Reflect.GetObjectSuper(App, split[0]);
+			o = Reflect.GetObjectSuper(baseObject, split[0]);
 		}
 		for(int i = 1; i < split.length; i++){
 			o = Reflect.GetObjectSuper(o, split[i]);
@@ -260,9 +278,12 @@ class RilFunction {
 		return o;
 	}
 
-
 	Object StringToObject(String string) {
-		ArrayList<String> parsed = SepperateString(string);
+		return StringToObject(SepperateString(string));
+	}
+
+
+	Object StringToObject(ArrayList<String> parsed) {
 		String type = parsed.get(0);
 
 
@@ -317,7 +338,7 @@ class RilFunction {
 
 
 		else if(type.equals("find")) {
-			return Find(parsed.get(1));
+			return FindJavaObject(parsed.get(1));
 		}
 
 
@@ -327,8 +348,7 @@ class RilFunction {
 
 
 		else if(type.equals("call")) {
-			script.ExecuteFunc(parsed.get(1));
-			return null; // todo: funcs need return types
+			return script.ExecuteFunc(parsed.get(1));
 		}
 
 
@@ -351,44 +371,59 @@ class RilFunction {
 
 
 	void ThrowError(String msg) {
-		//TODO: log the error somewhere...
-
+		log.Write("There was an error in func " + Name);
+		log.Write("at " + currentExpression);
+		log.Write(msg + ". At expression index: " + execIndex);
+		if(script != null) {
+			log.Write("in " + script.Name + "\n");
+		}
 		
 	}
 
 }
 
-/*
 
-		Transform (Vector3) (Vector3 1) (Quaternion);
-    print;
 
-    set t;
+class RilComponent extends Component {
+	
+	RilScript script;
 
-    \"Hello World\";
-    print;
+	RilComponent(String path) {
+		script = new RilScript(path, this); 
+	}
+	
+	@Override 
+	void Start() {
+		script.ExecuteFunc("Start");
+	}
 
-    get t;
-    print;
-*/
+	@Override
+	void Update() {
+		script.ExecuteFunc("Update");
+	}
 
+	@Override
+	void Render() {
+		script.ExecuteFunc("Render");
+	}
+
+	@Override
+	void End() {
+		script.ExecuteFunc("End");
+	}
+}
 
 
 void TestStringToObject() {
 
-	String test1 = "Vector3 10; set scale; Transform (Vector3) (get scale) (Quaternion); print; set t; \"Hello World\"; print; get t; print; ";
-	String test2 = "Vector3 21 34 3; set v; print; invoke setValue 10 12 5; get v; print;";
-
-	RilFunction f = new RilFunction("Test", test2);
-
-	//println(f.Find(App, "GameManager.MainCamera.transform.position.x"));
-
-	//f.Execute();	
-
-	RilScript s = new RilScript(assets.DataPath + "\\Scripts\\newandbetterTest.ril");
+	RilScript s = new RilScript(assets.DataPath + "\\Scripts\\newandbetterTest.ril", App);
 	//s.ExecuteFunc("main");
-	RilScript myRilS = new RilScript(assets.DataPath + "\\Scripts\\myRilScript.ril");
+
+	RilScript myRilS = new RilScript(assets.DataPath + "\\Scripts\\myRilScript.ril", App);
 	myRilS.ExecuteFunc("main");
+
+	
+	println(SepperateString("return (invoke GetComponent (typeof (Physics 1f)))"));
 }
 
 

@@ -53,6 +53,11 @@ Reflection:
     should return null if it doesnt find the object
 }
 
+todo: optimalization {
+    opt -> FuncPointer
+    refactor Reflect?? maybe?
+}
+
 
 Animation libray:
 
@@ -326,3 +331,19 @@ todo: Rewrite input system {
 
 }
 
+
+
+
+
+BUGS:
+
+todo: meshes blink {
+    observations:
+        only meshes in rotational motion blink
+
+    test:
+        100+ meshes gets rendered in motion
+        then compare to 
+        100+ meshes in both motion and rotational motion
+
+}
