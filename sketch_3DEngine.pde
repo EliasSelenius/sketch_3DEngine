@@ -46,15 +46,17 @@ class MyTestClass {
     println("MyTestClassGetName");
     return name;
   }
-}
 
+  boolean hello(float f) {
+    return f < 10;
+  }
+}
 
 
 void setup() {
   App = this;
 
   fullScreen(P2D);
-  
 
 
   //println(assets.GetDataFiles().get(0).getName());
@@ -102,30 +104,25 @@ void setup() {
   assets.loadShaderAsset("texShader", "texvert.glsl", "texfrag.glsl");
   //--------------------
   
+
+  Game.Init();
+
+  Game.scene = new Scene();
+  Game.ui = CreatTestUI();
   
-
-  GameManager.InitRenderer(P3D);
-
-  GameManager.ActiveScene = new Scene();
-  page = CreatTestUI();
-  exc = new CommandExecutor();
-  exc.LoadScript();
-  
-
-
   //----Init-RenderLayers-------
-  
+  /*
   GameManager.Layers.Insert(
     new BackgroundLayer(),
-    new ScreenLayer() {
+    new RenderLayer() {
       public void Render() {
         Draw_Debug();
       }
     },
-    GameManager.ActiveScene,
+    Game.scene,
     page
   );
-
+*/
   //-----------------------------
 
 
@@ -134,30 +131,49 @@ void setup() {
 
   //defScene.Instantiate("tree", new OcTreeRenderer());
   
-  GameManager.ActiveScene.Instantiate("cam", new CameraHandler(), new CamFlyMovment());
+  Game.scene.Instantiate("cam", new CameraHandler(), new CamFlyMovment());
 
-  GameManager.ActiveScene.Instantiate("aBoat", new MeshRenderer("GalleonBoat"));
+  Game.scene.Instantiate("aBoat", new MeshRenderer("GalleonBoat")).transform.scale.setValue(10);
+
+///*
+  Game.scene.Instantiate("RIL", new MeshRenderer("spaceCraft"), 
+    new RilComponent(assets.DataPath + "\\Scripts\\TestComponent.ril"),
+    new Physics(10));
+  //*/
+
+
+  for(int i = 0; i < 20; i++) {
+
+    ParticleSystem ps = new ParticleSystem(
+      new PointEmission(0, 4),
+      new Mesh(assets.getMesh("box")),
+      .5f,
+      6
+    );
+
+
+    Physics p = new Physics(10);
+    Transform t = Game.scene.Instantiate(new MeshRenderer("lowPolyDragon"), p, ps ).transform;
+    t.Translate(random(300),random(300),random(300));
+    t.scale.multiplyEq(4f);
+
+    p.Velocity.setRandomNormelizedDirection();
+    p.Velocity.multiplyEq(7f);
+  }
 
   
 
   //CreateGalaxy();
 
+  //TestStringToObject(); // <-- RilTest
 
-  LogicThread.LoopEvent.AddListner("Update", GameManager);
-
-  LogicThread.StartLoop();
-
-  GameManager.RenderTime.Start();
+  Game.Start();
 
   // NOTE: frameRate needs to be set at the end of setup:
   frameRate(200);
 } 
 
 
-UICanvas page;
-
-
-ThreadLoop LogicThread = new ThreadLoop();
 
 
 void draw(){
@@ -172,7 +188,7 @@ void draw(){
   //defScene.Update();
   //page.Update();
 
-  GameManager.Render();
+  Game.Render();
 
   //println(LogicThread.UpdatesPerSecond());  
 

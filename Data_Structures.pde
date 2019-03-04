@@ -26,35 +26,35 @@ class OcTreeRenderer extends Component {
   
   @Override
   void Render() {
-    GameManager.graphics.pushMatrix();
+    Game.graphics.pushMatrix();
     
-    GameManager.graphics.translate(transform.position.x, transform.position.y, transform.position.z);    
-    GameManager.graphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);          
+    Game.graphics.translate(transform.position.x, transform.position.y, transform.position.z);    
+    Game.graphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);          
     Vector4 a = transform.rotation.GetAxisAngle();   
-    GameManager.graphics.rotate(a.w, a.x, a.y, a.z);
+    Game.graphics.rotate(a.w, a.x, a.y, a.z);
     
-    GameManager.graphics.noFill();
-    GameManager.graphics.stroke(0, 255,255);
+    Game.graphics.noFill();
+    Game.graphics.stroke(0, 255,255);
     
-    //GameManager.graphics.box(ocTree.Root.cube.Size);
+    //Game.graphics.box(ocTree.Root.cube.Size);
     
 
     for(OcTree.OcTreeNode node : ocTree.GetLeafNodes()) {
-      GameManager.graphics.pushMatrix();
-      GameManager.graphics.translate(node.position.x, node.position.y, node.position.z);
-      GameManager.graphics.box(node.cube.Size);
+      Game.graphics.pushMatrix();
+      Game.graphics.translate(node.position.x, node.position.y, node.position.z);
+      Game.graphics.box(node.cube.Size);
       for(int i = 0; i < node.Elements.size(); i++) {
         Vector3 p = ((OcTree.OcTreeIndex)node.Elements.get(i)).pos.minus(node.position);
-        GameManager.graphics.pushMatrix();
-        GameManager.graphics.translate(p.x, p.y, p.z);
-        GameManager.graphics.sphere(50);
-        GameManager.graphics.popMatrix();
+        Game.graphics.pushMatrix();
+        Game.graphics.translate(p.x, p.y, p.z);
+        Game.graphics.sphere(50);
+        Game.graphics.popMatrix();
       }
-      GameManager.graphics.popMatrix();
+      Game.graphics.popMatrix();
       //println(node.Elements.size());
     }
     
-    GameManager.graphics.popMatrix();
+    Game.graphics.popMatrix();
   }
 }
 

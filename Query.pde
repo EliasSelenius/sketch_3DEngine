@@ -87,5 +87,10 @@ class QueryList<T> extends ArrayList<T> {
     set(j, t);
   }
 
+/* this method should not be necessary... you can remove this if u want....
+  T get(float i) {
+    return super.get((int)i);
+  } */
+
 
 }

@@ -30,7 +30,7 @@ func main {
     "Testing find command"; print;
 
     find deltaTime; print;
-    find GameManager.ActiveScene.gameObjects; print;
+    find Game.scene.gameObjects; print;
     invoke get 0; print;
     find *.transform.position; set objpos; print;
     invoke setValue -500f 800f -500f; get objpos; print;

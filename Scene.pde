@@ -1,6 +1,6 @@
 
 
-class Scene extends ScreenLayer {
+class Scene extends RenderLayer {
 
   QueryList<GameObject> gameObjects = new QueryList<GameObject>();
   
@@ -20,8 +20,8 @@ class Scene extends ScreenLayer {
   
   @Override
   void Render() {
-    GameManager.graphics.lights();
-    //GameManager.graphics.background(0);
+    Game.graphics.lights();
+    //Game.graphics.background(0);
     for(int i = 0; i < gameObjects.size(); i++){
       gameObjects.get(i).Render();
     }

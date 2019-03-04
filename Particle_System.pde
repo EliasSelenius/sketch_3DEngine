@@ -19,9 +19,10 @@ class Particle {
   }
   
   void Update(){
-    LifeTime += deltaTime;
-    transform.Translate(Velocity.multiply(Speed * deltaTime));
-    transform.Rotate(AngularVelocity.multiply(deltaTime));
+    float d = Game.Time.Delta();
+    LifeTime += d;
+    transform.Translate(Velocity.multiply(Speed * d));
+    transform.Rotate(AngularVelocity.multiply(d));
   }  
 }
 
@@ -65,23 +66,23 @@ class ParticleSystem extends Component {
   @Override
   void Render(){
   
-    GameManager.graphics.pushMatrix();
+    Game.graphics.pushMatrix();
     if(LocalSpace){
-      GameManager.graphics.translate(transform.position.x, transform.position.y, transform.position.z);
-      GameManager.graphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);
+      Game.graphics.translate(transform.position.x, transform.position.y, transform.position.z);
+      Game.graphics.scale(transform.scale.x, transform.scale.y, transform.scale.z);
       Vector4 axisAngle = transform.rotation.GetAxisAngle();
-      GameManager.graphics.rotate(axisAngle.w, axisAngle.x, axisAngle.y, axisAngle.z);
+      Game.graphics.rotate(axisAngle.w, axisAngle.x, axisAngle.y, axisAngle.z);
     }    
     
 
     for(int i = 0; i < particles.size(); i++){
       Particle p = particles.get(i);
-      float t = p.LifeTime / MaxLifeTime;
+      float t = p.LifeTime / MaxLifeTime; // NullPointerException
       renderObj.TintColor = lerpColor(StartTint, EndTint, t);
       renderObj.Render(p.transform.position, p.transform.scale.multiply(Scaler), p.transform.rotation);
     }
     
-    GameManager.graphics.popMatrix();
+    Game.graphics.popMatrix();
   }
   
   // Update(): Updates the Physics of each particle.

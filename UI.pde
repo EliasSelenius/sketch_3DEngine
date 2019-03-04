@@ -15,7 +15,7 @@ interface UIRenderable {
 	 
 }
 
-class UICanvas extends ScreenLayer {
+class UICanvas extends RenderLayer {
 
     QueryList<UIObject> Elements = new QueryList<UIObject>();
 
@@ -32,9 +32,9 @@ class UICanvas extends ScreenLayer {
 
     @Override
     void Render() {
-        GameManager.graphics.camera();
-        GameManager.graphics.perspective();
-        GameManager.graphics.text(frameRate, 600,600);
+        Game.graphics.camera();
+        Game.graphics.perspective();
+        Game.graphics.text(frameRate, 600,600);
         for(UIObject el : Elements) {
             el.Render();
         }
@@ -77,10 +77,10 @@ abstract class UIObject extends RenderObject {
 
 	final void Render() { 
 		Render(transform);
-		GameManager.graphics.pushMatrix();
-		GameManager.graphics.fill(0);
-		GameManager.graphics.ellipse(transform.position.x, transform.position.y, 20,20);
-		GameManager.graphics.popMatrix();
+		Game.graphics.pushMatrix();
+		Game.graphics.fill(0);
+		Game.graphics.ellipse(transform.position.x, transform.position.y, 20,20);
+		Game.graphics.popMatrix();
 	}
 
 	void Update() { }
@@ -101,7 +101,7 @@ class TextBox extends UIObject {
 
 		float hw = rect.Width / 2f;
 		float hh = rect.Height / 2f;
-        GameManager.graphics.text(text, 
+        Game.graphics.text(text, 
 									-hw,
 									-hh,
 									rect.Width, rect.Height);
@@ -122,7 +122,7 @@ class Button extends UIObject {
 		
 		float hw = rect.Width / 2f;
 		float hh = rect.Height / 2f;
-		GameManager.graphics.rect(-hw,
+		Game.graphics.rect(-hw,
 									-hh,
 									rect.Width,
 									rect.Height);	
@@ -131,11 +131,11 @@ class Button extends UIObject {
 	@Override
 	void Update() {
 		/*
-		println(PI * LogicThread.Time.Delta() + " AND " + (PI * deltaTime) + " AND " + (10000f * LogicThread.Time.Delta()) + " AND " + (millis()) );
-		transform.Rotate(0, 10000f * LogicThread.Time.Delta(), 0);
+		println(PI * Game.Time.Delta() + " AND " + (PI * deltaTime) + " AND " + (10000f * Game.Time.Delta()) + " AND " + (millis()) );
+		transform.Rotate(0, 10000f * Game.Time.Delta(), 0);
 		println("rotation " + transform.rotation);
 */
-		//transform.Translate(sin(LogicThread.Time.UpdateCount / 0.1f) * 100f, 0f, 0f);
+		//transform.Translate(sin(Game.Time.UpdateCount / 0.1f) * 100f, 0f, 0f);
 	}
 }
 

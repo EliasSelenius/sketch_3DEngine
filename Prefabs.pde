@@ -85,3 +85,10 @@ class PrefabManager {
     return Elements.get(name);
   }
 }
+
+
+
+
+interface Prefab {
+  void LoadFromXml(XML xml);
+}

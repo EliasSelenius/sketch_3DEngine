@@ -1,6 +1,6 @@
 
 
-class Transform{
+class Transform {
   
   Vector3 position;
   Vector3 scale;

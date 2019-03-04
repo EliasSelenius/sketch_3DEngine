@@ -12,15 +12,18 @@ class Physics extends Component {
   Vector3 AngularVelocity = new Vector3();
   
 
+
   public Physics(float m) {
     Mass = m;
   }
   
   void Update() {
     
-    transform.Translate(Velocity.multiply(deltaTime));
+    float d = Game.Time.Delta();
+
+    transform.Translate(Velocity.multiply(d));
     
-    transform.Rotate(AngularVelocity.multiply(deltaTime));
+    transform.Rotate(AngularVelocity.multiply(d));
     
   }
   

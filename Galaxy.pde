@@ -57,5 +57,5 @@ void CreateGalaxy(){
 
   scene.Instantiate("Galaxy", new Vector3(0f), new Vector3(1000f), new Quaternion(), new Galaxy(5, 10));
   
-  GameManager.ActiveScene = scene;
+  Game.scene = scene;
 }

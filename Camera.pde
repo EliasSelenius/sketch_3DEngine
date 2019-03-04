@@ -20,13 +20,13 @@ class Camera {
   void ApplySettings() {
     Vector3 forward = transform.Forward();
     Vector3 up = transform.Up();
-    GameManager.graphics.camera(transform.position.x, transform.position.y, transform.position.z, 
+    Game.graphics.camera(transform.position.x, transform.position.y, transform.position.z, 
       forward.x + transform.position.x, 
       forward.y + transform.position.y, 
       forward.z + transform.position.z,
       up.x, up.y, up.z);   
-    GameManager.graphics.perspective(radians(FieldOfView), (float)width / (float)height, NearClipPlane, FarClipPlane);
-    Buffer = GameManager.graphics.copy();
+    Game.graphics.perspective(radians(FieldOfView), (float)width / (float)height, NearClipPlane, FarClipPlane);
+    Buffer = Game.graphics.copy();
   }
 }
 
@@ -35,7 +35,7 @@ class CameraHandler extends Component {
   Camera cam;
   @Override
   void Start() {
-    cam = GameManager.MainCamera;
+    cam = Game.MainCamera;
     cam.transform = transform;
   }
 }
@@ -64,7 +64,7 @@ class CamFlyMovment extends Component {
       speed *= 4f;      
     }
       
-    float d = LogicThread.Time.Delta(); 
+    float d = Game.Time.Delta(); 
 
     // fly movement:
     transform.Translate(transform.Forward().multiply(-v.getValue() * speed).multiply(d));
@@ -74,23 +74,10 @@ class CamFlyMovment extends Component {
     // look rotation:    
     transform.Rotate(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).multiply(d));
 
-    println("Pos: " + transform.position + " Delta: " + d);
-
-    //transform.Translate(1f * d, 1f * d, 1f * d);
-
-    //println(input.mouseMove);
-
-    //println(transform.position);
-    
-    //println(LogicThread.Time.Delta());
-
-    //println(new Vector3(-input.mouseMove.y, -input.mouseMove.x, r.Value * 2f).multiply(d));
-
 
     if(input.GetKey('g').Released){
       
       timesGpressed++;
-      println("timesGpressed: "+timesGpressed);
 
       GameObject cube = gameObject.scene.Instantiate("TestCube", new MeshRenderer("box"), new DebugComponent());
       cube.transform.position.setValue(transform.position);

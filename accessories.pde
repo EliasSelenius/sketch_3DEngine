@@ -117,31 +117,31 @@ boolean isWrapper(Object o) {
 
 
 void Draw_Debug(){
-    GameManager.graphics.pushMatrix();
+    Game.graphics.pushMatrix();
   
     Vector3 f = new Vector3(0f,0f,1000f);
     Vector3 u = new Vector3(0f,1000f,0f);
     Vector3 r = new Vector3(1000f,0f,0f);
   
-    GameManager.graphics.strokeWeight(1);
+    Game.graphics.strokeWeight(1);
 
-    GameManager.graphics.scale(10);
-    GameManager.graphics.stroke(color(255,0,0));
-    GameManager.graphics.line(0,0,0,r.x, r.y, r.z);
-    GameManager.graphics.stroke(color(0,255,0));
-    GameManager.graphics.line(0,0,0,u.x, u.y, u.z);
-    GameManager.graphics.stroke(color(0,0,255));
-    GameManager.graphics.line(0,0,0,f.x, f.y, f.z);
+    Game.graphics.scale(10);
+    Game.graphics.stroke(color(255,0,0));
+    Game.graphics.line(0,0,0,r.x, r.y, r.z);
+    Game.graphics.stroke(color(0,255,0));
+    Game.graphics.line(0,0,0,u.x, u.y, u.z);
+    Game.graphics.stroke(color(0,0,255));
+    Game.graphics.line(0,0,0,f.x, f.y, f.z);
   
-    GameManager.graphics.scale(.1);
-    GameManager.graphics.stroke(255);
-    GameManager.graphics.line(width,0,0, width, height,0);
-    GameManager.graphics.line(0,height,0,  width, height, 0);
+    Game.graphics.scale(.1);
+    Game.graphics.stroke(255);
+    Game.graphics.line(width,0,0, width, height,0);
+    Game.graphics.line(0,height,0,  width, height, 0);
   
-    GameManager.graphics.line(0,height,0 ,0, height, width);
-    GameManager.graphics.line(0,0,width, 0,height, width);
+    Game.graphics.line(0,height,0 ,0, height, width);
+    Game.graphics.line(0,0,width, 0,height, width);
 
-    GameManager.graphics.popMatrix();
+    Game.graphics.popMatrix();
 }
 
 

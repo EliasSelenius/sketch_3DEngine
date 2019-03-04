@@ -160,7 +160,12 @@ class Reflect {
     try{
       return GetMethod(obj, methodName, paramTypes).invoke(obj, params);
     } catch(Exception x){
-      x.printStackTrace();
+      Throwable e = x.getCause();
+      if(e != null) {
+        e.printStackTrace();
+      } else {
+        x.printStackTrace();
+      }
     }
     return null;
   }
@@ -173,8 +178,12 @@ class Reflect {
     try{
       return GetMethodSuper(obj, methodName, paramTypes).invoke(obj, params);
     } catch (Exception x){
-      x.printStackTrace();
-      //x.getCause().printStackTrace();
+      Throwable e = x.getCause();
+      if(e != null) {
+        e.printStackTrace();
+      } else {
+        x.printStackTrace();
+      }
     }
     return null;
   }
